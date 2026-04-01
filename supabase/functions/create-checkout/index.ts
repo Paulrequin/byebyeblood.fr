@@ -29,6 +29,19 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'Invalid token' }), { status: 401, headers: corsHeaders })
   }
   const userId = userData.id
+  const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+
+  // Check if user already has access
+  const profileRes = await fetch(`${supabaseUrl}/rest/v1/profiles?id=eq.${userId}&select=has_access`, {
+    headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey },
+  })
+  const [profile] = await profileRes.json()
+  if (profile?.has_access) {
+    return new Response(JSON.stringify({ error: 'already_paid' }), {
+      status: 400,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  }
 
   const siteUrl = Deno.env.get('SITE_URL') ?? 'http://localhost:5173'
 

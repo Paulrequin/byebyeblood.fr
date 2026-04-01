@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom'
 import Landing from './pages/Landing'
 import Auth from './pages/Auth'
 import Dashboard from './pages/Dashboard'
@@ -33,6 +33,7 @@ export default function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/module/:id" element={<Module />} />
       <Route path="/success" element={<Success />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }

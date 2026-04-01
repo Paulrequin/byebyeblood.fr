@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { startCheckout } from '../lib/checkout'
 
 const MODULES = [
-  { level: 1, title: 'Première approche', desc: 'Illustrations abstraites. Zéro pression.', xp: 100, unlocked: true },
-  { level: 2, title: 'Couleur & forme', desc: 'Reconnaissance de couleurs et textures.', xp: 200, unlocked: true },
-  { level: 3, title: 'Contexte médical', desc: 'Soins, hôpitaux — dans un cadre sécurisé.', xp: 300, unlocked: false },
-  { level: 4, title: 'Exposition progressive', desc: 'Images réalistes, à ton rythme.', xp: 500, unlocked: false },
-  { level: 5, title: 'Maîtrise complète', desc: 'Situations réelles. Tu gères.', xp: 1000, unlocked: false },
+  { level: 1, title: 'Comprendre ta peur', desc: 'Les mécanismes scientifiques de l\'hémophobie expliqués.', xp: 100, unlocked: true },
+  { level: 2, title: 'Respirer pour contrôler', desc: 'Cohérence cardiaque et technique 4-7-8.', xp: 100, unlocked: true },
+  { level: 3, title: 'Applied Tension', desc: 'La méthode d\'Öst & Sterner pour contrer la syncope.', xp: 100, unlocked: false },
+  { level: 4, title: 'Exposition par les couleurs', desc: 'Du rose au rouge, en douceur.', xp: 100, unlocked: false },
+  { level: 5, title: 'Exposition par les formes', desc: 'Des formes abstraites évocatrices.', xp: 100, unlocked: false },
+  { level: 6, title: 'Exposition par les images', desc: 'Du schéma médical à la représentation réaliste.', xp: 100, unlocked: false },
+  { level: 7, title: 'Maîtrise totale', desc: 'Scénarios réels. Tu as tous les outils.', xp: 150, unlocked: false },
 ]
 
 const FEATURES = [
@@ -121,7 +123,7 @@ export default function Landing() {
       <section id="how" className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">5 niveaux. Une progression réelle.</h2>
+            <h2 className="text-4xl font-black mb-4">7 modules. Une progression réelle.</h2>
             <p className="text-[#9090A8]">Chaque module déverrouille le suivant. Tu ne sautes aucune étape.</p>
           </div>
 
@@ -201,7 +203,7 @@ export default function Landing() {
 
               <ul className="text-sm text-left space-y-3 mb-8">
                 {[
-                  '5 modules complets débloqués',
+                  '7 modules complets débloqués',
                   'Suivi de progression XP + badges',
                   'Exercices interactifs à ton rythme',
                   'Accès illimité, pour toujours',

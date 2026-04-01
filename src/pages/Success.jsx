@@ -72,7 +72,7 @@ export default function Success() {
 
             <div className="w-full p-5 rounded-2xl bg-[#16161F] border border-[#CC2233]/30 text-left space-y-3">
               {[
-                '5 modules complets débloqués',
+                '7 modules complets débloqués',
                 'Progression XP + badges actifs',
                 'Accès à vie — aucune limite',
               ].map((item, i) => (

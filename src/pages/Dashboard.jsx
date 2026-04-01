@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { MODULES } from '../data/modules'
-import { getProgress, getTotalXP, getJournal, getBadgeIds, getCompletedModulesCount, isModuleCompleted, isModuleUnlocked } from '../lib/progress'
+import { getProgress, isModuleCompleted, isModuleUnlocked } from '../lib/progress'
 
 const MAX_XP = 2350
 const ALL_BADGES = MODULES.map(m => m.badge)
