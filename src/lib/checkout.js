@@ -9,11 +9,7 @@ export async function startCheckout() {
     return
   }
 
-  const { data, error } = await supabase.functions.invoke('create-checkout', {
-    headers: {
-      Authorization: `Bearer ${session.access_token}`,
-    },
-  })
+  const { data, error } = await supabase.functions.invoke('create-checkout')
 
   if (error) {
     let body = {}
