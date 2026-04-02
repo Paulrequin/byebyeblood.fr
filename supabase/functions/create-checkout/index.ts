@@ -48,7 +48,7 @@ Deno.serve(async (req) => {
   const params = new URLSearchParams({
     mode: 'payment',
     'payment_method_types[]': 'card',
-    'line_items[0][price]': 'price_1TGKQMECHHg3iEHHUhN8PeCD',
+    'line_items[0][price]': Deno.env.get('STRIPE_PRICE_ID') ?? 'price_1TGKQMECHHg3iEHHUhN8PeCD',
     'line_items[0][quantity]': '1',
     'metadata[user_id]': userId,
     success_url: `${siteUrl}/success?session_id={CHECKOUT_SESSION_ID}`,

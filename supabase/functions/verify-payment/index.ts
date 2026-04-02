@@ -53,6 +53,18 @@ Deno.serve(async (req) => {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
+    // Idempotency check: if this session was already processed, return success immediately
+    const profileRes = await fetch(
+      `${supabaseUrl}/rest/v1/profiles?id=eq.${userId}&select=stripe_session_id,has_access`,
+      { headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey } },
+    )
+    const [existingProfile] = await profileRes.json()
+    if (existingProfile?.stripe_session_id === session_id && existingProfile?.has_access) {
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
     // Update has_access via Supabase REST API
     const updateRes = await fetch(
       `${supabaseUrl}/rest/v1/profiles?id=eq.${userId}`,

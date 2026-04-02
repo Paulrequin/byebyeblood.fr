@@ -1,16 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { startCheckout } from '../lib/checkout'
-
-const MODULES = [
-  { level: 1, title: 'Comprendre ta peur', desc: 'Les mécanismes scientifiques de l\'hémophobie expliqués.', xp: 100, unlocked: true },
-  { level: 2, title: 'Respirer pour contrôler', desc: 'Cohérence cardiaque et technique 4-7-8.', xp: 100, unlocked: true },
-  { level: 3, title: 'Applied Tension', desc: 'La méthode d\'Öst & Sterner pour contrer la syncope.', xp: 100, unlocked: false },
-  { level: 4, title: 'Exposition par les couleurs', desc: 'Du rose au rouge, en douceur.', xp: 100, unlocked: false },
-  { level: 5, title: 'Exposition par les formes', desc: 'Des formes abstraites évocatrices.', xp: 100, unlocked: false },
-  { level: 6, title: 'Exposition par les images', desc: 'Du schéma médical à la représentation réaliste.', xp: 100, unlocked: false },
-  { level: 7, title: 'Maîtrise totale', desc: 'Scénarios réels. Tu as tous les outils.', xp: 150, unlocked: false },
-]
+import { MODULES } from '../data/modules'
 
 const FEATURES = [
   {
@@ -133,32 +124,35 @@ export default function Landing() {
             <div className="absolute left-8 top-0 bottom-0 w-px bg-[#2A2A38] hidden sm:block" />
 
             <div className="flex flex-col gap-4">
-              {MODULES.map((mod, i) => (
-                <div
-                  key={i}
-                  className={`relative flex gap-6 p-5 rounded-2xl border transition-all ${
-                    mod.unlocked
-                      ? 'bg-[#16161F] border-[#CC2233]/40 hover:border-[#CC2233]'
-                      : 'bg-[#16161F]/50 border-[#2A2A38] opacity-60'
-                  }`}
-                >
-                  {/* Level badge */}
+              {MODULES.map((mod, i) => {
+                const unlocked = mod.id <= 2
+                return (
                   <div
-                    className={`relative z-10 flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-xl font-black text-xl ${
-                      mod.unlocked ? 'bg-[#CC2233] text-white' : 'bg-[#1E1E2A] text-[#6B6B80]'
+                    key={i}
+                    className={`relative flex gap-6 p-5 rounded-2xl border transition-all ${
+                      unlocked
+                        ? 'bg-[#16161F] border-[#CC2233]/40 hover:border-[#CC2233]'
+                        : 'bg-[#16161F]/50 border-[#2A2A38] opacity-60'
                     }`}
                   >
-                    {mod.unlocked ? mod.level : '🔒'}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-bold text-lg">Niveau {mod.level} — {mod.title}</h3>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-[#CC2233]/15 text-[#FF4455]">+{mod.xp} XP</span>
+                    {/* Level badge */}
+                    <div
+                      className={`relative z-10 flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-xl font-black text-xl ${
+                        unlocked ? 'bg-[#CC2233] text-white' : 'bg-[#1E1E2A] text-[#6B6B80]'
+                      }`}
+                    >
+                      {unlocked ? mod.id : '🔒'}
                     </div>
-                    <p className="text-[#9090A8] text-sm">{mod.desc}</p>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-1">
+                        <h3 className="font-bold text-lg">Niveau {mod.id} — {mod.title}</h3>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#CC2233]/15 text-[#FF4455]">+{mod.xpBonus} XP</span>
+                      </div>
+                      <p className="text-[#9090A8] text-sm">{mod.subtitle}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>

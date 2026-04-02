@@ -87,10 +87,25 @@ function BreathingExercise({ technique, title, description, onNext }) {
   const [cycleCount, setCycleCount] = useState(0)
   const [scale, setScale] = useState(1)
   const mountedRef = useRef(true)
+  const timeoutsRef = useRef([])
+
+  function scheduleTimeout(fn, delay) {
+    const id = setTimeout(fn, delay)
+    timeoutsRef.current.push(id)
+    return id
+  }
+
+  function clearAllTimeouts() {
+    timeoutsRef.current.forEach(id => clearTimeout(id))
+    timeoutsRef.current = []
+  }
 
   useEffect(() => {
     mountedRef.current = true
-    return () => { mountedRef.current = false }
+    return () => {
+      mountedRef.current = false
+      clearAllTimeouts()
+    }
   }, [])
 
   const TOTAL_CYCLES = 3
@@ -102,11 +117,11 @@ function BreathingExercise({ technique, title, description, onNext }) {
       // 5s inhale, 5s exhale
       setPhase('inhale')
       setScale(1.5)
-      setTimeout(() => {
+      scheduleTimeout(() => {
         if (!mountedRef.current) return
         setPhase('exhale')
         setScale(0.8)
-        setTimeout(() => {
+        scheduleTimeout(() => {
           if (!mountedRef.current) return
           const next = currentCycle + 1
           setCycleCount(next)
@@ -122,15 +137,15 @@ function BreathingExercise({ technique, title, description, onNext }) {
       // 478: 4s inhale, 7s hold, 8s exhale
       setPhase('inhale')
       setScale(1.5)
-      setTimeout(() => {
+      scheduleTimeout(() => {
         if (!mountedRef.current) return
         setPhase('hold')
         setScale(1.5)
-        setTimeout(() => {
+        scheduleTimeout(() => {
           if (!mountedRef.current) return
           setPhase('exhale')
           setScale(0.8)
-          setTimeout(() => {
+          scheduleTimeout(() => {
             if (!mountedRef.current) return
             const next = currentCycle + 1
             setCycleCount(next)
