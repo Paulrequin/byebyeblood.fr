@@ -47,6 +47,7 @@ export default function Landing() {
       await startCheckout()
     } catch (err) {
       setCheckoutError('Une erreur est survenue. Réessaie.')
+    } finally {
       setCheckoutLoading(false)
     }
   }

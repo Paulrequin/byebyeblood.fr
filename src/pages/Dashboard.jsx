@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase'
 import { MODULES } from '../data/modules'
 import { getProgress, isModuleCompleted, isModuleUnlocked } from '../lib/progress'
 
-const MAX_XP = 2350
+const MAX_XP = MODULES.reduce((sum, m) => sum + m.xpBonus + m.exercises.length * 50, 0)
 const ALL_BADGES = MODULES.map(m => m.badge)
 
 function greetingFromCount(count) {

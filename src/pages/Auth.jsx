@@ -31,10 +31,10 @@ export default function Auth() {
         else navigate('/dashboard')
       }
     } catch (err) {
-      setError(`Exception: ${err.message}`)
+      setError("Une erreur est survenue. Réessaie.")
+    } finally {
+      setLoading(false)
     }
-
-    setLoading(false)
   }
 
   return (
