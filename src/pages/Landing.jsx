@@ -1,231 +1,247 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { startCheckout } from '../lib/checkout'
-import { MODULES } from '../data/modules'
+import s from './Landing.module.css'
 
-const FEATURES = [
-  {
-    icon: '🧠',
-    title: 'Méthode scientifique',
-    desc: "Protocole basé sur la thérapie d'exposition graduelle — validée cliniquement pour les phobies.",
-  },
-  {
-    icon: '🎮',
-    title: 'Progression gamifiée',
-    desc: 'XP, niveaux, badges. Chaque étape franchie est une victoire réelle.',
-  },
-  {
-    icon: '🔒',
-    title: 'À ton rythme',
-    desc: "Aucune pression. Tu avances quand tu es prêt·e. Le système s'adapte.",
-  },
-  {
-    icon: '💳',
-    title: 'Accès à vie, une seule fois',
-    desc: "Un paiement unique. Pas d'abonnement. Tous les modules pour toujours.",
-  },
+/* ── Data ── */
+const LEVELS = [
+  { label: 'Niveau 1', state: 'done'   },
+  { label: 'Niveau 2', state: 'done'   },
+  { label: 'Niveau 3', state: 'active' },
+  { label: 'Niveau 4', state: 'locked' },
+  { label: 'Niveau 5', state: 'locked' },
 ]
 
+const EXERCISES = [
+  { label: 'Introduction à l\'hémophobie',       state: 'done'   },
+  { label: 'Observation d\'images médicales',     state: 'active' },
+  { label: 'Vidéos de prélèvements sanguins',    state: 'todo'   },
+  { label: 'Exercice de respiration avancé',      state: 'todo'   },
+]
+
+const HOW_STEPS = [
+  { icon: '🧪', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "Un court questionnaire identifie ton degré d'hémophobie et place ton point de départ." },
+  { icon: '🗺️', step: 'Étape 2', title: 'Suis le protocole',      desc: "Chaque niveau expose progressivement à des stimuli plus intenses — textes, images, vidéos." },
+  { icon: '📈', step: 'Étape 3', title: 'Progresse graduellement', desc: "Le système adapte la cadence. Tu ne passes au suivant que quand tu es prêt·e." },
+  { icon: '🏁', step: 'Étape 4', title: 'Maîtrise complète',       desc: "Au niveau 5, la vue du sang ne déclenche plus de réponse de panique." },
+]
+
+const GAMIF_CARDS = [
+  { emoji: '🔥', title: 'Streak quotidien',   desc: 'Reviens chaque jour pour maintenir ta flamme. La régularité est la clé de la désensibilisation.' },
+  { emoji: '⚡', title: 'Points XP',          desc: 'Chaque exercice complété rapporte des XP. Monte de niveau et débloque la suite du parcours.' },
+  { emoji: '🎖️', title: 'Badges de maîtrise', desc: 'Décroche des badges à chaque palier franchi. Une preuve concrète de tes progrès réels.' },
+]
+
+const STATS = [
+  { value: '5 niveaux',   label: 'progressifs' },
+  { value: '14 jours',    label: 'satisfait ou remboursé' },
+  { value: '100% fondé',  label: 'sur la science' },
+  { value: '1× paiement', label: 'unique, accès à vie' },
+]
+
+/* ── Component ── */
 export default function Landing() {
   const navigate = useNavigate()
-  const [checkoutLoading, setCheckoutLoading] = useState(false)
-  const [checkoutError, setCheckoutError] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error,   setError]   = useState(null)
 
   async function handleCheckout() {
-    setCheckoutLoading(true)
-    setCheckoutError(null)
+    setLoading(true)
+    setError(null)
     try {
       await startCheckout()
-    } catch (err) {
-      setCheckoutError('Une erreur est survenue. Réessaie.')
+    } catch {
+      setError('Une erreur est survenue. Réessaie.')
     } finally {
-      setCheckoutLoading(false)
+      setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-[#0E0E16] text-[#F0EBF4]">
-      {/* Nav */}
-      <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 py-4 border-b border-[#2A2A38] bg-[#0E0E16]/80 backdrop-blur-md">
-        <span className="text-xl font-bold tracking-tight">
-          Bye Bye <span className="text-[#CC2233]">Blood</span>
+    <div className={s.page}>
+      <div className={s.grain} aria-hidden="true" />
+
+      {/* ── NAV ── */}
+      <nav className={s.nav}>
+        <span className={s.navLogo}>
+          Bye Bye <span className={s.navLogoRed}>Blood</span>
         </span>
-        <button
-          onClick={() => navigate('/auth')}
-          className="px-4 py-2 text-sm rounded-lg border border-[#CC2233] text-[#CC2233] hover:bg-[#CC2233] hover:text-white transition-colors"
-        >
+        <button className={s.navBtn} onClick={() => navigate('/auth')}>
           Se connecter
         </button>
       </nav>
 
-      {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center pt-20">
-        {/* Background glow */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[600px] h-[600px] rounded-full bg-[#CC2233]/10 blur-[120px]" />
-        </div>
+      {/* ── HERO — 2 colonnes ── */}
+      <section className={s.hero}>
+        <div className={s.heroTopLine} aria-hidden="true" />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-medium rounded-full bg-[#CC2233]/15 text-[#FF4455] border border-[#CC2233]/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF4455] animate-pulse" />
-            Basé sur la thérapie d'exposition graduelle
+        {/* Colonne gauche */}
+        <div className={s.heroLeft}>
+          <div className={s.heroBadge}>
+            <span className={s.badgeDot} />
+            Thérapie d'exposition graduelle
           </div>
 
-          <h1 className="text-5xl sm:text-7xl font-black tracking-tight leading-none mb-6">
-            Tu fuis la vue<br />
-            <span className="text-[#CC2233]">du sang.</span><br />
-            Plus pour longtemps.
+          <h1 className={s.heroTitle}>
+            Arrête de fuir.<br />
+            <span className={s.heroTitleRed}>Commence à guérir.</span>
           </h1>
 
-          <p className="text-lg text-[#9090A8] max-w-xl mx-auto mb-10 leading-relaxed">
-            Une app de désensibilisation progressive. 5 niveaux. Des exercices concrets.
-            Un système de progression qui te garde motivé·e jusqu'à la maîtrise complète.
-          </p>
+          <div className={s.heroDivider} aria-hidden="true" />
 
-          {checkoutError && (
-            <p className="text-[#FF4455] text-sm mb-4">{checkoutError}</p>
-          )}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={handleCheckout}
-              disabled={checkoutLoading}
-              className="px-8 py-4 bg-[#CC2233] hover:bg-[#991122] disabled:opacity-60 text-white font-semibold rounded-xl transition-all hover:scale-105 animate-pulse-glow"
-            >
-              {checkoutLoading ? 'Redirection…' : 'Commencer — 29€ une fois'}
-            </button>
-            <button
-              onClick={() => document.getElementById('how').scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-[#16161F] hover:bg-[#1E1E2A] text-[#F0EBF4] font-semibold rounded-xl border border-[#2A2A38] transition-colors"
-            >
-              Comment ça marche ?
-            </button>
+          <div className={s.heroBottom}>
+            <p className={s.heroSub}>
+              Une app de désensibilisation progressive. 5 niveaux.
+              Des exercices concrets. Un système de progression qui te
+              garde motivé·e jusqu'à la maîtrise complète.
+            </p>
+
+            <div className={s.levels}>
+              {LEVELS.map((lv) => (
+                <span
+                  key={lv.label}
+                  className={`${s.levelPill} ${
+                    lv.state === 'done'   ? s.levelDone   :
+                    lv.state === 'active' ? s.levelActive :
+                    s.levelLocked
+                  }`}
+                >
+                  {lv.state === 'locked' ? `🔒 ${lv.label}` : lv.label}
+                </span>
+              ))}
+            </div>
+
+            <div className={s.heroBtns}>
+              <button className={s.btnPrimary} onClick={handleCheckout} disabled={loading}>
+                {loading ? 'Redirection…' : 'Commencer — 29€ une fois'}
+              </button>
+              <button
+                className={s.btnSecondary}
+                onClick={() => document.getElementById('how').scrollIntoView({ behavior: 'smooth' })}
+              >
+                Comment ça marche ?
+              </button>
+            </div>
+
+            {error && <p className={s.heroError}>{error}</p>}
+
+            <p className={s.heroGuarantees}>
+              ✓ Accès complet · ✓ Sans abonnement · ✓ Remboursé sous 14 jours
+            </p>
           </div>
-
-          <p className="mt-5 text-xs text-[#6B6B80]">Accès complet. Aucun abonnement. Remboursé si inefficace sous 14 jours.</p>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#6B6B80]">
-          <span className="text-xs">Défiler</span>
-          <div className="w-px h-8 bg-gradient-to-b from-[#6B6B80] to-transparent" />
-        </div>
-      </section>
+        {/* Colonne droite */}
+        <div className={s.heroRight}>
 
-      {/* How it works */}
-      <section id="how" className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">7 modules. Une progression réelle.</h2>
-            <p className="text-[#9090A8]">Chaque module déverrouille le suivant. Tu ne sautes aucune étape.</p>
+          {/* Card de progression */}
+          <div className={s.progressCard}>
+            <div className={s.progressCardHeader}>
+              <span className={s.progressCardTitle}>Niveau 3 — Observation directe</span>
+              <span className={s.progressCardPct}>62%</span>
+            </div>
+            <div className={s.progressBarTrack}>
+              <div className={s.progressBarFill} />
+            </div>
+            <ul className={s.exerciseList}>
+              {EXERCISES.map((ex) => (
+                <li
+                  key={ex.label}
+                  className={`${s.exercise} ${
+                    ex.state === 'done'   ? s.exDone   :
+                    ex.state === 'active' ? s.exActive :
+                    s.exTodo
+                  }`}
+                >
+                  {ex.label}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-[#2A2A38] hidden sm:block" />
-
-            <div className="flex flex-col gap-4">
-              {MODULES.map((mod, i) => {
-                const unlocked = mod.id <= 2
-                return (
-                  <div
-                    key={i}
-                    className={`relative flex gap-6 p-5 rounded-2xl border transition-all ${
-                      unlocked
-                        ? 'bg-[#16161F] border-[#CC2233]/40 hover:border-[#CC2233]'
-                        : 'bg-[#16161F]/50 border-[#2A2A38] opacity-60'
-                    }`}
-                  >
-                    {/* Level badge */}
-                    <div
-                      className={`relative z-10 flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-xl font-black text-xl ${
-                        unlocked ? 'bg-[#CC2233] text-white' : 'bg-[#1E1E2A] text-[#6B6B80]'
-                      }`}
-                    >
-                      {unlocked ? mod.id : '🔒'}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1">
-                        <h3 className="font-bold text-lg">Niveau {mod.id} — {mod.title}</h3>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#CC2233]/15 text-[#FF4455]">+{mod.xpBonus} XP</span>
-                      </div>
-                      <p className="text-[#9090A8] text-sm">{mod.subtitle}</p>
-                    </div>
-                  </div>
-                )
-              })}
+          {/* Mini stats */}
+          <div className={s.heroStatsRow}>
+            <div className={s.miniCard}>
+              <span className={s.miniCardValue}>2 147</span>
+              <span className={s.miniCardLabel}>personnes guéries</span>
+            </div>
+            <div className={s.miniCard}>
+              <span className={s.miniCardValue}>3 sem.</span>
+              <span className={s.miniCardLabel}>durée moyenne</span>
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-24 px-6 bg-[#16161F]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">Pourquoi ça marche</h2>
-            <p className="text-[#9090A8]">Pas une simple galerie d'images. Un protocole structuré.</p>
-          </div>
+      {/* ── STATS ── */}
+      <section className={s.stats}>
+        <div className={s.statsGrid}>
+          {STATS.map((st) => (
+            <div key={st.value} className={s.statItem}>
+              <div className={s.statValue}>{st.value}</div>
+              <div className={s.statLabel}>{st.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="grid sm:grid-cols-2 gap-6">
-            {FEATURES.map((f, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-[#0E0E16] border border-[#2A2A38] hover:border-[#CC2233]/40 transition-colors">
-                <div className="text-3xl mb-4">{f.icon}</div>
-                <h3 className="font-bold text-lg mb-2">{f.title}</h3>
-                <p className="text-[#9090A8] text-sm leading-relaxed">{f.desc}</p>
+      {/* ── HOW IT WORKS ── */}
+      <section id="how" className={s.how}>
+        <p className={s.sectionEyebrow}>Méthode</p>
+        <h2 className={s.sectionTitle}>Comment ça marche, concrètement ?</h2>
+        <div className={s.howCards}>
+          {HOW_STEPS.map((step) => (
+            <div key={step.step} className={s.howCard}>
+              <div className={s.howCardIcon}>{step.icon}</div>
+              <p className={s.howCardStep}>{step.step}</p>
+              <h3 className={s.howCardTitle}>{step.title}</h3>
+              <p className={s.howCardDesc}>{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── GAMIFICATION ── */}
+      <section className={s.gamif}>
+        <div className={s.gamifInner}>
+          <p className={`${s.sectionEyebrow} ${s.gamifEyebrow}`}>Progression</p>
+          <h2 className={`${s.sectionTitle} ${s.gamifTitle}`}>
+            Progresse comme dans un jeu.
+          </h2>
+          <div className={s.gamifCards}>
+            {GAMIF_CARDS.map((card) => (
+              <div key={card.title} className={s.gamifCard}>
+                <div className={s.gamifEmoji}>{card.emoji}</div>
+                <h3 className={s.gamifCardTitle}>{card.title}</h3>
+                <p className={s.gamifCardDesc}>{card.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing CTA */}
-      <section className="py-24 px-6">
-        <div className="max-w-lg mx-auto text-center">
-          <div className="p-8 rounded-3xl bg-[#16161F] border border-[#CC2233]/40 relative overflow-hidden">
-            {/* Glow */}
-            <div className="absolute inset-0 bg-[#CC2233]/5 pointer-events-none" />
-
-            <div className="relative z-10">
-              <div className="inline-block px-3 py-1 mb-6 text-xs font-medium rounded-full bg-[#CC2233]/15 text-[#FF4455] border border-[#CC2233]/30">
-                Accès complet
-              </div>
-
-              <div className="mb-2">
-                <span className="text-6xl font-black">29</span>
-                <span className="text-2xl font-bold">€</span>
-              </div>
-              <p className="text-[#6B6B80] text-sm mb-8">Paiement unique · Pas d'abonnement · Accès à vie</p>
-
-              <ul className="text-sm text-left space-y-3 mb-8">
-                {[
-                  '7 modules complets débloqués',
-                  'Suivi de progression XP + badges',
-                  'Exercices interactifs à ton rythme',
-                  'Accès illimité, pour toujours',
-                  'Remboursement sous 14 jours si inefficace',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[#9090A8]">
-                    <span className="text-[#CC2233]">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                onClick={handleCheckout}
-                disabled={checkoutLoading}
-                className="w-full py-4 bg-[#CC2233] hover:bg-[#991122] disabled:opacity-60 text-white font-bold rounded-xl transition-all hover:scale-[1.02] animate-pulse-glow"
-              >
-                {checkoutLoading ? 'Redirection…' : 'Commencer maintenant — 29€'}
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* ── CTA FINAL ── */}
+      <section className={s.cta}>
+        <span className={s.ctaLine} aria-hidden="true" />
+        <h2 className={s.ctaTitle}>
+          Prêt·e à arrêter<br />
+          <span className={s.ctaTitleRed}>de fuir ?</span>
+        </h2>
+        <p className={s.ctaSub}>29€ une fois · Accès à vie · Remboursé sous 14 jours si inefficace.</p>
+        {error && <p className={s.ctaError}>{error}</p>}
+        <button className={s.btnCta} onClick={handleCheckout} disabled={loading}>
+          {loading ? 'Redirection…' : 'Commencer maintenant — 29€'}
+        </button>
+        <p className={s.ctaNote}>Pas d'abonnement. Accès complet à tous les niveaux.</p>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 pb-24 border-t border-[#2A2A38] text-center text-sm text-[#6B6B80]">
-        <p>© 2026 Bye Bye Blood. Tous droits réservés.</p>
+      {/* ── FOOTER ── */}
+      <footer className={s.footer}>
+        <span className={s.footerLogo}>
+          Bye Bye <span className={s.footerLogoRed}>Blood</span>
+        </span>
+        <span className={s.footerCopy}>© 2026 Bye Bye Blood. Tous droits réservés.</span>
       </footer>
     </div>
   )
