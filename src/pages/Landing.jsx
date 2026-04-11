@@ -12,18 +12,11 @@ const LEVELS = [
   { label: 'Niveau 5', state: 'locked' },
 ]
 
-const EXERCISES = [
-  { label: 'Introduction à l\'hémophobie',       state: 'done'   },
-  { label: 'Observation d\'images médicales',     state: 'active' },
-  { label: 'Vidéos de prélèvements sanguins',    state: 'todo'   },
-  { label: 'Exercice de respiration avancé',      state: 'todo'   },
-]
-
 const HOW_STEPS = [
-  { icon: '🧪', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "Un court questionnaire identifie ton degré d'hémophobie et place ton point de départ." },
-  { icon: '🗺️', step: 'Étape 2', title: 'Suis le protocole',      desc: "Chaque niveau expose progressivement à des stimuli plus intenses — textes, images, vidéos." },
-  { icon: '📈', step: 'Étape 3', title: 'Progresse graduellement', desc: "Le système adapte la cadence. Tu ne passes au suivant que quand tu es prêt·e." },
-  { icon: '🏁', step: 'Étape 4', title: 'Maîtrise complète',       desc: "Au niveau 5, la vue du sang ne déclenche plus de réponse de panique." },
+  { num: '01', icon: '🧪', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "Un court questionnaire identifie ton degré d'hémophobie et place ton point de départ." },
+  { num: '02', icon: '🗺️', step: 'Étape 2', title: 'Suis le protocole',      desc: "Chaque niveau expose progressivement à des stimuli plus intenses — textes, images, vidéos." },
+  { num: '03', icon: '📈', step: 'Étape 3', title: 'Progresse graduellement', desc: "Le système adapte la cadence. Tu ne passes au suivant que quand tu es prêt·e." },
+  { num: '04', icon: '🏁', step: 'Étape 4', title: 'Maîtrise complète',       desc: "Au niveau 5, la vue du sang ne déclenche plus de réponse de panique." },
 ]
 
 const GAMIF_CARDS = [
@@ -38,6 +31,87 @@ const STATS = [
   { value: '100% fondé',  label: 'sur la science' },
   { value: '1× paiement', label: 'unique, accès à vie' },
 ]
+
+/* ── Hero Illustration ── */
+function HeroIllustration() {
+  return (
+    <svg viewBox="0 0 420 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className={s.heroSvg}>
+      {/* Background blobs */}
+      <ellipse cx="210" cy="235" rx="185" ry="172" fill="#FFECEC"/>
+      <circle cx="355" cy="88" r="58" fill="#FFE0DC" opacity="0.55"/>
+      <circle cx="52" cy="395" r="44" fill="#FFE8D6" opacity="0.5"/>
+      <circle cx="370" cy="370" r="30" fill="#FFE0DC" opacity="0.4"/>
+
+      {/* Mascot droplet */}
+      <path d="M210 50 C210 50 126 162 126 258 C126 305 165 342 210 342 C255 342 294 305 294 258 C294 162 210 50 210 50Z" fill="#E53935"/>
+
+      {/* Eyes */}
+      <circle cx="188" cy="246" r="7.5" fill="white"/>
+      <circle cx="232" cy="246" r="7.5" fill="white"/>
+      <circle cx="190" cy="247.5" r="3.5" fill="#1a1a1a"/>
+      <circle cx="234" cy="247.5" r="3.5" fill="#1a1a1a"/>
+      {/* Eye shine */}
+      <circle cx="192" cy="245" r="1.5" fill="white"/>
+      <circle cx="236" cy="245" r="1.5" fill="white"/>
+
+      {/* Smile */}
+      <path d="M191 276 Q210 298 229 276" stroke="white" strokeWidth="4.5" strokeLinecap="round" fill="none"/>
+
+      {/* Rosy cheeks */}
+      <circle cx="170" cy="266" r="13" fill="white" opacity="0.18"/>
+      <circle cx="250" cy="266" r="13" fill="white" opacity="0.18"/>
+
+      {/* Sparkles */}
+      <g transform="translate(338,185)">
+        <path d="M0-11 L2.6-2.6 L11 0 L2.6 2.6 L0 11 L-2.6 2.6 L-11 0 L-2.6-2.6Z" fill="#E53935" opacity="0.5"/>
+      </g>
+      <g transform="translate(62,172)">
+        <path d="M0-8 L1.9-1.9 L8 0 L1.9 1.9 L0 8 L-1.9 1.9 L-8 0 L-1.9-1.9Z" fill="#FF8C5A" opacity="0.65"/>
+      </g>
+      <g transform="translate(378,308)">
+        <path d="M0-5.5 L1.3-1.3 L5.5 0 L1.3 1.3 L0 5.5 L-1.3 1.3 L-5.5 0 L-1.3-1.3Z" fill="#E53935" opacity="0.4"/>
+      </g>
+      <g transform="translate(40,275)">
+        <path d="M0-6.5 L1.5-1.5 L6.5 0 L1.5 1.5 L0 6.5 L-1.5 1.5 L-6.5 0 L-1.5-1.5Z" fill="#FF8C5A" opacity="0.45"/>
+      </g>
+
+      {/* Connector line */}
+      <path d="M65 435 C100 418 138 432 175 427 C212 422 248 432 285 427 C322 422 352 432 375 430" stroke="#E8DDD5" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="5 6"/>
+
+      {/* Level 1 */}
+      <circle cx="65" cy="435" r="24" fill="#1a1a1a"/>
+      <text x="65" y="441" textAnchor="middle" fill="white" fontSize="13" fontWeight="800" fontFamily="Plus Jakarta Sans,sans-serif">1</text>
+
+      {/* Level 2 */}
+      <circle cx="162" cy="428" r="24" fill="#1a1a1a"/>
+      <text x="162" y="434" textAnchor="middle" fill="white" fontSize="13" fontWeight="800" fontFamily="Plus Jakarta Sans,sans-serif">2</text>
+
+      {/* Level 3 — active */}
+      <circle cx="210" cy="450" r="30" fill="#E53935" opacity="0.18"/>
+      <circle cx="210" cy="450" r="24" fill="#E53935"/>
+      <text x="210" y="456" textAnchor="middle" fill="white" fontSize="13" fontWeight="800" fontFamily="Plus Jakarta Sans,sans-serif">3</text>
+
+      {/* Level 4 */}
+      <circle cx="258" cy="428" r="24" fill="#EDE6DE"/>
+      <text x="258" y="434" textAnchor="middle" fill="#B8AFA6" fontSize="13" fontWeight="800" fontFamily="Plus Jakarta Sans,sans-serif">4</text>
+
+      {/* Level 5 */}
+      <circle cx="375" cy="432" r="24" fill="#EDE6DE"/>
+      <text x="375" y="438" textAnchor="middle" fill="#B8AFA6" fontSize="13" fontWeight="800" fontFamily="Plus Jakarta Sans,sans-serif">5</text>
+    </svg>
+  )
+}
+
+/* ── Wave Divider ── */
+function WaveDivider({ topColor, bottomColor }) {
+  return (
+    <div style={{ background: topColor, lineHeight: 0, display: 'block' }}>
+      <svg viewBox="0 0 1440 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', width: '100%', height: '72px' }}>
+        <path d="M0 36 Q180 0 360 36 Q540 72 720 36 Q900 0 1080 36 Q1260 72 1440 36 L1440 72 L0 72Z" fill={bottomColor}/>
+      </svg>
+    </div>
+  )
+}
 
 /* ── Component ── */
 export default function Landing() {
@@ -71,7 +145,7 @@ export default function Landing() {
         </button>
       </nav>
 
-      {/* ── HERO — 2 colonnes ── */}
+      {/* ── HERO ── */}
       <section className={s.hero}>
         <div className={s.heroTopLine} aria-hidden="true" />
 
@@ -123,6 +197,13 @@ export default function Landing() {
               </button>
             </div>
 
+            <div className={s.heroSignIn}>
+              <span className={s.heroSignInText}>Déjà un compte ?</span>
+              <button className={s.heroSignInBtn} onClick={() => navigate('/auth')}>
+                Se connecter →
+              </button>
+            </div>
+
             {error && <p className={s.heroError}>{error}</p>}
 
             <p className={s.heroGuarantees}>
@@ -131,35 +212,9 @@ export default function Landing() {
           </div>
         </div>
 
-        {/* Colonne droite */}
+        {/* Colonne droite — illustration */}
         <div className={s.heroRight}>
-
-          {/* Card de progression */}
-          <div className={s.progressCard}>
-            <div className={s.progressCardHeader}>
-              <span className={s.progressCardTitle}>Niveau 3 — Observation directe</span>
-              <span className={s.progressCardPct}>62%</span>
-            </div>
-            <div className={s.progressBarTrack}>
-              <div className={s.progressBarFill} />
-            </div>
-            <ul className={s.exerciseList}>
-              {EXERCISES.map((ex) => (
-                <li
-                  key={ex.label}
-                  className={`${s.exercise} ${
-                    ex.state === 'done'   ? s.exDone   :
-                    ex.state === 'active' ? s.exActive :
-                    s.exTodo
-                  }`}
-                >
-                  {ex.label}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Mini stats */}
+          <HeroIllustration />
           <div className={s.heroStatsRow}>
             <div className={s.miniCard}>
               <span className={s.miniCardValue}>2 147</span>
@@ -170,9 +225,10 @@ export default function Landing() {
               <span className={s.miniCardLabel}>durée moyenne</span>
             </div>
           </div>
-
         </div>
       </section>
+
+      <WaveDivider topColor="#FFFCF7" bottomColor="#0A0A0A" />
 
       {/* ── STATS ── */}
       <section className={s.stats}>
@@ -186,6 +242,8 @@ export default function Landing() {
         </div>
       </section>
 
+      <WaveDivider topColor="#0A0A0A" bottomColor="#FFFCF7" />
+
       {/* ── HOW IT WORKS ── */}
       <section id="how" className={s.how}>
         <p className={s.sectionEyebrow}>Méthode</p>
@@ -193,6 +251,7 @@ export default function Landing() {
         <div className={s.howCards}>
           {HOW_STEPS.map((step) => (
             <div key={step.step} className={s.howCard}>
+              <div className={s.howCardNum}>{step.num}</div>
               <div className={s.howCardIcon}>{step.icon}</div>
               <p className={s.howCardStep}>{step.step}</p>
               <h3 className={s.howCardTitle}>{step.title}</h3>

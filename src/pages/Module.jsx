@@ -54,20 +54,20 @@ function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction })
   }, [onNext, setFooterAction])
 
   return (
-    <div className="flex flex-col gap-6">
-      <h2 className="text-2xl font-black">{title}</h2>
-      <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
+      <h2 className="text-3xl font-black leading-tight">{title}</h2>
+      <div className="flex flex-col gap-6">
         {paragraphs.map((p, i) => (
-          <p key={i} className="text-[#333333] leading-relaxed">{p}</p>
+          <p key={i} className="text-[#222222] text-lg leading-relaxed">{p}</p>
         ))}
       </div>
       {keyPoints && keyPoints.length > 0 && (
-        <div className="p-4 rounded-2xl bg-[#F8F6F2] border border-[#E8E6E0]">
-          <p className="text-xs font-semibold uppercase tracking-wider text-[#888888] mb-3">Points clés</p>
-          <ul className="flex flex-col gap-2">
+        <div className="p-6 rounded-2xl bg-[#fff5f5] border-2 border-[#E53935]/20">
+          <p className="text-sm font-bold uppercase tracking-wider text-[#E53935] mb-4">Points clés</p>
+          <ul className="flex flex-col gap-3">
             {keyPoints.map((kp, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-[#0A0A0A]">
-                <span className="text-[#E53935] mt-0.5 flex-shrink-0">✓</span>
+              <li key={i} className="flex items-start gap-3 text-base text-[#1a1a1a]">
+                <span className="text-[#E53935] mt-0.5 flex-shrink-0 font-bold">✓</span>
                 <span>{kp}</span>
               </li>
             ))}
@@ -643,9 +643,8 @@ export default function Module() {
     guard()
   }, [navigate, moduleId, moduleData])
 
-  // Reset footer + scroll to top when exercise changes
+  // Scroll to top when exercise changes
   useEffect(() => {
-    setFooterAction(null)
     if (contentRef.current) contentRef.current.scrollTop = 0
   }, [exerciseIndex])
 
@@ -681,16 +680,16 @@ export default function Module() {
 
       {/* Header */}
       <div className="sticky top-0 z-10 bg-white border-b border-[#f0f0f0]">
-        <div className="max-w-[640px] mx-auto px-4 py-3">
-          <div className="relative flex items-center justify-between mb-3">
-            <button onClick={() => navigate('/dashboard')} className="text-sm text-[#AAAAAA] hover:text-[#0A0A0A] transition-colors">← Dashboard</button>
-            <p className="text-xs text-[#AAAAAA] absolute left-1/2 -translate-x-1/2 truncate max-w-[40%]">{moduleData.title}</p>
-            <span className="text-xs px-2.5 py-1 rounded-full bg-[#E53935]/10 text-[#E53935] font-semibold">+50 XP</span>
+        <div style={{maxWidth:'680px', margin:'0 auto', padding:'1rem 3rem'}}>
+          <div className="flex items-center justify-between mb-4">
+            <button onClick={() => navigate('/dashboard')} className="text-sm font-medium text-[#888888] hover:text-[#0A0A0A] transition-colors">← Dashboard</button>
+            <span className="text-sm font-bold px-3 py-1 rounded-full bg-[#E53935]/10 text-[#E53935]">+50 XP</span>
           </div>
+          <p className="text-sm font-semibold text-[#1a1a1a] mb-3">{moduleData.title}</p>
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-1.5 bg-[#EFEFEC] rounded-full overflow-hidden">
+            <div className="flex-1 h-2 bg-[#ddd] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#E53935] to-[#FF4455] rounded-full transition-all duration-500"
+                className="h-full bg-[#E53935] rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -701,36 +700,37 @@ export default function Module() {
 
       {/* Scrollable content */}
       <div ref={contentRef} className="flex-1 overflow-y-auto">
-        <div className="max-w-[640px] mx-auto px-4 pt-6 pb-28">
-          {exercise.type === 'reading' && <ReadingExercise {...exerciseProps} />}
-          {exercise.type === 'breathing' && <BreathingExercise {...exerciseProps} />}
-          {exercise.type === 'applied_tension' && <AppliedTensionExercise {...exerciseProps} />}
-          {exercise.type === 'color_exposure' && <ColorExposureExercise {...exerciseProps} />}
-          {exercise.type === 'shape_exposure' && <ShapeExposureExercise {...exerciseProps} />}
-          {exercise.type === 'image_exposure' && <ImageExposureExercise {...exerciseProps} />}
-          {exercise.type === 'quiz' && <QuizExercise {...exerciseProps} />}
-          {exercise.type === 'journal' && <JournalExercise {...exerciseProps} />}
-          {exercise.type === 'scenario' && <ScenarioExercise {...exerciseProps} />}
+        <div style={{maxWidth:'680px', margin:'0 auto', padding:'2rem 3rem 10rem 3rem'}}>
+          {exercise.type === 'reading' && <ReadingExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'breathing' && <BreathingExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'applied_tension' && <AppliedTensionExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'color_exposure' && <ColorExposureExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'shape_exposure' && <ShapeExposureExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'image_exposure' && <ImageExposureExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'quiz' && <QuizExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'journal' && <JournalExercise key={exerciseIndex} {...exerciseProps} />}
+          {exercise.type === 'scenario' && <ScenarioExercise key={exerciseIndex} {...exerciseProps} />}
         </div>
       </div>
 
       {/* Fixed footer button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#f0f0f0] px-4 py-4 z-10">
-        <div className="max-w-[640px] mx-auto">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#f0f0f0] z-10" style={{padding:'1rem 3rem 1.5rem'}}>
+        <div style={{maxWidth:'680px', margin:'0 auto'}}>
           {footerAction ? (
             <button
               onClick={footerAction.disabled ? undefined : footerAction.onClick}
               disabled={footerAction.disabled}
-              className={`w-full py-4 font-semibold rounded-xl transition-all text-sm ${
+              className={`w-full font-bold rounded-2xl transition-all text-base ${
                 footerAction.disabled
                   ? 'bg-[#EFEFEC] text-[#AAAAAA] cursor-not-allowed'
-                  : 'bg-[#E53935] hover:bg-[#C62828] text-white active:scale-[0.98]'
+                  : 'bg-[#E53935] hover:bg-[#C62828] text-white active:scale-[0.98] shadow-lg'
               }`}
+              style={{padding:'0.9rem 1.2rem'}}
             >
               {footerAction.label}
             </button>
           ) : (
-            <div className="w-full py-4 rounded-xl bg-[#EFEFEC]" />
+            <div style={{padding:'0.9rem 1.2rem'}} className="w-full rounded-2xl bg-[#EFEFEC]" />
           )}
         </div>
       </div>
