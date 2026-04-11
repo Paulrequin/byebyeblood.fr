@@ -22,9 +22,11 @@ export function useProgress() {
   const { user } = useAuth()
   const queryClient = useQueryClient()
 
+  const userId = user?.id ?? ''
+
   const query = useQuery<Progress, Error>({
-    queryKey: QUERY_KEY(user?.id ?? ''),
-    queryFn: () => fetchProgress(user!.id),
+    queryKey: QUERY_KEY(userId),
+    queryFn: () => fetchProgress(userId), // userId est non-vide car enabled: !!user
     enabled: !!user,
     staleTime: 1000 * 30,
     retry: 2,
@@ -34,7 +36,7 @@ export function useProgress() {
 
   // Lit le progress depuis le cache au moment de la mutation (évite les stale closures)
   function currentProgress(): Progress {
-    return queryClient.getQueryData<Progress>(QUERY_KEY(user?.id ?? '')) ?? EMPTY_PROGRESS
+    return queryClient.getQueryData<Progress>(QUERY_KEY(userId)) ?? EMPTY_PROGRESS
   }
 
   const exerciseMutation = useMutation({

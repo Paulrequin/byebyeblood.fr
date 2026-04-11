@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 import { signIn, signUp } from '@/services/authService'
 import { startCheckout } from '@/services/profileService'
 import s from './Auth.module.css'
@@ -8,8 +8,10 @@ type Mode = 'login' | 'signup'
 
 export default function Auth() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [searchParams] = useSearchParams()
   const nextCheckout = searchParams.get('next') === 'checkout'
+  const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? '/dashboard'
 
   const [mode, setMode]         = useState<Mode>('login')
   const [email, setEmail]       = useState('')
@@ -30,11 +32,12 @@ export default function Auth() {
       } else {
         await signIn(email, password)
         if (nextCheckout) await startCheckout()
-        else navigate('/dashboard')
+        else navigate(from, { replace: true })
       }
     } catch (err) {
-      const e = err as { message?: string; status?: number; code?: string }
-      setError(e.message ? `${e.message}${e.status ? ` (status: ${e.status})` : ''}` : 'Une erreur est survenue. Réessaie.')
+      const isObj = typeof err === 'object' && err !== null
+      const e = isObj ? (err as { message?: string; status?: number }) : null
+      setError(e?.message ? `${e.message}${e.status ? ` (status: ${e.status})` : ''}` : 'Une erreur est survenue. Réessaie.')
     } finally {
       setLoading(false)
     }

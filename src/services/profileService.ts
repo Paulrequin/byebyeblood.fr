@@ -13,9 +13,10 @@ interface FunctionErrorBody {
  */
 async function parseFunctionError(error: unknown): Promise<FunctionErrorBody> {
   try {
-    const ctx = (error as { context?: Response }).context
-    if (ctx && typeof ctx.json === 'function') {
-      return await ctx.json() as FunctionErrorBody
+    if (typeof error !== 'object' || error === null) return {}
+    const ctx = (error as { context?: unknown }).context
+    if (ctx && typeof ctx === 'object' && 'json' in ctx && typeof (ctx as { json: unknown }).json === 'function') {
+      return await (ctx as { json: () => Promise<FunctionErrorBody> }).json()
     }
   } catch {
     // Corps non parseable — on ignore

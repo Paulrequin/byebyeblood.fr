@@ -103,7 +103,7 @@ function HeroIllustration() {
 }
 
 /* ── Wave Divider ── */
-function WaveDivider({ topColor, bottomColor }) {
+function WaveDivider({ topColor, bottomColor }: { topColor: string; bottomColor: string }) {
   return (
     <div style={{ background: topColor, lineHeight: 0, display: 'block' }}>
       <svg viewBox="0 0 1440 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', width: '100%', height: '72px' }}>
