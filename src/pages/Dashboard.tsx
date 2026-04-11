@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { supabase } from '../lib/supabase'
-import { MODULES } from '../data/modules'
-import { getProgress, isModuleCompleted, isModuleUnlocked } from '../lib/progress'
+import { useAuth } from '@/contexts/AuthContext'
+import { useProfile } from '@/hooks/useProfile'
+import { useProgress } from '@/hooks/useProgress'
+import { signOut } from '@/services/authService'
+import { MODULES } from '@/data/modules'
 import s from './Dashboard.module.css'
 
 const MAX_XP     = MODULES.reduce((sum, m) => sum + m.xpBonus + m.exercises.length * 50, 0)
 const ALL_BADGES = MODULES.map(m => m.badge)
 
-function greetingFromCount(count) {
+function greetingFromCount(count: number): string {
   if (count === 0) return 'Prêt à commencer ton parcours ?'
   if (count <= 2) return 'Tu as fait les premiers pas. Continue !'
   if (count < MODULES.length - 1) return 'Tu progresses vraiment bien.'
@@ -16,13 +18,13 @@ function greetingFromCount(count) {
   return 'Programme terminé. Incroyable ! 🏆'
 }
 
-function formatDate(iso) {
+function formatDate(iso: string): string {
   try {
     return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
   } catch { return '' }
 }
 
-function ratingClass(r, s) {
+function ratingClass(r: number): string {
   if (r <= 3) return s.ratingBad
   if (r <= 6) return s.ratingMid
   return s.ratingGood
@@ -30,45 +32,34 @@ function ratingClass(r, s) {
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const [user, setUser]                   = useState(null)
-  const [hasAccess, setHasAccess]         = useState(null)
-  const [xp, setXp]                       = useState(0)
-  const [completedCount, setCompletedCount] = useState(0)
-  const [journal, setJournal]             = useState([])
-  const [badgeIds, setBadgeIds]           = useState([])
+  const { user } = useAuth()
+
+  const { data: profile, isLoading: profileLoading } = useProfile()
+  const { progress, isLoading: progressLoading, isModuleCompleted, isModuleUnlocked } = useProgress()
 
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   useEffect(() => {
-    async function init() {
-      if (import.meta.env.DEV) {
-        setUser({ email: 'dev@local.test' })
-      } else {
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) { navigate('/auth'); return }
-        setUser(user)
-        const { data: profile } = await supabase
-          .from('profiles').select('has_access').eq('id', user.id).single()
-        if (!profile?.has_access) { navigate('/'); return }
-      }
-      const prog = getProgress()
-      setXp(prog.xp)
-      setCompletedCount(prog.completedModules.length)
-      setJournal(prog.journal)
-      setBadgeIds(prog.badges)
-      setHasAccess(true)
+    if (!profileLoading && profile && !profile.has_access) {
+      navigate('/')
     }
-    init()
-  }, [navigate])
+  }, [profile, profileLoading, navigate])
 
-  if (hasAccess === null) {
+  if (profileLoading || progressLoading) {
     return <div className={s.loading}><div className={s.spinner} /></div>
   }
 
+  if (!profile?.has_access) return null
+
   async function handleSignOut() {
-    await supabase.auth.signOut()
+    await signOut()
     navigate('/')
   }
+
+  const xp             = progress.xp
+  const completedCount = progress.completedModules.length
+  const journal        = progress.journal
+  const badgeIds       = progress.badges
 
   const xpPercent     = Math.min(100, Math.round((xp / MAX_XP) * 100))
   const recentJournal = [...journal].reverse().slice(0, 5)
@@ -93,7 +84,6 @@ export default function Dashboard() {
 
       <main className={s.main}>
 
-        {/* Greeting */}
         <div className={s.greeting}>
           <h1 className={s.greetTitle}>
             Bonjour{firstName ? ` ${firstName}` : ''} 👋
@@ -106,7 +96,6 @@ export default function Dashboard() {
           {/* ── SIDEBAR ── */}
           <aside className={s.sidebar}>
 
-            {/* Stats */}
             <div className={s.statsGrid}>
               <div className={s.statCard}>
                 <p className={s.statLabel}>Modules</p>
@@ -121,7 +110,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Progress */}
             <div className={s.card}>
               <div className={s.progressHeader}>
                 <span className={s.progressTitle}>Progression</span>
@@ -135,7 +123,6 @@ export default function Dashboard() {
               </p>
             </div>
 
-            {/* Badges */}
             <div className={s.card}>
               <div className={s.cardHeader}>
                 <span className={s.cardTitle}>Badges</span>
@@ -159,7 +146,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Journal */}
             <div className={s.card}>
               <div className={s.cardHeader}>
                 <span className={s.cardTitle}>Journal</span>
@@ -180,7 +166,7 @@ export default function Dashboard() {
                       <div key={i} className={s.journalItem}>
                         <div className={s.journalTop}>
                           <p className={s.journalMod}>{mod ? mod.title : `Module ${entry.moduleId}`}</p>
-                          <span className={ratingClass(entry.rating, s)}>{entry.rating}/10</span>
+                          <span className={ratingClass(entry.rating)}>{entry.rating}/10</span>
                         </div>
                         <p className={s.journalDate}>{formatDate(entry.date)}</p>
                         {entry.note && <p className={s.journalNote}>{entry.note}</p>}

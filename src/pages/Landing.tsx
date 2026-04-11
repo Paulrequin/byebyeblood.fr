@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { startCheckout } from '../lib/checkout'
+import { startCheckout } from '@/services/profileService'
 import s from './Landing.module.css'
 
 /* ── Data ── */
@@ -117,7 +117,7 @@ function WaveDivider({ topColor, bottomColor }) {
 export default function Landing() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const [error,   setError]   = useState(null)
+  const [error,   setError]   = useState<string | null>(null)
 
   async function handleCheckout() {
     setLoading(true)
@@ -191,7 +191,7 @@ export default function Landing() {
               </button>
               <button
                 className={s.btnSecondary}
-                onClick={() => document.getElementById('how').scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Comment ça marche ?
               </button>

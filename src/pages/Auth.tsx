@@ -1,41 +1,49 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { supabase } from '../lib/supabase'
-import { startCheckout } from '../lib/checkout'
+import { signIn, signUp } from '@/services/authService'
+import { startCheckout } from '@/services/profileService'
 import s from './Auth.module.css'
+
+type Mode = 'login' | 'signup'
 
 export default function Auth() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const nextCheckout = searchParams.get('next') === 'checkout'
-  const [mode, setMode]       = useState('login')
-  const [email, setEmail]     = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError]     = useState(null)
-  const [message, setMessage] = useState(null)
 
-  async function handleSubmit(e) {
+  const [mode, setMode]         = useState<Mode>('login')
+  const [email, setEmail]       = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading]   = useState(false)
+  const [error, setError]       = useState<string | null>(null)
+  const [message, setMessage]   = useState<string | null>(null)
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
     setMessage(null)
     try {
       if (mode === 'signup') {
-        const { error } = await supabase.auth.signUp({ email, password })
-        if (error) setError(`${error.message} (status: ${error.status}, code: ${error.code})`)
-        else setMessage('Vérifie tes emails pour confirmer ton compte.')
+        await signUp(email, password)
+        setMessage('Vérifie tes emails pour confirmer ton compte.')
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
-        if (error) setError(`${error.message} (status: ${error.status}, code: ${error.code})`)
-        else if (nextCheckout) await startCheckout()
+        await signIn(email, password)
+        if (nextCheckout) await startCheckout()
         else navigate('/dashboard')
       }
-    } catch {
-      setError('Une erreur est survenue. Réessaie.')
+    } catch (err) {
+      const e = err as { message?: string; status?: number; code?: string }
+      setError(e.message ? `${e.message}${e.status ? ` (status: ${e.status})` : ''}` : 'Une erreur est survenue. Réessaie.')
     } finally {
       setLoading(false)
     }
+  }
+
+  function switchMode(next: Mode) {
+    setMode(next)
+    setError(null)
+    setMessage(null)
   }
 
   return (
@@ -77,14 +85,14 @@ export default function Auth() {
         </p>
 
         <div className={s.tabs}>
-          {[
-            { key: 'login',  label: 'Se connecter' },
-            { key: 'signup', label: "S'inscrire" },
-          ].map(({ key, label }) => (
+          {([
+            { key: 'login'  as Mode, label: 'Se connecter' },
+            { key: 'signup' as Mode, label: "S'inscrire" },
+          ]).map(({ key, label }) => (
             <button
               key={key}
               className={`${s.tab} ${mode === key ? s.tabActive : ''}`}
-              onClick={() => { setMode(key); setError(null); setMessage(null) }}
+              onClick={() => switchMode(key)}
             >
               {label}
             </button>
@@ -127,12 +135,6 @@ export default function Auth() {
           En continuant, tu acceptes nos{' '}
           <span className={s.termsLink}>conditions d'utilisation</span>.
         </p>
-
-        {import.meta.env.DEV && (
-          <button className={s.devBtn} onClick={() => navigate('/dashboard')}>
-            ⚡ Mode dev — accès direct
-          </button>
-        )}
       </div>
     </div>
   )

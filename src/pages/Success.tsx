@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { supabase } from '../lib/supabase'
+import { verifyPayment } from '@/services/profileService'
 import s from './Success.module.css'
+
+type Status = 'verifying' | 'success' | 'error'
 
 export default function Success() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const sessionId = searchParams.get('session_id')
 
-  const [status, setStatus]   = useState('verifying')
-  const [errorMsg, setErrorMsg] = useState(null)
+  const [status, setStatus]     = useState<Status>('verifying')
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   useEffect(() => {
     if (!sessionId) {
@@ -18,26 +20,12 @@ export default function Success() {
       return
     }
 
-    async function verify() {
-      try {
-        const { error } = await supabase.functions.invoke('verify-payment', {
-          body: { session_id: sessionId },
-        })
-        if (error) {
-          let body = {}
-          try { body = await error.context.json() } catch (_) {}
-          setErrorMsg(body.error ?? error.message ?? 'Erreur lors de la vérification.')
-          setStatus('error')
-          return
-        }
-        setStatus('success')
-      } catch (err) {
-        setErrorMsg(err.message ?? 'Erreur inconnue.')
+    verifyPayment(sessionId)
+      .then(() => setStatus('success'))
+      .catch((err: Error) => {
+        setErrorMsg(err.message ?? 'Erreur lors de la vérification.')
         setStatus('error')
-      }
-    }
-
-    verify()
+      })
   }, [sessionId])
 
   return (

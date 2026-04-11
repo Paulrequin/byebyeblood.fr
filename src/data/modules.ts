@@ -1,4 +1,6 @@
-export const MODULES = [
+import type { Module } from '@/types'
+
+export const MODULES: Module[] = [
   {
     id: 1,
     title: 'Comprendre ta peur',
