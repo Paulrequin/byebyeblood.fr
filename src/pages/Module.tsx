@@ -1,12 +1,35 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { supabase } from '../lib/supabase'
-import { MODULES } from '../data/modules'
-import { isModuleUnlocked, completeExercise, completeModule, addJournalEntry } from '../lib/progress'
+import { useProgress } from '@/hooks/useProgress'
+import { MODULES } from '@/data/modules'
+import type {
+  Module as ModuleType,
+  ReadingExerciseData,
+  QuizExerciseData,
+  JournalExerciseData,
+  BreathingExerciseData,
+  AppliedTensionExerciseData,
+  ColorExposureExerciseData,
+  ShapeExposureExerciseData,
+  ImageExposureExerciseData,
+  ScenarioExerciseData,
+} from '@/types'
 
-// ---------------------------------------------------------------------------
-// Spinner
-// ---------------------------------------------------------------------------
+// ─── Shared types ─────────────────────────────────────────────────────────────
+
+interface FooterAction {
+  label: string
+  disabled: boolean
+  onClick: (() => void) | null
+}
+
+interface BaseExerciseProps {
+  onNext: () => void
+  setFooterAction: (action: FooterAction | null) => void
+}
+
+// ─── Spinner ──────────────────────────────────────────────────────────────────
+
 function Spinner() {
   return (
     <div className="h-dvh bg-white flex items-center justify-center">
@@ -15,10 +38,9 @@ function Spinner() {
   )
 }
 
-// ---------------------------------------------------------------------------
-// CompletionScreen
-// ---------------------------------------------------------------------------
-function CompletionScreen({ module: mod, totalXP, onDashboard }) {
+// ─── CompletionScreen ─────────────────────────────────────────────────────────
+
+function CompletionScreen({ module: mod, totalXP, onDashboard }: { module: ModuleType; totalXP: number; onDashboard: () => void }) {
   return (
     <div className="h-dvh bg-white text-[#0A0A0A] flex items-center justify-center px-6">
       <div className="text-center max-w-sm w-full">
@@ -43,10 +65,9 @@ function CompletionScreen({ module: mod, totalXP, onDashboard }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// ReadingExercise
-// ---------------------------------------------------------------------------
-function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction }) {
+// ─── ReadingExercise ──────────────────────────────────────────────────────────
+
+function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction }: ReadingExerciseData & BaseExerciseProps) {
   const paragraphs = content.split('\n\n')
 
   useEffect(() => {
@@ -54,20 +75,20 @@ function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction })
   }, [onNext, setFooterAction])
 
   return (
-    <div className="flex flex-col gap-6">
-      <h2 className="text-2xl font-black">{title}</h2>
-      <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
+      <h2 className="text-3xl font-black leading-tight">{title}</h2>
+      <div className="flex flex-col gap-6">
         {paragraphs.map((p, i) => (
-          <p key={i} className="text-[#333333] leading-relaxed">{p}</p>
+          <p key={i} className="text-[#222222] text-lg leading-relaxed">{p}</p>
         ))}
       </div>
       {keyPoints && keyPoints.length > 0 && (
-        <div className="p-4 rounded-2xl bg-[#F8F6F2] border border-[#E8E6E0]">
-          <p className="text-xs font-semibold uppercase tracking-wider text-[#888888] mb-3">Points clés</p>
-          <ul className="flex flex-col gap-2">
+        <div className="p-6 rounded-2xl bg-[#fff5f5] border-2 border-[#E53935]/20">
+          <p className="text-sm font-bold uppercase tracking-wider text-[#E53935] mb-4">Points clés</p>
+          <ul className="flex flex-col gap-3">
             {keyPoints.map((kp, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-[#0A0A0A]">
-                <span className="text-[#E53935] mt-0.5 flex-shrink-0">✓</span>
+              <li key={i} className="flex items-start gap-3 text-base text-[#1a1a1a]">
+                <span className="text-[#E53935] mt-0.5 flex-shrink-0 font-bold">✓</span>
                 <span>{kp}</span>
               </li>
             ))}
@@ -78,17 +99,18 @@ function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction })
   )
 }
 
-// ---------------------------------------------------------------------------
-// BreathingExercise
-// ---------------------------------------------------------------------------
-function BreathingExercise({ technique, title, description, onNext, setFooterAction }) {
-  const [phase, setPhase] = useState('idle')
-  const [cycleCount, setCycleCount] = useState(0)
-  const [scale, setScale] = useState(1)
-  const mountedRef = useRef(true)
-  const timeoutsRef = useRef([])
+// ─── BreathingExercise ────────────────────────────────────────────────────────
 
-  function scheduleTimeout(fn, delay) {
+type BreathingPhase = 'idle' | 'inhale' | 'hold' | 'exhale' | 'done'
+
+function BreathingExercise({ technique, title, description, onNext, setFooterAction }: BreathingExerciseData & BaseExerciseProps) {
+  const [phase, setPhase]           = useState<BreathingPhase>('idle')
+  const [cycleCount, setCycleCount] = useState(0)
+  const [scale, setScale]           = useState(1)
+  const mountedRef   = useRef(true)
+  const timeoutsRef  = useRef<ReturnType<typeof setTimeout>[]>([])
+
+  function scheduleTimeout(fn: () => void, delay: number) {
     const id = setTimeout(fn, delay)
     timeoutsRef.current.push(id)
     return id
@@ -107,7 +129,6 @@ function BreathingExercise({ technique, title, description, onNext, setFooterAct
     }
   }, [])
 
-  // Footer button: only show when done
   useEffect(() => {
     if (phase === 'done') {
       setFooterAction({ label: 'Continuer →', disabled: false, onClick: onNext })
@@ -118,7 +139,7 @@ function BreathingExercise({ technique, title, description, onNext, setFooterAct
 
   const TOTAL_CYCLES = 3
 
-  function runCycle(currentCycle) {
+  function runCycle(currentCycle: number) {
     if (!mountedRef.current) return
     if (technique === 'cardiac') {
       setPhase('inhale'); setScale(1.5)
@@ -153,9 +174,16 @@ function BreathingExercise({ technique, title, description, onNext, setFooterAct
     }
   }
 
-  const phaseLabels = { idle: '', inhale: 'Inspire…', hold: 'Retiens…', exhale: 'Expire…', done: 'Bien joué ✓' }
-  const phaseDuration = technique === 'cardiac' ? { inhale: 5000, exhale: 5000 } : { inhale: 4000, hold: 7000, exhale: 8000 }
-  const transitionDuration = phase === 'inhale' ? phaseDuration.inhale : phase === 'hold' ? 0 : phase === 'exhale' ? phaseDuration.exhale : 500
+  const phaseLabels: Record<BreathingPhase, string> = {
+    idle: '', inhale: 'Inspire…', hold: 'Retiens…', exhale: 'Expire…', done: 'Bien joué ✓',
+  }
+  const phaseDuration = technique === 'cardiac'
+    ? { inhale: 5000, hold: 0, exhale: 5000 }
+    : { inhale: 4000, hold: 7000, exhale: 8000 }
+  const transitionDuration =
+    phase === 'inhale' ? phaseDuration.inhale :
+    phase === 'hold'   ? 0 :
+    phase === 'exhale' ? phaseDuration.exhale : 500
 
   return (
     <div className="flex flex-col items-center gap-8 py-4">
@@ -163,7 +191,6 @@ function BreathingExercise({ technique, title, description, onNext, setFooterAct
         <h2 className="text-xl font-bold mb-2">{title}</h2>
         <p className="text-sm text-[#888888] max-w-xs">{description}</p>
       </div>
-
       <div
         className="w-44 h-44 rounded-full border-4 border-[#E53935] flex items-center justify-center"
         style={{
@@ -174,7 +201,6 @@ function BreathingExercise({ technique, title, description, onNext, setFooterAct
       >
         <span className="text-sm text-[#0A0A0A] font-medium text-center px-4">{phaseLabels[phase]}</span>
       </div>
-
       {phase !== 'idle' && phase !== 'done' && (
         <p className="text-[#888888] text-sm">Cycle {cycleCount + 1} / {TOTAL_CYCLES}</p>
       )}
@@ -193,14 +219,15 @@ function BreathingExercise({ technique, title, description, onNext, setFooterAct
   )
 }
 
-// ---------------------------------------------------------------------------
-// AppliedTensionExercise
-// ---------------------------------------------------------------------------
-function AppliedTensionExercise({ title, muscleGroup, instruction, rounds, onNext, setFooterAction }) {
-  const [phase, setPhase] = useState('idle')
-  const [countdown, setCountdown] = useState(0)
+// ─── AppliedTensionExercise ───────────────────────────────────────────────────
+
+type TensionPhase = 'idle' | 'tense' | 'release' | 'rest' | 'done'
+
+function AppliedTensionExercise({ title, muscleGroup, instruction, rounds, onNext, setFooterAction }: AppliedTensionExerciseData & BaseExerciseProps) {
+  const [phase, setPhase]               = useState<TensionPhase>('idle')
+  const [countdown, setCountdown]       = useState(0)
   const [currentRound, setCurrentRound] = useState(0)
-  const intervalRef = useRef(null)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   function clearTimer() {
     if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null }
@@ -216,7 +243,7 @@ function AppliedTensionExercise({ title, muscleGroup, instruction, rounds, onNex
     }
   }, [phase, onNext, setFooterAction])
 
-  function startRound(roundIndex) {
+  function startRound(roundIndex: number) {
     setCurrentRound(roundIndex)
     setPhase('tense')
     setCountdown(10)
@@ -248,12 +275,12 @@ function AppliedTensionExercise({ title, muscleGroup, instruction, rounds, onNex
     }, 1000)
   }
 
-  const phaseConfig = {
-    idle: { label: '', color: 'text-[#0A0A0A]', bg: 'bg-[#F8F6F2]' },
-    tense: { label: 'TENSEZ', color: 'text-[#E53935]', bg: 'bg-[#E53935]/10' },
-    release: { label: 'RELÂCHEZ', color: 'text-[#888888]', bg: 'bg-[#F8F6F2]' },
-    rest: { label: 'REPOS', color: 'text-[#AAAAAA]', bg: 'bg-[#F8F6F2]' },
-    done: { label: '', color: '', bg: 'bg-[#F8F6F2]' },
+  const phaseConfig: Record<TensionPhase, { label: string; color: string; bg: string }> = {
+    idle:    { label: '',          color: 'text-[#0A0A0A]',  bg: 'bg-[#F8F6F2]' },
+    tense:   { label: 'TENSEZ',    color: 'text-[#E53935]',  bg: 'bg-[#E53935]/10' },
+    release: { label: 'RELÂCHEZ',  color: 'text-[#888888]',  bg: 'bg-[#F8F6F2]' },
+    rest:    { label: 'REPOS',     color: 'text-[#AAAAAA]',  bg: 'bg-[#F8F6F2]' },
+    done:    { label: '',          color: '',                 bg: 'bg-[#F8F6F2]' },
   }
   const config = phaseConfig[phase]
 
@@ -294,10 +321,9 @@ function AppliedTensionExercise({ title, muscleGroup, instruction, rounds, onNex
   )
 }
 
-// ---------------------------------------------------------------------------
-// ColorExposureExercise
-// ---------------------------------------------------------------------------
-function ColorExposureExercise({ colors, onNext, setFooterAction }) {
+// ─── ColorExposureExercise ────────────────────────────────────────────────────
+
+function ColorExposureExercise({ colors, onNext, setFooterAction }: ColorExposureExerciseData & BaseExerciseProps) {
   const [index, setIndex] = useState(0)
   const isLast = index === colors.length - 1
 
@@ -326,10 +352,9 @@ function ColorExposureExercise({ colors, onNext, setFooterAction }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// ShapeExposureExercise
-// ---------------------------------------------------------------------------
-function ShapeExposureExercise({ shapes, onNext, setFooterAction }) {
+// ─── ShapeExposureExercise ────────────────────────────────────────────────────
+
+function ShapeExposureExercise({ shapes, onNext, setFooterAction }: ShapeExposureExerciseData & BaseExerciseProps) {
   const [index, setIndex] = useState(0)
   const isLast = index === shapes.length - 1
 
@@ -340,12 +365,12 @@ function ShapeExposureExercise({ shapes, onNext, setFooterAction }) {
 
   const current = shapes[index]
 
-  function renderShape(variant) {
+  function renderShape(variant: string) {
     switch (variant) {
-      case 'circle': return <circle cx="100" cy="100" r="80" fill="#E53935" opacity="0.85" />
-      case 'drop': return <path d="M100 20 C100 20 30 90 30 130 C30 168 62 190 100 190 C138 190 170 168 170 130 C170 90 100 20 100 20Z" fill="#E53935" opacity="0.85" />
+      case 'circle':   return <circle cx="100" cy="100" r="80" fill="#E53935" opacity="0.85" />
+      case 'drop':     return <path d="M100 20 C100 20 30 90 30 130 C30 168 62 190 100 190 C138 190 170 168 170 130 C170 90 100 20 100 20Z" fill="#E53935" opacity="0.85" />
       case 'splatter': return <path d="M100 80 C120 60 150 70 145 95 C155 90 165 105 150 115 C160 125 150 145 135 140 C140 155 120 160 110 148 C105 162 85 160 82 145 C68 152 55 138 65 124 C50 118 48 98 65 95 C55 78 72 62 85 72 C85 55 108 50 100 80Z" fill="#E53935" opacity="0.85" />
-      case 'complex': return (
+      case 'complex':  return (
         <>
           <ellipse cx="100" cy="90" rx="65" ry="50" fill="#E53935" opacity="0.7" />
           <circle cx="140" cy="130" r="30" fill="#AA1122" opacity="0.8" />
@@ -374,10 +399,9 @@ function ShapeExposureExercise({ shapes, onNext, setFooterAction }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// ImageExposureExercise
-// ---------------------------------------------------------------------------
-function ImageExposureExercise({ level, title, description, onNext, setFooterAction }) {
+// ─── ImageExposureExercise ────────────────────────────────────────────────────
+
+function ImageExposureExercise({ level, title, description, onNext, setFooterAction }: ImageExposureExerciseData & BaseExerciseProps) {
   useEffect(() => {
     setFooterAction({ label: "J'ai regardé, continuer →", disabled: false, onClick: onNext })
   }, [onNext, setFooterAction])
@@ -435,24 +459,22 @@ function ImageExposureExercise({ level, title, description, onNext, setFooterAct
   )
 }
 
-// ---------------------------------------------------------------------------
-// QuizExercise
-// ---------------------------------------------------------------------------
-function QuizExercise({ questions, onNext, setFooterAction }) {
+// ─── QuizExercise ─────────────────────────────────────────────────────────────
+
+function QuizExercise({ questions, onNext, setFooterAction }: QuizExerciseData & BaseExerciseProps) {
   const [questionIndex, setQuestionIndex] = useState(0)
-  const [selected, setSelected] = useState(null)
-  const [score, setScore] = useState(0)
-  const [showScore, setShowScore] = useState(false)
+  const [selected, setSelected]           = useState<number | null>(null)
+  const [score, setScore]                 = useState(0)
+  const [showScore, setShowScore]         = useState(false)
 
   const current = questions[questionIndex]
-  const isLast = questionIndex === questions.length - 1
+  const isLast  = questionIndex === questions.length - 1
 
   function handleNext() {
     if (isLast) setShowScore(true)
     else { setQuestionIndex(i => i + 1); setSelected(null) }
   }
 
-  // Update footer based on state
   useEffect(() => {
     if (showScore) {
       setFooterAction({ label: 'Terminer le quiz →', disabled: false, onClick: onNext })
@@ -461,9 +483,9 @@ function QuizExercise({ questions, onNext, setFooterAction }) {
     } else {
       setFooterAction({ label: 'Choisir une réponse…', disabled: true, onClick: null })
     }
-  }, [selected, showScore, isLast, questionIndex])
+  }, [selected, showScore, isLast, questionIndex]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  function handleSelect(optionIndex) {
+  function handleSelect(optionIndex: number) {
     if (selected !== null) return
     setSelected(optionIndex)
     if (optionIndex === current.correct) setScore(s => s + 1)
@@ -491,8 +513,8 @@ function QuizExercise({ questions, onNext, setFooterAction }) {
           let style = 'bg-[#F8F6F2] border-[#E8E6E0] text-[#0A0A0A] hover:border-[#E53935]/50'
           if (selected !== null) {
             if (i === current.correct) style = 'bg-[#F0FFF4] border-[#9AE6B4] text-[#276749]'
-            else if (i === selected) style = 'bg-[#FFF0F0] border-[#FFCCCC] text-[#C62828]'
-            else style = 'bg-[#F8F6F2] border-[#E8E6E0] text-[#AAAAAA] opacity-60'
+            else if (i === selected)   style = 'bg-[#FFF0F0] border-[#FFCCCC] text-[#C62828]'
+            else                       style = 'bg-[#F8F6F2] border-[#E8E6E0] text-[#AAAAAA] opacity-60'
           }
           return (
             <button
@@ -515,24 +537,28 @@ function QuizExercise({ questions, onNext, setFooterAction }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// JournalExercise
-// ---------------------------------------------------------------------------
-function JournalExercise({ prompt, moduleId, onNext, setFooterAction }) {
-  const [rating, setRating] = useState(null)
-  const [note, setNote] = useState('')
+// ─── JournalExercise ──────────────────────────────────────────────────────────
+
+interface JournalExerciseProps extends JournalExerciseData, BaseExerciseProps {
+  moduleId: number
+  onSaveJournal: (moduleId: number, rating: number, note?: string) => Promise<unknown>
+}
+
+function JournalExercise({ prompt, moduleId, onNext, setFooterAction, onSaveJournal }: JournalExerciseProps) {
+  const [rating, setRating] = useState<number | null>(null)
+  const [note, setNote]     = useState('')
 
   useEffect(() => {
     if (rating !== null) {
       setFooterAction({
         label: 'Enregistrer →',
         disabled: false,
-        onClick: () => { addJournalEntry(moduleId, rating, note); onNext() },
+        onClick: () => { onSaveJournal(moduleId, rating, note).then(onNext) },
       })
     } else {
       setFooterAction({ label: 'Sélectionne une note pour continuer', disabled: true, onClick: null })
     }
-  }, [rating, note, moduleId, onNext, setFooterAction])
+  }, [rating, note, moduleId, onNext, setFooterAction, onSaveJournal])
 
   return (
     <div className="flex flex-col gap-6">
@@ -576,10 +602,9 @@ function JournalExercise({ prompt, moduleId, onNext, setFooterAction }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// ScenarioExercise
-// ---------------------------------------------------------------------------
-function ScenarioExercise({ title, situation, steps, onNext, setFooterAction }) {
+// ─── ScenarioExercise ─────────────────────────────────────────────────────────
+
+function ScenarioExercise({ title, situation, steps, onNext, setFooterAction }: ScenarioExerciseData & BaseExerciseProps) {
   const [stepIndex, setStepIndex] = useState(0)
   const isLast = stepIndex === steps.length - 1
 
@@ -613,54 +638,48 @@ function ScenarioExercise({ title, situation, steps, onNext, setFooterAction }) 
   )
 }
 
-// ---------------------------------------------------------------------------
-// Main Module Component
-// ---------------------------------------------------------------------------
-export default function Module() {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const [ready, setReady] = useState(false)
-  const [exerciseIndex, setExerciseIndex] = useState(0)
-  const [completed, setCompleted] = useState(false)
-  const [earnedXP, setEarnedXP] = useState(0)
-  const [footerAction, setFooterAction] = useState(null)
-  const contentRef = useRef(null)
+// ─── Main Module Component ────────────────────────────────────────────────────
 
-  const moduleId = parseInt(id)
+export default function Module() {
+  const { id }       = useParams<{ id: string }>()
+  const navigate     = useNavigate()
+  const { isModuleUnlocked, completeExercise, completeModule, addJournalEntry } = useProgress()
+
+  const [exerciseIndex, setExerciseIndex] = useState(0)
+  const [completed, setCompleted]         = useState(false)
+  const [earnedXP, setEarnedXP]           = useState(0)
+  const [footerAction, setFooterAction]   = useState<FooterAction | null>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const moduleId   = parseInt(id ?? '0')
   const moduleData = MODULES.find(m => m.id === moduleId)
 
+  // Guard : module inexistant ou verrouillé
   useEffect(() => {
-    async function guard() {
-      if (!import.meta.env.DEV) {
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) { navigate('/auth'); return }
-        const { data: profile } = await supabase.from('profiles').select('has_access').eq('id', user.id).single()
-        if (!profile?.has_access) { navigate('/'); return }
-      }
-      if (!moduleData || !isModuleUnlocked(moduleId)) { navigate('/dashboard'); return }
-      setReady(true)
+    if (!moduleData || !isModuleUnlocked(moduleId)) {
+      navigate('/dashboard')
     }
-    guard()
-  }, [navigate, moduleId, moduleData])
+  }, [moduleData, moduleId, isModuleUnlocked, navigate])
 
-  // Reset footer + scroll to top when exercise changes
+  // Reset footer + scroll quand l'exercice change
   useEffect(() => {
     setFooterAction(null)
     if (contentRef.current) contentRef.current.scrollTop = 0
   }, [exerciseIndex])
 
-  const handleExerciseComplete = useCallback(() => {
-    completeExercise(moduleId, exerciseIndex)
+  const handleExerciseComplete = useCallback(async () => {
+    if (!moduleData) return
+    await completeExercise(moduleId, exerciseIndex)
     if (exerciseIndex + 1 >= moduleData.exercises.length) {
-      const finalProgress = completeModule(moduleId, moduleData.xpBonus)
-      setEarnedXP(finalProgress.xp)
+      const next = await completeModule(moduleId, moduleData.xpBonus)
+      setEarnedXP(next.xp)
       setCompleted(true)
     } else {
       setExerciseIndex(i => i + 1)
     }
-  }, [moduleId, exerciseIndex, moduleData])
+  }, [moduleId, exerciseIndex, moduleData, completeExercise, completeModule])
 
-  if (!ready) return <Spinner />
+  if (!moduleData) return <Spinner />
 
   if (completed) {
     return (
@@ -672,9 +691,9 @@ export default function Module() {
     )
   }
 
-  const exercise = moduleData.exercises[exerciseIndex]
-  const progress = Math.round((exerciseIndex / moduleData.exercises.length) * 100)
-  const exerciseProps = { ...exercise, onNext: handleExerciseComplete, setFooterAction }
+  const exercise      = moduleData.exercises[exerciseIndex]
+  const progressPct   = Math.round((exerciseIndex / moduleData.exercises.length) * 100)
+  const baseProps     = { onNext: handleExerciseComplete, setFooterAction }
 
   return (
     <div className="h-dvh bg-white text-[#0A0A0A] flex flex-col">
@@ -691,7 +710,7 @@ export default function Module() {
             <div className="flex-1 h-1.5 bg-[#EFEFEC] rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-[#E53935] to-[#FF4455] rounded-full transition-all duration-500"
-                style={{ width: `${progress}%` }}
+                style={{ width: `${progressPct}%` }}
               />
             </div>
             <span className="text-xs text-[#AAAAAA] flex-shrink-0">{exerciseIndex + 1} / {moduleData.exercises.length}</span>
@@ -702,24 +721,31 @@ export default function Module() {
       {/* Scrollable content */}
       <div ref={contentRef} className="flex-1 overflow-y-auto">
         <div className="max-w-[640px] mx-auto px-4 pt-6 pb-28">
-          {exercise.type === 'reading' && <ReadingExercise {...exerciseProps} />}
-          {exercise.type === 'breathing' && <BreathingExercise {...exerciseProps} />}
-          {exercise.type === 'applied_tension' && <AppliedTensionExercise {...exerciseProps} />}
-          {exercise.type === 'color_exposure' && <ColorExposureExercise {...exerciseProps} />}
-          {exercise.type === 'shape_exposure' && <ShapeExposureExercise {...exerciseProps} />}
-          {exercise.type === 'image_exposure' && <ImageExposureExercise {...exerciseProps} />}
-          {exercise.type === 'quiz' && <QuizExercise {...exerciseProps} />}
-          {exercise.type === 'journal' && <JournalExercise {...exerciseProps} />}
-          {exercise.type === 'scenario' && <ScenarioExercise {...exerciseProps} />}
+          {exercise.type === 'reading'         && <ReadingExercise        {...exercise} {...baseProps} />}
+          {exercise.type === 'breathing'       && <BreathingExercise      {...exercise} {...baseProps} />}
+          {exercise.type === 'applied_tension' && <AppliedTensionExercise {...exercise} {...baseProps} />}
+          {exercise.type === 'color_exposure'  && <ColorExposureExercise  {...exercise} {...baseProps} />}
+          {exercise.type === 'shape_exposure'  && <ShapeExposureExercise  {...exercise} {...baseProps} />}
+          {exercise.type === 'image_exposure'  && <ImageExposureExercise  {...exercise} {...baseProps} />}
+          {exercise.type === 'quiz'            && <QuizExercise           {...exercise} {...baseProps} />}
+          {exercise.type === 'journal'         && (
+            <JournalExercise
+              {...exercise}
+              {...baseProps}
+              moduleId={moduleId}
+              onSaveJournal={addJournalEntry}
+            />
+          )}
+          {exercise.type === 'scenario'        && <ScenarioExercise {...(exercise as ScenarioExerciseData)} {...baseProps} />}
         </div>
       </div>
 
-      {/* Fixed footer button */}
+      {/* Fixed footer */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#f0f0f0] px-4 py-4 z-10">
         <div className="max-w-[640px] mx-auto">
           {footerAction ? (
             <button
-              onClick={footerAction.disabled ? undefined : footerAction.onClick}
+              onClick={footerAction.disabled ? undefined : (footerAction.onClick ?? undefined)}
               disabled={footerAction.disabled}
               className={`w-full py-4 font-semibold rounded-xl transition-all text-sm ${
                 footerAction.disabled
