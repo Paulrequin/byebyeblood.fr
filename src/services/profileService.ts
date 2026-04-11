@@ -1,6 +1,38 @@
 import { supabase } from '@/lib/supabase'
 import type { Profile } from '@/types'
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+interface FunctionErrorBody {
+  error?: string
+}
+
+/**
+ * Tente de lire le corps JSON d'une erreur Supabase Edge Function.
+ * Retourne {} si la structure n'est pas celle attendue.
+ */
+async function parseFunctionError(error: unknown): Promise<FunctionErrorBody> {
+  try {
+    const ctx = (error as { context?: Response }).context
+    if (ctx && typeof ctx.json === 'function') {
+      return await ctx.json() as FunctionErrorBody
+    }
+  } catch {
+    // Corps non parseable — on ignore
+  }
+  return {}
+}
+
+function toErrorMessage(error: unknown, fallback: string): string {
+  if (error instanceof Error) return error.message
+  if (typeof error === 'object' && error !== null && 'message' in error) {
+    return String((error as { message: unknown }).message)
+  }
+  return fallback
+}
+
+// ─── Service ──────────────────────────────────────────────────────────────────
+
 export async function getProfile(userId: string): Promise<Profile> {
   const { data, error } = await supabase
     .from('profiles')
@@ -23,16 +55,17 @@ export async function startCheckout(): Promise<void> {
   const { data, error } = await supabase.functions.invoke('create-checkout')
 
   if (error) {
-    let body: { error?: string } = {}
-    try { body = await (error as unknown as { context: Response }).context.json() } catch (_) { /* ignore */ }
+    const body = await parseFunctionError(error)
     if (body.error === 'already_paid') {
       window.location.href = '/dashboard'
       return
     }
-    throw new Error(body.error ?? error.message)
+    throw new Error(body.error ?? toErrorMessage(error, 'Erreur lors du checkout.'))
   }
 
-  window.location.href = (data as { url: string }).url
+  const url = (data as { url?: string }).url
+  if (!url) throw new Error('URL de paiement manquante dans la réponse.')
+  window.location.href = url
 }
 
 export async function verifyPayment(sessionId: string): Promise<void> {
@@ -41,8 +74,7 @@ export async function verifyPayment(sessionId: string): Promise<void> {
   })
 
   if (error) {
-    let body: { error?: string } = {}
-    try { body = await (error as unknown as { context: Response }).context.json() } catch (_) { /* ignore */ }
-    throw new Error(body.error ?? error.message ?? 'Erreur lors de la vérification.')
+    const body = await parseFunctionError(error)
+    throw new Error(body.error ?? toErrorMessage(error, 'Erreur lors de la vérification du paiement.'))
   }
 }

@@ -24,10 +24,10 @@ function formatDate(iso: string): string {
   } catch { return '' }
 }
 
-function ratingClass(r: number, styles: Record<string, string>): string {
-  if (r <= 3) return styles.ratingBad
-  if (r <= 6) return styles.ratingMid
-  return styles.ratingGood
+function ratingClass(r: number): string {
+  if (r <= 3) return s.ratingBad
+  if (r <= 6) return s.ratingMid
+  return s.ratingGood
 }
 
 export default function Dashboard() {
@@ -166,7 +166,7 @@ export default function Dashboard() {
                       <div key={i} className={s.journalItem}>
                         <div className={s.journalTop}>
                           <p className={s.journalMod}>{mod ? mod.title : `Module ${entry.moduleId}`}</p>
-                          <span className={ratingClass(entry.rating, s as unknown as Record<string, string>)}>{entry.rating}/10</span>
+                          <span className={ratingClass(entry.rating)}>{entry.rating}/10</span>
                         </div>
                         <p className={s.journalDate}>{formatDate(entry.date)}</p>
                         {entry.note && <p className={s.journalNote}>{entry.note}</p>}

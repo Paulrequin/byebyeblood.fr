@@ -483,7 +483,9 @@ function QuizExercise({ questions, onNext, setFooterAction }: QuizExerciseData &
     } else {
       setFooterAction({ label: 'Choisir une réponse…', disabled: true, onClick: null })
     }
-  }, [selected, showScore, isLast, questionIndex]) // eslint-disable-line react-hooks/exhaustive-deps
+  // handleNext est recréé dans le scope — dépendances explicites couvrent tous les cas
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, showScore, isLast, questionIndex, onNext, setFooterAction])
 
   function handleSelect(optionIndex: number) {
     if (selected !== null) return
@@ -553,7 +555,13 @@ function JournalExercise({ prompt, moduleId, onNext, setFooterAction, onSaveJour
       setFooterAction({
         label: 'Enregistrer →',
         disabled: false,
-        onClick: () => { onSaveJournal(moduleId, rating, note).then(onNext) },
+        onClick: () => {
+          onSaveJournal(moduleId, rating, note)
+            .then(onNext)
+            .catch((err: Error) => {
+              console.error('[Journal] Erreur lors de l\'enregistrement :', err)
+            })
+        },
       })
     } else {
       setFooterAction({ label: 'Sélectionne une note pour continuer', disabled: true, onClick: null })
@@ -649,17 +657,18 @@ export default function Module() {
   const [completed, setCompleted]         = useState(false)
   const [earnedXP, setEarnedXP]           = useState(0)
   const [footerAction, setFooterAction]   = useState<FooterAction | null>(null)
+  const [isProcessing, setIsProcessing]   = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  const moduleId   = parseInt(id ?? '0')
-  const moduleData = MODULES.find(m => m.id === moduleId)
+  const moduleId   = id ? parseInt(id, 10) : NaN
+  const moduleData = !isNaN(moduleId) ? MODULES.find(m => m.id === moduleId) : undefined
 
-  // Guard : module inexistant ou verrouillé
+  // Guard : id invalide, module inexistant ou verrouillé
   useEffect(() => {
-    if (!moduleData || !isModuleUnlocked(moduleId)) {
+    if (isNaN(moduleId) || !moduleData || !isModuleUnlocked(moduleId)) {
       navigate('/dashboard')
     }
-  }, [moduleData, moduleId, isModuleUnlocked, navigate])
+  }, [moduleId, moduleData, isModuleUnlocked, navigate])
 
   // Reset footer + scroll quand l'exercice change
   useEffect(() => {
@@ -668,16 +677,21 @@ export default function Module() {
   }, [exerciseIndex])
 
   const handleExerciseComplete = useCallback(async () => {
-    if (!moduleData) return
-    await completeExercise(moduleId, exerciseIndex)
-    if (exerciseIndex + 1 >= moduleData.exercises.length) {
-      const next = await completeModule(moduleId, moduleData.xpBonus)
-      setEarnedXP(next.xp)
-      setCompleted(true)
-    } else {
-      setExerciseIndex(i => i + 1)
+    if (!moduleData || isProcessing) return
+    setIsProcessing(true)
+    try {
+      await completeExercise(moduleId, exerciseIndex)
+      if (exerciseIndex + 1 >= moduleData.exercises.length) {
+        const next = await completeModule(moduleId, moduleData.xpBonus)
+        setEarnedXP(next.xp)
+        setCompleted(true)
+      } else {
+        setExerciseIndex(i => i + 1)
+      }
+    } finally {
+      setIsProcessing(false)
     }
-  }, [moduleId, exerciseIndex, moduleData, completeExercise, completeModule])
+  }, [moduleId, exerciseIndex, moduleData, isProcessing, completeExercise, completeModule])
 
   if (!moduleData) return <Spinner />
 
