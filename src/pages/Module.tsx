@@ -470,10 +470,10 @@ function QuizExercise({ questions, onNext, setFooterAction }: QuizExerciseData &
   const current = questions[questionIndex]
   const isLast  = questionIndex === questions.length - 1
 
-  function handleNext() {
+  const handleNext = useCallback(() => {
     if (isLast) setShowScore(true)
     else { setQuestionIndex(i => i + 1); setSelected(null) }
-  }
+  }, [isLast])
 
   useEffect(() => {
     if (showScore) {
@@ -483,9 +483,7 @@ function QuizExercise({ questions, onNext, setFooterAction }: QuizExerciseData &
     } else {
       setFooterAction({ label: 'Choisir une réponse…', disabled: true, onClick: null })
     }
-  // handleNext est recréé dans le scope — dépendances explicites couvrent tous les cas
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected, showScore, isLast, questionIndex, onNext, setFooterAction])
+  }, [selected, showScore, isLast, handleNext, onNext, setFooterAction])
 
   function handleSelect(optionIndex: number) {
     if (selected !== null) return
