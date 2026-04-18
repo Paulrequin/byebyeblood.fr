@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /auth
+Disallow: /success
+Disallow: /module/
+
+Sitemap: https://byebyeblood.fr/sitemap.xml
