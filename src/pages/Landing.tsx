@@ -152,13 +152,12 @@ export default function Landing() {
         {/* Colonne gauche */}
         <div className={s.heroLeft}>
           <div className={s.heroBadge}>
-            <span className={s.badgeDot} />
-            Thérapie d'exposition graduelle
+            🧪 Thérapie d'exposition graduelle
           </div>
 
           <h1 className={s.heroTitle}>
-            Arrête de fuir.<br />
-            <span className={s.heroTitleRed}>Commence à guérir.</span>
+            Peur du sang ?<br />
+            <span className={s.heroTitleRed}>Plus pour longtemps.</span>
           </h1>
 
           <div className={s.heroDivider} aria-hidden="true" />
