@@ -63,7 +63,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 64px 80px 48px;
+  padding: 96px 64px 96px 48px;
   border-right: 1px solid #111;
   animation: fadeUp 0.6s ease both;
   animation-delay: 0.1s;
@@ -73,10 +73,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: #E53935;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
+  letter-spacing: 0.02em;
 }
 .badgeDot { display: none; }
 
@@ -97,7 +98,7 @@
   display: none;
 }
 
-.heroBottom { display: flex; flex-direction: column; gap: 28px; }
+.heroBottom { display: flex; flex-direction: column; gap: 36px; }
 
 .heroSub {
   font-size: 1rem;
@@ -175,50 +176,129 @@
 .heroGuarantees { font-size: 0.76rem; color: #999; line-height: 1.7; }
 .heroError { font-size: 0.8rem; color: #E53935; }
 
-/* Colonne droite — illustration */
+/* Colonne droite — mockup */
 .heroRight {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px 48px;
-  background: #fafafa;
-  gap: 32px;
+  padding: 96px 48px;
+  background: #FFFCF7;
+  gap: 20px;
   animation: fadeUp 0.6s ease both;
   animation-delay: 0.2s;
 }
 
-.heroSvg {
+/* ── Product Mockup ── */
+.mockup {
   width: 100%;
-  max-width: 340px;
-  height: auto;
-  display: block;
+  max-width: 380px;
+  background: #fff;
+  border: 1px solid #111;
+  padding: 32px;
+  box-shadow: 6px 6px 0 #111;
 }
 
+.mockupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.mockupTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
+}
+
+.mockupSub {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: 400;
+}
+
+.mockupPct {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #E53935;
+}
+
+.mockupTrack {
+  height: 4px;
+  background: #f0f0f0;
+  margin-bottom: 28px;
+}
+
+.mockupFill {
+  width: 62%;
+  height: 100%;
+  background: #E53935;
+}
+
+.mockupList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mockupItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.mockupDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mockupItemDone { color: #999; font-weight: 500; }
+.mockupItemDone .mockupDot { background: #111; }
+
+.mockupItemActive { color: #111; font-weight: 800; }
+.mockupItemActive .mockupDot {
+  background: #E53935;
+  box-shadow: 0 0 0 3px rgba(229,57,53,0.18);
+}
+
+.mockupItemLocked { color: #ccc; font-weight: 400; }
+.mockupItemLocked .mockupDot { background: #e0e0e0; }
+
+/* Stats row sous mockup */
 .heroStatsRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
   width: 100%;
-  max-width: 340px;
-  border: 1px solid #e0e0e0;
+  max-width: 380px;
+  border: 1px solid #111;
 }
 .miniCard {
-  padding: 20px;
-  border-right: 1px solid #e0e0e0;
+  padding: 24px;
+  border-right: 1px solid #111;
 }
 .miniCard:last-child { border-right: none; }
 .miniCardValue {
   display: block;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 800;
   color: #111;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   margin-bottom: 4px;
 }
 .miniCardLabel {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: #999;
   font-weight: 400;
   text-transform: uppercase;
