@@ -13,16 +13,16 @@ const LEVELS = [
 ]
 
 const HOW_STEPS = [
-  { num: '01', icon: '🧪', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "Un court questionnaire identifie ton degré d'hémophobie et place ton point de départ." },
-  { num: '02', icon: '🗺️', step: 'Étape 2', title: 'Suis le protocole',      desc: "Chaque niveau expose progressivement à des stimuli plus intenses — textes, images, vidéos." },
-  { num: '03', icon: '📈', step: 'Étape 3', title: 'Progresse graduellement', desc: "Le système adapte la cadence. Tu ne passes au suivant que quand tu es prêt·e." },
-  { num: '04', icon: '🏁', step: 'Étape 4', title: 'Maîtrise complète',       desc: "Au niveau 5, la vue du sang ne déclenche plus de réponse de panique." },
+  { num: '01', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "Un court questionnaire identifie ton degré d'hémophobie et place ton point de départ." },
+  { num: '02', step: 'Étape 2', title: 'Suis le protocole',      desc: "Chaque niveau expose progressivement à des stimuli plus intenses — textes, images, vidéos." },
+  { num: '03', step: 'Étape 3', title: 'Progresse graduellement', desc: "Le système adapte la cadence. Tu ne passes au suivant que quand tu es prêt·e." },
+  { num: '04', step: 'Étape 4', title: 'Maîtrise complète',       desc: "Au niveau 5, la vue du sang ne déclenche plus de réponse de panique." },
 ]
 
 const GAMIF_CARDS = [
-  { emoji: '🔥', title: 'Streak quotidien',   desc: 'Reviens chaque jour pour maintenir ta flamme. La régularité est la clé de la désensibilisation.' },
-  { emoji: '⚡', title: 'Points XP',          desc: 'Chaque exercice complété rapporte des XP. Monte de niveau et débloque la suite du parcours.' },
-  { emoji: '🎖️', title: 'Badges de maîtrise', desc: 'Décroche des badges à chaque palier franchi. Une preuve concrète de tes progrès réels.' },
+  { num: '01', title: 'Streak quotidien',   desc: 'Reviens chaque jour pour maintenir ton rythme. La régularité est la clé de la désensibilisation.' },
+  { num: '02', title: 'Points XP',          desc: 'Chaque exercice complété rapporte des XP. Monte de niveau et débloque la suite du parcours.' },
+  { num: '03', title: 'Badges de maîtrise', desc: 'Décroche des badges à chaque palier franchi. Une preuve concrète de tes progrès réels.' },
 ]
 
 const STATS = [
@@ -58,17 +58,6 @@ function ProductMockup() {
           <span className={s.mockupDot} />Exercice de respiration avancé
         </li>
       </ul>
-    </div>
-  )
-}
-
-/* ── Wave Divider ── */
-function WaveDivider({ topColor, bottomColor }: { topColor: string; bottomColor: string }) {
-  return (
-    <div style={{ background: topColor, lineHeight: 0, display: 'block' }}>
-      <svg viewBox="0 0 1440 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', width: '100%', height: '72px' }}>
-        <path d="M0 36 Q180 0 360 36 Q540 72 720 36 Q900 0 1080 36 Q1260 72 1440 36 L1440 72 L0 72Z" fill={bottomColor}/>
-      </svg>
     </div>
   )
 }
@@ -185,8 +174,6 @@ export default function Landing() {
         </div>
       </section>
 
-      <WaveDivider topColor="#FFFCF7" bottomColor="#0A0A0A" />
-
       {/* ── STATS ── */}
       <section className={s.stats}>
         <div className={s.statsGrid}>
@@ -199,8 +186,6 @@ export default function Landing() {
         </div>
       </section>
 
-      <WaveDivider topColor="#0A0A0A" bottomColor="#FFFCF7" />
-
       {/* ── HOW IT WORKS ── */}
       <section id="how" className={s.how}>
         <p className={s.sectionEyebrow}>Méthode</p>
@@ -209,7 +194,6 @@ export default function Landing() {
           {HOW_STEPS.map((step) => (
             <div key={step.step} className={s.howCard}>
               <div className={s.howCardNum}>{step.num}</div>
-              <div className={s.howCardIcon}>{step.icon}</div>
               <p className={s.howCardStep}>{step.step}</p>
               <h3 className={s.howCardTitle}>{step.title}</h3>
               <p className={s.howCardDesc}>{step.desc}</p>
@@ -228,7 +212,7 @@ export default function Landing() {
           <div className={s.gamifCards}>
             {GAMIF_CARDS.map((card) => (
               <div key={card.title} className={s.gamifCard}>
-                <div className={s.gamifEmoji}>{card.emoji}</div>
+                <div className={s.gamifNum}>{card.num}</div>
                 <h3 className={s.gamifCardTitle}>{card.title}</h3>
                 <p className={s.gamifCardDesc}>{card.desc}</p>
               </div>
