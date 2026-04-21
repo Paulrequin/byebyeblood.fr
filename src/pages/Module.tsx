@@ -697,6 +697,10 @@ export default function Module() {
     }
   }, [moduleId, exerciseIndex, moduleData, isProcessing, completeExercise, completeModule])
 
+  function handlePrev() {
+    if (exerciseIndex > 0) setExerciseIndex(i => i - 1)
+  }
+
   if (!moduleData) return <Spinner />
 
   if (completed) {
@@ -758,15 +762,37 @@ export default function Module() {
         </div>
       </div>
 
-      {/* Fixed footer button */}
+      {/* Fixed footer */}
       <div className="fixed bottom-0 left-0 right-0 z-10" style={{background:'#FFFCF7', borderTop:'1px solid #111', padding:'1rem 3rem 1.5rem'}}>
-        <div style={{maxWidth:'680px', margin:'0 auto'}}>
+        <div style={{maxWidth:'680px', margin:'0 auto', display:'flex', gap:'12px'}}>
+          {exerciseIndex > 0 && (
+            <button
+              onClick={handlePrev}
+              style={{
+                padding:'14px 20px',
+                fontFamily:"'Plus Jakarta Sans', sans-serif",
+                fontSize:'0.82rem',
+                fontWeight:700,
+                letterSpacing:'0.04em',
+                textTransform:'uppercase',
+                border:'1px solid #111',
+                borderRadius:0,
+                cursor:'pointer',
+                background:'transparent',
+                color:'#111',
+                flexShrink:0,
+                transition:'background 0.15s',
+              }}
+            >
+              ←
+            </button>
+          )}
           {footerAction ? (
             <button
               onClick={footerAction.disabled ? undefined : (footerAction.onClick ?? undefined)}
               disabled={footerAction.disabled}
               style={{
-                width:'100%',
+                flex:1,
                 padding:'14px 20px',
                 fontFamily:"'Plus Jakarta Sans', sans-serif",
                 fontSize:'0.82rem',
@@ -784,7 +810,7 @@ export default function Module() {
               {footerAction.label}
             </button>
           ) : (
-            <div style={{padding:'0.9rem 1.2rem', background:'#eee'}} />
+            <div style={{flex:1, padding:'0.9rem 1.2rem', background:'#eee'}} />
           )}
         </div>
       </div>

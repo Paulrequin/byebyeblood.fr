@@ -375,6 +375,67 @@
 .howCardTitle { font-size: 1rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; color: #111; line-height: 1.2; }
 .howCardDesc  { font-size: 0.88rem; line-height: 1.8; color: #777; font-weight: 400; }
 
+/* ── TESTIMONIALS ── */
+.testimonials {
+  padding: 72px 48px;
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
+  background: #FFFCF7;
+}
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid #111;
+}
+.testimonialCard {
+  padding: 40px 36px;
+  border-right: 1px solid #111;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  transition: background 0.15s;
+}
+.testimonialCard:last-child { border-right: none; }
+.testimonialCard:hover { background: #fff; }
+.testimonialQuote {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0;
+}
+.testimonialFooter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.testimonialName {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.testimonialContext {
+  font-size: 0.72rem;
+  color: #999;
+  margin: 0;
+  font-weight: 400;
+}
+.testimonialResult {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #E53935;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* ── GAMIFICATION ── */
 .gamif { background: #111; padding: 72px 48px; border-top: 1px solid #222; border-bottom: 1px solid #222; }
 .gamifInner { max-width: 100%; }
