@@ -60,12 +60,12 @@ export default function Auth() {
         <div className={s.leftCenter}>
           <div className={s.leftDivider} />
           <h2 className={s.leftTagline}>
-            Arrête de fuir.<br />
-            <span className={s.leftTaglineRed}>Commence à guérir.</span>
+            Peur du sang ?<br />
+            <span className={s.leftTaglineRed}>Plus pour longtemps.</span>
           </h2>
           <p className={s.leftSub}>
-            Un programme de désensibilisation progressive à la vue du sang.
-            7 modules. À ton rythme.
+            Désensibilise-toi progressivement à la vue du sang.
+            5 niveaux. À ton rythme.
           </p>
         </div>
         <span className={s.leftFooter}>© 2026 Bye Bye Blood</span>

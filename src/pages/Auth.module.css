@@ -43,7 +43,7 @@
 .leftTaglineRed { color: #E53935; }
 .leftSub {
   font-size: 0.9rem;
-  color: #555;
+  color: #888;
   line-height: 1.65;
   max-width: 320px;
   font-weight: 400;
@@ -126,7 +126,7 @@
   border: none;
   border-bottom: 2px solid transparent;
   margin-bottom: -1.5px;
-  color: #aaa;
+  color: #666;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s;
 }
@@ -188,7 +188,7 @@
 .submitBtn {
   width: 100%;
   padding: 15px;
-  background: #0A0A0A;
+  background: #E53935;
   color: #fff;
   font-family: 'Urbanist', sans-serif;
   font-size: 0.9rem;
@@ -199,7 +199,7 @@
   margin-top: 4px;
   transition: background 0.15s;
 }
-.submitBtn:hover    { background: #E53935; }
+.submitBtn:hover    { background: #c62828; }
 .submitBtn:disabled { opacity: 0.55; cursor: default; }
 
 .terms {
