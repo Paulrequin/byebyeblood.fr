@@ -42,21 +42,21 @@ function Spinner() {
 
 function CompletionScreen({ module: mod, totalXP, onDashboard }: { module: ModuleType; totalXP: number; onDashboard: () => void }) {
   return (
-    <div className="h-dvh bg-white text-[#0A0A0A] flex items-center justify-center px-6">
-      <div className="text-center max-w-sm w-full">
-        <div className="text-6xl mb-4">{mod.badge.icon}</div>
-        <h1 className="text-3xl font-black mb-2">Module terminé !</h1>
-        <p className="text-[#888888] mb-1">Badge obtenu</p>
-        <p className="text-xl font-bold text-[#E53935] mb-5">{mod.badge.label}</p>
-        <div className="p-5 rounded-2xl bg-[#F8F6F2] border border-[#E8E6E0] mb-8">
-          <p className="text-sm text-[#888888]">+{mod.xpBonus} XP ce module</p>
-          <p className="text-3xl font-black mt-1">
-            {totalXP} <span className="text-sm font-normal text-[#888888]">XP total</span>
+    <div className="h-dvh flex items-center justify-center px-6" style={{background:'#FFFCF7', color:'#111', fontFamily:"'Plus Jakarta Sans', sans-serif"}}>
+      <div className="text-center" style={{maxWidth:'360px', width:'100%'}}>
+        <div style={{fontSize:'3.5rem', marginBottom:'16px'}}>{mod.badge.icon}</div>
+        <h1 style={{fontSize:'2rem', fontWeight:800, letterSpacing:'-0.04em', marginBottom:'8px'}}>Module terminé !</h1>
+        <p style={{color:'#888', marginBottom:'4px', fontSize:'0.85rem'}}>Badge obtenu</p>
+        <p style={{fontSize:'1.1rem', fontWeight:800, color:'#E53935', marginBottom:'32px'}}>{mod.badge.label}</p>
+        <div style={{padding:'20px', background:'#fff', border:'1px solid #111', boxShadow:'4px 4px 0 #111', marginBottom:'24px'}}>
+          <p style={{fontSize:'0.78rem', color:'#888'}}>+{mod.xpBonus} XP ce module</p>
+          <p style={{fontSize:'2.5rem', fontWeight:800, marginTop:'4px', letterSpacing:'-0.04em'}}>
+            {totalXP} <span style={{fontSize:'0.85rem', fontWeight:400, color:'#888'}}>XP total</span>
           </p>
         </div>
         <button
           onClick={onDashboard}
-          className="w-full py-4 bg-[#E53935] hover:bg-[#C62828] text-white font-bold rounded-xl transition-colors"
+          style={{width:'100%', padding:'14px 20px', background:'#E53935', color:'#fff', border:'none', borderRadius:0, fontFamily:"'Plus Jakarta Sans', sans-serif", fontSize:'0.82rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', cursor:'pointer'}}
         >
           Retour au tableau de bord
         </button>
@@ -83,12 +83,12 @@ function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction }:
         ))}
       </div>
       {keyPoints && keyPoints.length > 0 && (
-        <div className="p-6 rounded-2xl bg-[#fff5f5] border-2 border-[#E53935]/20">
-          <p className="text-sm font-bold uppercase tracking-wider text-[#E53935] mb-4">Points clés</p>
-          <ul className="flex flex-col gap-3">
+        <div style={{padding:'20px 24px', background:'#fff0f0', border:'1px solid #E53935', boxShadow:'3px 3px 0 #E53935'}}>
+          <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#E53935', marginBottom:'16px'}}>Points clés</p>
+          <ul style={{display:'flex', flexDirection:'column', gap:'10px', listStyle:'none', padding:0, margin:0}}>
             {keyPoints.map((kp, i) => (
-              <li key={i} className="flex items-start gap-3 text-base text-[#1a1a1a]">
-                <span className="text-[#E53935] mt-0.5 flex-shrink-0 font-bold">✓</span>
+              <li key={i} style={{display:'flex', alignItems:'flex-start', gap:'10px', fontSize:'0.95rem', color:'#111'}}>
+                <span style={{color:'#E53935', flexShrink:0, fontWeight:700}}>✓</span>
                 <span>{kp}</span>
               </li>
             ))}
@@ -210,7 +210,7 @@ function BreathingExercise({ technique, title, description, onNext, setFooterAct
       {phase === 'idle' && (
         <button
           onClick={() => runCycle(0)}
-          className="px-8 py-3 bg-[#E53935] hover:bg-[#C62828] text-white font-semibold rounded-xl transition-colors"
+          style={{padding:'12px 32px', background:'#E53935', color:'#fff', border:'none', borderRadius:0, fontFamily:"'Plus Jakarta Sans', sans-serif", fontSize:'0.82rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', cursor:'pointer'}}
         >
           Commencer
         </button>
@@ -290,31 +290,31 @@ function AppliedTensionExercise({ title, muscleGroup, instruction, rounds, onNex
         <h2 className="text-2xl font-black mb-1">{title}</h2>
         <p className="text-sm text-[#888888]">Groupe musculaire : {muscleGroup}</p>
       </div>
-      <div className={`p-5 rounded-2xl border border-[#E8E6E0] text-sm text-[#333333] leading-relaxed ${config.bg}`}>
+      <div style={{padding:'16px 20px', border:'1px solid #ddd', fontSize:'0.88rem', color:'#333', lineHeight:1.7, background:'#FFFCF7'}}>
         {instruction}
       </div>
       {phase !== 'idle' && phase !== 'done' && (
-        <div className={`flex flex-col items-center gap-3 p-8 rounded-2xl border border-[#E8E6E0] ${config.bg}`}>
-          <span className={`text-2xl font-black tracking-widest ${config.color}`}>{config.label}</span>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'12px', padding:'32px', border:'1px solid #111', background: phase === 'tense' ? '#fff0f0' : '#FFFCF7', boxShadow:'4px 4px 0 #111'}}>
+          <span style={{fontSize:'1.5rem', fontWeight:800, letterSpacing:'0.1em', color: phase === 'tense' ? '#E53935' : phase === 'rest' ? '#bbb' : '#888'}}>{config.label}</span>
           {(phase === 'tense' || phase === 'rest') && (
-            <span className="text-6xl font-black text-[#0A0A0A]">{countdown}</span>
+            <span style={{fontSize:'4rem', fontWeight:800, color:'#111', letterSpacing:'-0.04em'}}>{countdown}</span>
           )}
-          {phase === 'release' && <span className="text-base text-[#888888]">Relâchez progressivement…</span>}
-          <p className="text-sm text-[#AAAAAA]">Série {currentRound + 1} / {rounds}</p>
+          {phase === 'release' && <span style={{fontSize:'0.9rem', color:'#888'}}>Relâchez progressivement…</span>}
+          <p style={{fontSize:'0.75rem', color:'#bbb'}}>Série {currentRound + 1} / {rounds}</p>
         </div>
       )}
       {phase === 'idle' && (
         <button
           onClick={() => startRound(0)}
-          className="w-full py-3 bg-[#E53935] hover:bg-[#C62828] text-white font-semibold rounded-xl transition-colors"
+          style={{width:'100%', padding:'14px 20px', background:'#E53935', color:'#fff', border:'none', borderRadius:0, fontFamily:"'Plus Jakarta Sans', sans-serif", fontSize:'0.82rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', cursor:'pointer'}}
         >
           Commencer les séries
         </button>
       )}
       {phase === 'done' && (
-        <div className="p-5 rounded-2xl bg-[#F0FFF4] border border-[#9AE6B4] text-center">
-          <p className="text-lg font-bold text-[#276749]">Excellent travail !</p>
-          <p className="text-sm text-[#888888] mt-1">{rounds} séries complétées</p>
+        <div style={{padding:'20px', background:'#f0fff4', border:'1px solid #276749', textAlign:'center'}}>
+          <p style={{fontSize:'1rem', fontWeight:700, color:'#276749'}}>Excellent travail !</p>
+          <p style={{fontSize:'0.82rem', color:'#888', marginTop:'4px'}}>{rounds} séries complétées</p>
         </div>
       )}
     </div>
@@ -336,14 +336,13 @@ function ColorExposureExercise({ colors, onNext, setFooterAction }: ColorExposur
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 text-sm text-[#E53935]">
+      <div style={{display:'flex', alignItems:'center', gap:'8px', padding:'10px 14px', background:'#fff0f0', border:'1px solid #E53935', fontSize:'0.82rem', color:'#E53935'}}>
         <span>💪</span>
         <span>Tension musculaire active — contracte bras et jambes</span>
       </div>
-      <div className="flex flex-col items-center gap-4 py-4">
+      <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', padding:'16px 0'}}>
         <div
-          className="w-64 h-64 rounded-3xl mx-auto transition-all duration-700"
-          style={{ backgroundColor: current.hex }}
+          style={{ width:'240px', height:'240px', backgroundColor: current.hex, transition:'background-color 0.7s ease' }}
         />
         <p className="text-[#888888] text-sm text-center">{current.label}</p>
         <p className="text-xs text-[#AAAAAA]">{index + 1} / {colors.length}</p>
@@ -384,11 +383,11 @@ function ShapeExposureExercise({ shapes, onNext, setFooterAction }: ShapeExposur
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 text-sm text-[#E53935]">
+      <div style={{display:'flex', alignItems:'center', gap:'8px', padding:'10px 14px', background:'#fff0f0', border:'1px solid #E53935', fontSize:'0.82rem', color:'#E53935'}}>
         <span>💪</span>
         <span>Appliquer la tension — contracte bras et jambes</span>
       </div>
-      <div className="flex flex-col items-center gap-4 py-4">
+      <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', padding:'16px 0'}}>
         <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
           {renderShape(current.variant)}
         </svg>
@@ -448,11 +447,11 @@ function ImageExposureExercise({ level, title, description, onNext, setFooterAct
         <h2 className="text-xl font-black mb-1">{title}</h2>
         <p className="text-sm text-[#888888]">{description}</p>
       </div>
-      <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 text-sm text-[#E53935]">
+      <div style={{display:'flex', alignItems:'center', gap:'8px', padding:'10px 14px', background:'#fff0f0', border:'1px solid #E53935', fontSize:'0.82rem', color:'#E53935'}}>
         <span>💪</span>
         <span>Tension avant de regarder — contracte tes muscles maintenant</span>
       </div>
-      <div className="flex flex-col items-center py-6 bg-[#F8F6F2] rounded-2xl border border-[#E8E6E0]">
+      <div style={{display:'flex', flexDirection:'column', alignItems:'center', padding:'32px 0', background:'#FFFCF7', border:'1px solid #ddd'}}>
         {renderSVG()}
       </div>
     </div>
@@ -493,34 +492,34 @@ function QuizExercise({ questions, onNext, setFooterAction }: QuizExerciseData &
 
   if (showScore) {
     return (
-      <div className="flex flex-col gap-6">
-        <div className="text-center p-10 rounded-2xl bg-[#F8F6F2] border border-[#E8E6E0]">
-          <p className="text-6xl font-black text-[#E53935] mb-2">{score} / {questions.length}</p>
-          <p className="text-[#888888]">bonne{score > 1 ? 's' : ''} réponse{score > 1 ? 's' : ''}</p>
+      <div style={{display:'flex', flexDirection:'column', gap:'24px'}}>
+        <div style={{textAlign:'center', padding:'40px', background:'#fff', border:'1px solid #111', boxShadow:'4px 4px 0 #111'}}>
+          <p style={{fontSize:'4rem', fontWeight:800, color:'#E53935', marginBottom:'8px', letterSpacing:'-0.04em'}}>{score} / {questions.length}</p>
+          <p style={{color:'#888', fontSize:'0.85rem'}}>bonne{score > 1 ? 's' : ''} réponse{score > 1 ? 's' : ''}</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div style={{display:'flex', flexDirection:'column', gap:'20px'}}>
       <div>
-        <p className="text-xs text-[#AAAAAA] mb-2">Question {questionIndex + 1} / {questions.length}</p>
-        <h2 className="text-lg font-bold">{current.question}</h2>
+        <p style={{fontSize:'0.65rem', color:'#bbb', marginBottom:'8px', letterSpacing:'0.1em', textTransform:'uppercase'}}>Question {questionIndex + 1} / {questions.length}</p>
+        <h2 style={{fontSize:'1.1rem', fontWeight:700, color:'#111'}}>{current.question}</h2>
       </div>
-      <div className="flex flex-col gap-2">
+      <div style={{display:'flex', flexDirection:'column', gap:'8px'}}>
         {current.options.map((option, i) => {
-          let style = 'bg-[#F8F6F2] border-[#E8E6E0] text-[#0A0A0A] hover:border-[#E53935]/50'
+          let bg = '#FFFCF7', border = '1px solid #ddd', color = '#111'
           if (selected !== null) {
-            if (i === current.correct) style = 'bg-[#F0FFF4] border-[#9AE6B4] text-[#276749]'
-            else if (i === selected)   style = 'bg-[#FFF0F0] border-[#FFCCCC] text-[#C62828]'
-            else                       style = 'bg-[#F8F6F2] border-[#E8E6E0] text-[#AAAAAA] opacity-60'
+            if (i === current.correct)    { bg = '#f0fff4'; border = '1px solid #276749'; color = '#276749' }
+            else if (i === selected)      { bg = '#fff0f0'; border = '1px solid #E53935'; color = '#c62828' }
+            else                          { bg = '#f5f5f5'; border = '1px solid #ddd'; color = '#bbb' }
           }
           return (
             <button
               key={i}
               onClick={() => handleSelect(i)}
-              className={`w-full text-left px-4 py-3 rounded-xl border text-sm transition-all ${style}`}
+              style={{width:'100%', textAlign:'left', padding:'12px 16px', border, background:bg, color, fontSize:'0.88rem', cursor:'pointer', fontFamily:"'Plus Jakarta Sans', sans-serif", borderRadius:0, transition:'border-color 0.15s'}}
             >
               {option}
             </button>
@@ -528,8 +527,8 @@ function QuizExercise({ questions, onNext, setFooterAction }: QuizExerciseData &
         })}
       </div>
       {selected !== null && (
-        <div className="p-4 rounded-xl bg-[#F8F6F2] border border-[#E8E6E0] text-sm text-[#333333]">
-          <span className="font-semibold text-[#888888]">Explication : </span>
+        <div style={{padding:'14px 16px', background:'#FFFCF7', border:'1px solid #ddd', fontSize:'0.82rem', color:'#444'}}>
+          <span style={{fontWeight:700, color:'#888'}}>Explication : </span>
           {current.explanation}
         </div>
       )}
@@ -572,36 +571,44 @@ function JournalExercise({ prompt, moduleId, onNext, setFooterAction, onSaveJour
         <h2 className="text-xl font-black mb-2">Journal</h2>
         <p className="text-[#333333] leading-relaxed">{prompt}</p>
       </div>
-      <div className="flex flex-col gap-3">
-        <p className="text-sm text-[#888888]">Comment te sens-tu ?</p>
-        <div className="flex gap-2 flex-wrap">
+      <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+        <p style={{fontSize:'0.82rem', color:'#888'}}>Comment te sens-tu ?</p>
+        <div style={{display:'flex', gap:'8px', flexWrap:'wrap'}}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(r => (
             <button
               key={r}
               onClick={() => setRating(r)}
-              className={`w-10 h-10 rounded-xl border font-bold text-sm transition-all ${
-                rating === r
-                  ? 'bg-[#E53935] border-[#E53935] text-white scale-110'
-                  : 'bg-[#F8F6F2] border-[#E8E6E0] text-[#888888] hover:border-[#E53935]/60'
-              }`}
+              style={{
+                width:'40px', height:'40px',
+                border: rating === r ? '1px solid #E53935' : '1px solid #ddd',
+                background: rating === r ? '#E53935' : '#fff',
+                color: rating === r ? '#fff' : '#888',
+                fontWeight:700, fontSize:'0.82rem',
+                cursor:'pointer', borderRadius:0,
+                fontFamily:"'Plus Jakarta Sans', sans-serif",
+                transform: rating === r ? 'scale(1.1)' : 'scale(1)',
+                transition:'all 0.15s',
+              }}
             >
               {r}
             </button>
           ))}
         </div>
-        <div className="flex justify-between text-xs text-[#AAAAAA]">
+        <div style={{display:'flex', justifyContent:'space-between', fontSize:'0.7rem', color:'#bbb'}}>
           <span>Très anxieux·se</span>
           <span>Très serein·e</span>
         </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <label className="text-sm text-[#888888]">Ajoute une note (optionnel)</label>
+      <div style={{display:'flex', flexDirection:'column', gap:'8px'}}>
+        <label style={{fontSize:'0.78rem', color:'#888'}}>Ajoute une note (optionnel)</label>
         <textarea
           value={note}
           onChange={e => setNote(e.target.value)}
           placeholder="Décris ce que tu as ressenti…"
           rows={3}
-          className="w-full bg-[#F8F6F2] border border-[#E8E6E0] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] placeholder-[#CCCCCC] resize-none focus:outline-none focus:border-[#E53935]/50"
+          style={{width:'100%', background:'#fff', border:'1px solid #ddd', borderRadius:0, padding:'12px 16px', fontSize:'0.85rem', color:'#111', resize:'none', outline:'none', fontFamily:"'Plus Jakarta Sans', sans-serif", boxSizing:'border-box'}}
+          onFocus={e => { e.currentTarget.style.borderColor = '#E53935'; e.currentTarget.style.boxShadow = '3px 3px 0 #E53935' }}
+          onBlur={e => { e.currentTarget.style.borderColor = '#ddd'; e.currentTarget.style.boxShadow = 'none' }}
         />
       </div>
     </div>
@@ -624,20 +631,20 @@ function ScenarioExercise({ title, situation, steps, onNext, setFooterAction }: 
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h2 className="text-xl font-black mb-2">{title}</h2>
-        <div className="p-4 rounded-xl bg-[#F8F6F2] border border-[#E8E6E0]">
-          <p className="text-sm font-semibold text-[#888888] mb-1">Situation</p>
-          <p className="text-sm text-[#333333] leading-relaxed">{situation}</p>
+        <h2 style={{fontSize:'1.3rem', fontWeight:800, letterSpacing:'-0.03em', marginBottom:'12px'}}>{title}</h2>
+        <div style={{padding:'14px 16px', background:'#FFFCF7', border:'1px solid #ddd'}}>
+          <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#888', marginBottom:'6px'}}>Situation</p>
+          <p style={{fontSize:'0.88rem', color:'#333', lineHeight:1.7}}>{situation}</p>
         </div>
       </div>
-      <p className="text-xs text-[#AAAAAA]">Étape {stepIndex + 1} / {steps.length}</p>
-      <div className="flex flex-col gap-3">
-        <div className="p-4 rounded-xl bg-[#F8F6F2] border border-[#E8E6E0]">
-          <p className="text-sm text-[#0A0A0A] leading-relaxed">{current.instruction}</p>
+      <p style={{fontSize:'0.65rem', color:'#bbb', letterSpacing:'0.1em', textTransform:'uppercase'}}>Étape {stepIndex + 1} / {steps.length}</p>
+      <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+        <div style={{padding:'14px 16px', background:'#FFFCF7', border:'1px solid #ddd'}}>
+          <p style={{fontSize:'0.88rem', color:'#111', lineHeight:1.7}}>{current.instruction}</p>
         </div>
-        <div className="p-4 rounded-xl border border-[#E53935]/20" style={{ background: 'rgba(229,57,53,0.05)' }}>
-          <p className="text-xs font-semibold text-[#E53935] mb-1">Conseil</p>
-          <p className="text-sm text-[#333333] leading-relaxed">{current.tip}</p>
+        <div style={{padding:'14px 16px', background:'#fff0f0', border:'1px solid #E53935'}}>
+          <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#E53935', marginBottom:'6px'}}>Conseil</p>
+          <p style={{fontSize:'0.88rem', color:'#333', lineHeight:1.7}}>{current.tip}</p>
         </div>
       </div>
     </div>
@@ -707,30 +714,29 @@ export default function Module() {
   const baseProps     = { onNext: handleExerciseComplete, setFooterAction }
 
   return (
-    <div className="h-dvh bg-white text-[#0A0A0A] flex flex-col">
+    <div className="h-dvh flex flex-col" style={{background:'#FFFCF7', color:'#111', fontFamily:"'Plus Jakarta Sans', sans-serif"}}>
 
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-white border-b border-[#f0f0f0]">
+      <div className="sticky top-0 z-10" style={{background:'#FFFCF7', borderBottom:'1px solid #111'}}>
         <div style={{maxWidth:'680px', margin:'0 auto', padding:'1rem 3rem'}}>
           <div className="flex items-center justify-between mb-4">
-            <button onClick={() => navigate('/dashboard')} className="text-sm font-medium text-[#888888] hover:text-[#0A0A0A] transition-colors">← Dashboard</button>
-            <span className="text-sm font-bold px-3 py-1 rounded-full bg-[#E53935]/10 text-[#E53935]">+50 XP</span>
+            <button onClick={() => navigate('/dashboard')} style={{fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', color:'#999', background:'none', border:'none', cursor:'pointer', padding:0, fontFamily:"'Plus Jakarta Sans', sans-serif"}} onMouseEnter={e=>(e.currentTarget.style.color='#111')} onMouseLeave={e=>(e.currentTarget.style.color='#999')}>← Dashboard</button>
+            <span style={{fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.04em', color:'#E53935', background:'#fff0f0', border:'1px solid #E53935', padding:'4px 10px'}}>+50 XP</span>
           </div>
-          <p className="text-sm font-semibold text-[#1a1a1a] mb-3">{moduleData.title}</p>
+          <p className="mb-3" style={{fontSize:'0.82rem', fontWeight:700, color:'#111'}}>{moduleData.title}</p>
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-2 bg-[#ddd] rounded-full overflow-hidden">
+            <div className="flex-1 overflow-hidden" style={{height:'3px', background:'#e0e0e0'}}>
               <div
-                className="h-full bg-gradient-to-r from-[#E53935] to-[#FF4455] rounded-full transition-all duration-500"
-                style={{ width: `${progressPct}%` }}
+                style={{ width: `${progressPct}%`, height:'100%', background:'#E53935', transition:'width 0.5s ease' }}
               />
             </div>
-            <span className="text-xs text-[#AAAAAA] flex-shrink-0">{exerciseIndex + 1} / {moduleData.exercises.length}</span>
+            <span style={{fontSize:'0.72rem', color:'#bbb', flexShrink:0}}>{exerciseIndex + 1} / {moduleData.exercises.length}</span>
           </div>
         </div>
       </div>
 
       {/* Scrollable content */}
-      <div ref={contentRef} className="flex-1 overflow-y-auto">
+      <div ref={contentRef} className="flex-1 overflow-y-auto" style={{background:'#FFFCF7'}}>
         <div style={{maxWidth:'680px', margin:'0 auto', padding:'2rem 3rem 10rem 3rem'}}>
           {exercise.type === 'reading'         && <ReadingExercise        key={exerciseIndex} {...exercise} {...baseProps} />}
           {exercise.type === 'breathing'       && <BreathingExercise      key={exerciseIndex} {...exercise} {...baseProps} />}
@@ -753,23 +759,32 @@ export default function Module() {
       </div>
 
       {/* Fixed footer button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#f0f0f0] z-10" style={{padding:'1rem 3rem 1.5rem'}}>
+      <div className="fixed bottom-0 left-0 right-0 z-10" style={{background:'#FFFCF7', borderTop:'1px solid #111', padding:'1rem 3rem 1.5rem'}}>
         <div style={{maxWidth:'680px', margin:'0 auto'}}>
           {footerAction ? (
             <button
               onClick={footerAction.disabled ? undefined : (footerAction.onClick ?? undefined)}
               disabled={footerAction.disabled}
-              className={`w-full font-bold rounded-2xl transition-all text-base ${
-                footerAction.disabled
-                  ? 'bg-[#EFEFEC] text-[#AAAAAA] cursor-not-allowed'
-                  : 'bg-[#E53935] hover:bg-[#C62828] text-white active:scale-[0.98] shadow-lg'
-              }`}
-              style={{padding:'0.9rem 1.2rem'}}
+              style={{
+                width:'100%',
+                padding:'14px 20px',
+                fontFamily:"'Plus Jakarta Sans', sans-serif",
+                fontSize:'0.82rem',
+                fontWeight:700,
+                letterSpacing:'0.04em',
+                textTransform:'uppercase',
+                border:'none',
+                borderRadius:0,
+                cursor: footerAction.disabled ? 'not-allowed' : 'pointer',
+                background: footerAction.disabled ? '#eee' : '#E53935',
+                color: footerAction.disabled ? '#aaa' : '#fff',
+                transition:'background 0.15s',
+              }}
             >
               {footerAction.label}
             </button>
           ) : (
-            <div style={{padding:'0.9rem 1.2rem'}} className="w-full rounded-2xl bg-[#EFEFEC]" />
+            <div style={{padding:'0.9rem 1.2rem', background:'#eee'}} />
           )}
         </div>
       </div>
