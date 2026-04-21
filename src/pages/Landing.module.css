@@ -69,6 +69,8 @@
   animation-delay: 0.1s;
 }
 
+.heroTopLine { display: none; }
+
 .heroBadge {
   display: inline-flex;
   align-items: center;
