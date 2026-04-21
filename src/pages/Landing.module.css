@@ -377,23 +377,23 @@
 .howCardDesc  { font-size: 0.88rem; line-height: 1.8; color: #777; font-weight: 400; }
 
 /* ── GAMIFICATION ── */
-.gamif { background: #111; padding: 96px 48px; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+.gamif { background: #111; padding: 72px 48px; border-top: 1px solid #222; border-bottom: 1px solid #222; }
 .gamifInner { max-width: 100%; }
 .gamifEyebrow { color: #E53935; border-color: #E53935; }
-.gamifTitle   { color: #fff; }
+.gamifTitle   { color: #fff; margin-bottom: 32px; }
 
 .gamifCards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid #333; }
 .gamifCard {
-  padding: 48px 40px;
+  padding: 32px;
   background: #161616;
   border-right: 1px solid #333;
   transition: background 0.15s;
 }
 .gamifCard:last-child { border-right: none; }
 .gamifCard:hover { background: #1e1e1e; }
-.gamifEmoji     { font-size: 2rem; margin-bottom: 24px; display: block; }
-.gamifCardTitle { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 14px; letter-spacing: -0.02em; }
-.gamifCardDesc  { font-size: 0.88rem; line-height: 1.8; color: #aaa; font-weight: 400; }
+.gamifEmoji     { font-size: 1.8rem; margin-bottom: 16px; display: block; }
+.gamifCardTitle { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.02em; }
+.gamifCardDesc  { font-size: 0.88rem; line-height: 1.7; color: #aaa; font-weight: 400; }
 
 /* ── CTA FINAL ── */
 .cta { background: #E53935; padding: 120px 48px; text-align: center; }
