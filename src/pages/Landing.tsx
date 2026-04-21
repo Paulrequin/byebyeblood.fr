@@ -221,9 +221,9 @@ export default function Landing() {
       {/* ── GAMIFICATION ── */}
       <section className={s.gamif}>
         <div className={s.gamifInner}>
-          <p className={`${s.sectionEyebrow} ${s.gamifEyebrow}`}>Progression</p>
+          <p className={`${s.sectionEyebrow} ${s.gamifEyebrow}`}>Tu ne lâcheras pas</p>
           <h2 className={`${s.sectionTitle} ${s.gamifTitle}`}>
-            Progresse comme dans un jeu.
+            Un système conçu pour te garder motivé·e.
           </h2>
           <div className={s.gamifCards}>
             {GAMIF_CARDS.map((card) => (
