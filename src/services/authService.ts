@@ -6,8 +6,12 @@ export async function signIn(email: string, password: string) {
   return data
 }
 
-export async function signUp(email: string, password: string) {
-  const { data, error } = await supabase.auth.signUp({ email, password })
+export async function signUp(email: string, password: string, firstName?: string) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: firstName ? { data: { full_name: firstName } } : undefined,
+  })
   if (error) throw error
   return data
 }

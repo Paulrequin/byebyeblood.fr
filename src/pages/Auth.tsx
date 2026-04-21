@@ -14,9 +14,10 @@ export default function Auth() {
   const nextCheckout = searchParams.get('next') === 'checkout'
   const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? '/dashboard'
 
-  const [mode, setMode]             = useState<Mode>('login')
-  const [email, setEmail]           = useState('')
-  const [password, setPassword]     = useState('')
+  const [mode, setMode]               = useState<Mode>('login')
+  const [email, setEmail]             = useState('')
+  const [firstName, setFirstName]     = useState('')
+  const [password, setPassword]       = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [loading, setLoading]       = useState(false)
   const [error, setError]           = useState<string | null>(null)
@@ -41,7 +42,7 @@ export default function Auth() {
     setMessage(null)
     try {
       if (mode === 'signup') {
-        await signUp(email, password)
+        await signUp(email, password, firstName.trim() || undefined)
         setMessage('Vérifie tes emails pour confirmer ton compte.')
       } else if (mode === 'forgot') {
         await resetPassword(email)
@@ -134,6 +135,22 @@ export default function Auth() {
         )}
 
         <form onSubmit={handleSubmit}>
+
+          {/* First name — signup only */}
+          {mode === 'signup' && (
+            <div className={s.field}>
+              <label htmlFor="auth-firstname" className={s.label}>Prénom</label>
+              <input
+                id="auth-firstname"
+                className={s.input}
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Ton prénom"
+                autoComplete="given-name"
+              />
+            </div>
+          )}
 
           {/* Email — shown in login, signup, forgot */}
           {mode !== 'reset' && (
