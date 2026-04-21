@@ -139,6 +139,12 @@
 
 /* Fields */
 .field { margin-bottom: 20px; }
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
 .label {
   display: block;
   font-size: 0.7rem;
@@ -146,8 +152,23 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #999;
-  margin-bottom: 8px;
 }
+.labelRow .label { margin-bottom: 0; }
+
+.forgotLink {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #999;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s;
+}
+.forgotLink:hover { color: #111; }
 .input {
   width: 100%;
   padding: 14px 16px;
@@ -204,6 +225,23 @@
 .submitBtn:hover    { background: #c62828; }
 .submitBtn:disabled { opacity: 0.55; cursor: default; }
 
+.backToLogin {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #999;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 24px;
+  display: block;
+  transition: color 0.15s;
+}
+.backToLogin:hover { color: #111; }
+
 .terms {
   font-size: 0.72rem;
   color: #bbb;
@@ -211,7 +249,7 @@
   margin-top: 24px;
   font-weight: 400;
 }
-.termsLink { text-decoration: underline; cursor: pointer; }
+.termsLink { color: #bbb; text-decoration: underline; text-underline-offset: 2px; }
 .termsLink:hover { color: #111; }
 
 .devBtn {
