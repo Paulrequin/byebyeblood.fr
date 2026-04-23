@@ -5,6 +5,7 @@ import Auth from './pages/Auth'
 import Dashboard from './pages/Dashboard'
 import Module from './pages/Module'
 import Success from './pages/Success'
+import DiagnosticSUD from './pages/DiagnosticSUD'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/module/:id" element={<Module />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/diagnostic" element={<DiagnosticSUD />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

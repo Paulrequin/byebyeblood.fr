@@ -1,0 +1,319 @@
+/* ── Quiz page ── */
+.page {
+  min-height: 100dvh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Progress ── */
+.progressArea {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.progressHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.progressCount {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #E53935;
+}
+
+.progressLabel {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.progressTrack {
+  height: 6px;
+  background: #F0F0F0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #E53935;
+  border-radius: 99px;
+  transition: width 0.35s ease;
+}
+
+/* ── Card ── */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 28px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.situationLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #E53935;
+  margin: 0;
+}
+
+.situationText {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  color: #1A1A1A;
+  margin: 0;
+}
+
+.questionText {
+  font-size: 0.9375rem;
+  color: #555;
+  margin: 0;
+}
+
+/* ── Emoji row ── */
+.emojiRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.emojiBtn {
+  flex: 1 1 0;
+  min-width: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 6px;
+  border: 2px solid #EBEBEB;
+  border-radius: 12px;
+  background: #FAFAFA;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.emojiBtn:active {
+  transform: scale(0.95);
+}
+
+.emojiBtnSelected {
+  border-color: #E53935;
+  background: #FFF5F5;
+}
+
+.emojiIcon {
+  font-size: 1.875rem;
+  line-height: 1;
+}
+
+.emojiLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.emojiBtnSelected .emojiLabel {
+  color: #E53935;
+}
+
+/* ── Navigation ── */
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btnPrev {
+  background: none;
+  border: none;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  padding: 12px 4px;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+
+.btnPrev:hover {
+  color: #1A1A1A;
+}
+
+.btnNext {
+  flex: 1;
+  background: #E53935;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, opacity 0.18s, transform 0.12s;
+  white-space: nowrap;
+}
+
+.btnNext:hover:not(:disabled) {
+  background: #C62828;
+}
+
+.btnNext:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btnNext:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* ── Result page ── */
+.resultPage {
+  min-height: 100dvh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.resultCard {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  animation: resultFadeUp 0.5s ease both;
+}
+
+@keyframes resultFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultBadge {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.resultTitle {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #1A1A1A;
+  margin: 0;
+}
+
+.resultDesc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+  max-width: 380px;
+}
+
+.scoreBox {
+  background: #FFF5F5;
+  border: 1px solid #FECACA;
+  border-radius: 12px;
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.scoreLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #E53935;
+}
+
+.scoreValue {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: #1A1A1A;
+}
+
+.saveError {
+  font-size: 0.875rem;
+  color: #E53935;
+  margin: 0;
+}
+
+.btnStart {
+  width: 100%;
+  background: #E53935;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s;
+  margin-top: 4px;
+}
+
+.btnStart:hover {
+  background: #C62828;
+}
+
+.btnStart:active {
+  transform: scale(0.97);
+}
+
+/* ── Responsive ── */
+@media (min-width: 640px) {
+  .situationText {
+    font-size: 1.5rem;
+  }
+
+  .emojiIcon {
+    font-size: 2.25rem;
+  }
+
+  .emojiLabel {
+    font-size: 0.75rem;
+  }
+}
