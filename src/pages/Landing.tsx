@@ -138,6 +138,9 @@ export default function Landing() {
             <p className={s.heroSub}>
               Désensibilise-toi à la vue du sang, progressivement, à ton rythme.
             </p>
+            <p className={s.heroReassurance}>
+              Méthode basée sur la thérapie d'exposition progressive, validée cliniquement.
+            </p>
 
             <div className={s.levels}>
               {LEVELS.map((lv) => (
@@ -155,8 +158,8 @@ export default function Landing() {
             </div>
 
             <div className={s.heroBtns}>
-              <button className={s.btnPrimary} onClick={handleCheckout} disabled={loading}>
-                {loading ? 'Redirection…' : 'Commencer — 29€ une fois'}
+              <button className={s.btnPrimary} onClick={() => navigate('/auth')}>
+                Faire ma 1ère séance — c'est gratuit
               </button>
               <button
                 className={s.btnSecondary}
@@ -165,6 +168,9 @@ export default function Landing() {
                 Comment ça marche ?
               </button>
             </div>
+            <p className={s.heroNote}>
+              Aucune carte bancaire requise · 5 min pour commencer
+            </p>
 
             <div className={s.heroSignIn}>
               <span className={s.heroSignInText}>Déjà un compte ?</span>
@@ -281,6 +287,15 @@ export default function Landing() {
           {loading ? 'Redirection…' : 'Commencer maintenant — 29€'}
         </button>
         <p className={s.ctaNote}>Pas d'abonnement. Accès complet à tous les niveaux.</p>
+      </section>
+
+      {/* ── BOTTOM CTA ── */}
+      <section className={s.bottomCta}>
+        <h2 className={s.bottomCtaTitle}>Prêt à dire bye bye à ta peur&nbsp;?</h2>
+        <p className={s.bottomCtaSub}>Commence gratuitement, sans engagement.</p>
+        <button className={s.bottomCtaBtn} onClick={() => navigate('/auth')}>
+          Commencer maintenant
+        </button>
       </section>
 
       {/* ── FOOTER ── */}

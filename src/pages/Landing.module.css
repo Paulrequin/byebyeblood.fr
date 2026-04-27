@@ -177,6 +177,8 @@
 
 .heroGuarantees { font-size: 0.76rem; color: #999; line-height: 1.7; }
 .heroError { font-size: 0.8rem; color: #E53935; }
+.heroReassurance { font-size: 0.82rem; color: #777; line-height: 1.6; font-style: italic; }
+.heroNote { font-size: 0.76rem; color: #aaa; }
 
 /* Colonne droite — mockup */
 .heroRight {
@@ -496,6 +498,44 @@
 .btnCta:disabled { opacity: 0.5; cursor: default; }
 .ctaError { color: rgba(255,255,255,0.8); font-size: 0.82rem; margin-bottom: 16px; }
 .ctaNote  { margin-top: 24px; font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+
+/* ── BOTTOM CTA ── */
+.bottomCta {
+  background: #FFF5F5;
+  border-top: 1px solid #fce4e4;
+  padding: 80px 48px;
+  text-align: center;
+}
+.bottomCtaTitle {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #111;
+  margin: 0 0 12px;
+}
+.bottomCtaSub {
+  font-size: 1rem;
+  color: #777;
+  margin: 0 0 36px;
+}
+.bottomCtaBtn {
+  display: inline-block;
+  padding: 16px 48px;
+  background: #E53935;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.bottomCtaBtn:hover  { background: #c62828; }
+.bottomCtaBtn:active { transform: scale(0.98); }
 
 /* ── FOOTER ── */
 .footer {
