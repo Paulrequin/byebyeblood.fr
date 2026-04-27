@@ -1,0 +1,158 @@
+.section {
+  background: #fff;
+  padding: 80px 48px;
+  border-top: 1px solid #ebebeb;
+}
+
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ── Stats banner ── */
+.statsBanner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #FAFAF7;
+  border: 1px solid #e4e4e0;
+  border-radius: 8px;
+  padding: 28px 32px;
+  gap: 16px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.statValue {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #E53935;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: #777;
+  font-weight: 400;
+  max-width: 180px;
+  line-height: 1.4;
+}
+
+/* ── Cards ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+
+/* ── Stars ── */
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.starFilled { fill: #FF6D00; }
+.starEmpty  { fill: #e0e0e0; }
+
+/* ── Quote ── */
+.quote {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Author ── */
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.01em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .section {
+    padding: 64px 32px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .statsBanner {
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .statItem {
+    flex-direction: row;
+    text-align: left;
+    gap: 12px;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .statLabel {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 56px 20px;
+  }
+}

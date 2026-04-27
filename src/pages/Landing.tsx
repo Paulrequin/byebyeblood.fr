@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { startCheckout } from '@/services/profileService'
 import HowItWorks from '@/components/HowItWorks'
+import Testimonials from '@/components/Testimonials'
 import s from './Landing.module.css'
 
 /* ── Data ── */
@@ -264,6 +265,8 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
 
       {/* ── CTA FINAL ── */}
       <section className={s.cta}>
