@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { startCheckout } from '@/services/profileService'
+import HowItWorks from '@/components/HowItWorks'
 import s from './Landing.module.css'
 
 /* ── Data ── */
@@ -195,6 +196,8 @@ export default function Landing() {
         </div>
       </section>
 
+      <HowItWorks />
+
       {/* ── STATS ── */}
       <section className={s.stats}>
         <div className={s.statsGrid}>
@@ -208,7 +211,7 @@ export default function Landing() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section id="how" className={s.how}>
+      <section className={s.how}>
         <p className={s.sectionEyebrow}>Méthode</p>
         <h2 className={s.sectionTitle}>Comment ça marche, concrètement ?</h2>
         <div className={s.howCards}>
