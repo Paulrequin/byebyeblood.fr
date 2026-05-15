@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { startCheckout } from '@/services/profileService'
 import HowItWorks from '@/components/HowItWorks'
-import Testimonials from '@/components/Testimonials'
 import s from './Landing.module.css'
 
 /* ── Data ── */
@@ -25,27 +24,6 @@ const GAMIF_CARDS = [
   { num: '01', title: 'Streak quotidien',   desc: 'Reviens chaque jour pour maintenir ton rythme. La régularité est la clé de la désensibilisation.' },
   { num: '02', title: 'Points XP',          desc: 'Chaque exercice complété rapporte des XP. Monte de niveau et débloque la suite du parcours.' },
   { num: '03', title: 'Badges de maîtrise', desc: 'Décroche des badges à chaque palier franchi. Une preuve concrète de tes progrès réels.' },
-]
-
-const TESTIMONIALS = [
-  {
-    name: 'Camille R.',
-    context: 'Prise de sang évitée pendant 6 ans',
-    quote: "J'ai enfin pu faire mes analyses de sang sans m'évanouir. Au niveau 4, j'ai regardé une vidéo de prélèvement jusqu'au bout. Incroyable.",
-    result: 'Niveau 4 atteint en 3 semaines',
-  },
-  {
-    name: 'Thomas M.',
-    context: 'Pompier, incapable de voir du sang',
-    quote: "Paradoxal pour mon métier. Le protocole est graduel, jamais brutal. J'aurais mis des années à faire ça seul en thérapie.",
-    result: 'Programme complet en 5 semaines',
-  },
-  {
-    name: 'Sofia L.',
-    context: 'Anxiété lors des visites médicales',
-    quote: "Les exercices de respiration du module 2 ont tout changé. Maintenant j'attends le résultat de mes analyses sans spiraler.",
-    result: '14 jours pour les premiers résultats',
-  },
 ]
 
 const STATS = [
@@ -123,10 +101,6 @@ export default function Landing() {
 
         {/* Colonne gauche */}
         <div className={s.heroLeft}>
-          <div className={s.heroBadge}>
-            ✓ 2 147 personnes déjà libérées
-          </div>
-
           <h1 className={s.heroTitle}>
             Peur du sang ?<br />
             <span className={s.heroTitleRed}>Plus pour longtemps.</span>
@@ -190,16 +164,6 @@ export default function Landing() {
         {/* Colonne droite — mockup */}
         <div className={s.heroRight}>
           <ProductMockup />
-          <div className={s.heroStatsRow}>
-            <div className={s.miniCard}>
-              <span className={s.miniCardValue}>2 147</span>
-              <span className={s.miniCardLabel}>personnes guéries</span>
-            </div>
-            <div className={s.miniCard}>
-              <span className={s.miniCardValue}>3 sem.</span>
-              <span className={s.miniCardLabel}>durée moyenne</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -233,26 +197,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section className={s.testimonials}>
-        <p className={s.sectionEyebrow}>Ils l'ont fait</p>
-        <h2 className={s.sectionTitle}>Vraies personnes. Vrais résultats.</h2>
-        <div className={s.testimonialsGrid}>
-          {TESTIMONIALS.map((t) => (
-            <div key={t.name} className={s.testimonialCard}>
-              <p className={s.testimonialQuote}>"{t.quote}"</p>
-              <div className={s.testimonialFooter}>
-                <div>
-                  <p className={s.testimonialName}>{t.name}</p>
-                  <p className={s.testimonialContext}>{t.context}</p>
-                </div>
-                <span className={s.testimonialResult}>{t.result}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── GAMIFICATION ── */}
       <section className={s.gamif}>
         <div className={s.gamifInner}>
@@ -271,8 +215,6 @@ export default function Landing() {
           </div>
         </div>
       </section>
-
-      <Testimonials />
 
       {/* ── CTA FINAL ── */}
       <section className={s.cta}>
