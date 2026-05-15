@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { useAuth } from '@/contexts/AuthContext'
 import { useProfile } from '@/hooks/useProfile'
 import { useProgress } from '@/hooks/useProgress'
 import { signOut } from '@/services/authService'
+import { supabase } from '@/lib/supabase'
 import { MODULES } from '@/data/modules'
 import s from './Dashboard.module.css'
 
@@ -37,6 +39,20 @@ export default function Dashboard() {
   const { data: profile, isLoading: profileLoading } = useProfile()
   const { progress, isLoading: progressLoading, isModuleCompleted, isModuleUnlocked } = useProgress()
 
+  const { data: hasDiagnostic, isLoading: diagnosticLoading } = useQuery({
+    queryKey: ['diagnostic', user?.id],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from('diagnostic_results')
+        .select('id')
+        .eq('user_id', user!.id)
+        .maybeSingle()
+      return !!data
+    },
+    enabled: !!user && !!profile?.has_access,
+    staleTime: Infinity,
+  })
+
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   useEffect(() => {
@@ -45,7 +61,13 @@ export default function Dashboard() {
     }
   }, [profile, profileLoading, navigate])
 
-  if (profileLoading || progressLoading) {
+  useEffect(() => {
+    if (!diagnosticLoading && hasDiagnostic === false && profile?.has_access) {
+      navigate('/diagnostic', { replace: true })
+    }
+  }, [hasDiagnostic, diagnosticLoading, profile, navigate])
+
+  if (profileLoading || progressLoading || diagnosticLoading) {
     return <div className={s.loading}><div className={s.spinner} /></div>
   }
 
