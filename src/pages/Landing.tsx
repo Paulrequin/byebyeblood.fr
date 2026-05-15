@@ -14,7 +14,7 @@ const LEVELS = [
 ]
 
 const HOW_STEPS = [
-  { num: '01', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "Un court questionnaire identifie ton degré d'hémophobie et place ton point de départ." },
+  { num: '01', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "8 questions, 2 minutes. On identifie ton degré d'hémophobie et place ton point de départ." },
   { num: '02', step: 'Étape 2', title: 'Suis le protocole',      desc: "Chaque niveau expose progressivement à des stimuli plus intenses — textes, images, vidéos." },
   { num: '03', step: 'Étape 3', title: 'Progresse graduellement', desc: "Le système adapte la cadence. Tu ne passes au suivant que quand tu es prêt·e." },
   { num: '04', step: 'Étape 4', title: 'Maîtrise complète',       desc: "Au niveau 5, la vue du sang ne déclenche plus de réponse de panique." },
@@ -143,7 +143,7 @@ export default function Landing() {
               </button>
             </div>
             <p className={s.heroNote}>
-              Aucune carte bancaire requise · 5 min pour commencer
+              Aucune carte bancaire requise · 2 min pour le diagnostic
             </p>
 
             <div className={s.heroSignIn}>
