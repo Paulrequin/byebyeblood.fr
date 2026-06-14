@@ -30,7 +30,7 @@ const STATS = [
   { value: '5 niveaux',   label: 'progressifs' },
   { value: '14 jours',    label: 'satisfait ou remboursé' },
   { value: '100% fondé',  label: 'sur la science' },
-  { value: '1× paiement', label: 'unique, accès à vie' },
+  { value: 'Pré-vente', label: 'accès le 4 août 2026' },
 ]
 
 /* ── Product Mockup ── */
@@ -133,7 +133,7 @@ export default function Landing() {
 
             <div className={s.heroBtns}>
               <button className={s.btnPrimary} onClick={() => navigate('/auth')}>
-                Faire ma 1ère séance — c'est gratuit
+                Réserver en pré-vente — 280€
               </button>
               <button
                 className={s.btnSecondary}
@@ -143,7 +143,7 @@ export default function Landing() {
               </button>
             </div>
             <p className={s.heroNote}>
-              Aucune carte bancaire requise · 2 min pour le diagnostic
+              Pré-vente · Accès garanti le 4 août 2026 · 2 min pour le diagnostic
             </p>
 
             <div className={s.heroSignIn}>
@@ -156,7 +156,7 @@ export default function Landing() {
             {error && <p className={s.heroError}>{error}</p>}
 
             <p className={s.heroGuarantees}>
-              ✓ Accès complet · ✓ Sans abonnement · ✓ Remboursé sous 14 jours
+              ✓ Pré-vente limitée · ✓ Accès le 4 août 2026 · ✓ Remboursé si non satisfait
             </p>
           </div>
         </div>
@@ -223,20 +223,20 @@ export default function Landing() {
           Prêt·e à arrêter<br />
           <span className={s.ctaTitleRed}>de fuir ?</span>
         </h2>
-        <p className={s.ctaSub}>29€ une fois · Accès à vie · Remboursé sous 14 jours si inefficace.</p>
+        <p className={s.ctaSub}>280€ · Pré-vente · Accès garanti le 4 août 2026.</p>
         {error && <p className={s.ctaError}>{error}</p>}
         <button className={s.btnCta} onClick={handleCheckout} disabled={loading}>
-          {loading ? 'Redirection…' : 'Commencer maintenant — 29€'}
+          {loading ? 'Redirection…' : 'Réserver ma place — 280€'}
         </button>
-        <p className={s.ctaNote}>Pas d'abonnement. Accès complet à tous les niveaux.</p>
+        <p className={s.ctaNote}>Places limitées. Accès complet dès le 4 août 2026.</p>
       </section>
 
       {/* ── BOTTOM CTA ── */}
       <section className={s.bottomCta}>
         <h2 className={s.bottomCtaTitle}>Prêt à dire bye bye à ta peur&nbsp;?</h2>
-        <p className={s.bottomCtaSub}>Commence gratuitement, sans engagement.</p>
+        <p className={s.bottomCtaSub}>Pré-vente ouverte · Accès le 4 août 2026.</p>
         <button className={s.bottomCtaBtn} onClick={() => navigate('/auth')}>
-          Commencer maintenant
+          Réserver ma place — 280€
         </button>
       </section>
 
