@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { verifyPayment } from '@/services/profileService'
+import { MODULES } from '@/data/modules'
 import s from './Success.module.css'
+
+const MODULES_COUNT = MODULES.length
 
 type Status = 'verifying' | 'success' | 'error'
 
@@ -53,7 +56,7 @@ export default function Success() {
             </p>
             <div className={s.checklist}>
               {[
-                '7 modules complets débloqués',
+                `${MODULES_COUNT} modules complets débloqués`,
                 'Progression XP + badges actifs',
                 'Accès à vie — aucune limite',
               ].map((item) => (

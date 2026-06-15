@@ -11,8 +11,8 @@ export function ProtectedRoute() {
 
   if (loading) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-white">
-        <div className="w-10 h-10 rounded-full border-4 border-[#E53935]/30 border-t-[#E53935] animate-spin" />
+      <div className="h-dvh flex items-center justify-center bg-[#FBF5EA]">
+        <div className="w-10 h-10 rounded-full border-4 border-[#E7DCC9] border-t-[#EE3D2E] animate-spin" />
       </div>
     )
   }
@@ -33,8 +33,8 @@ export function PublicOnlyRoute() {
 
   if (loading) {
     return (
-      <div className="h-dvh flex items-center justify-center bg-white">
-        <div className="w-10 h-10 rounded-full border-4 border-[#E53935]/30 border-t-[#E53935] animate-spin" />
+      <div className="h-dvh flex items-center justify-center bg-[#FBF5EA]">
+        <div className="w-10 h-10 rounded-full border-4 border-[#E7DCC9] border-t-[#EE3D2E] animate-spin" />
       </div>
     )
   }
