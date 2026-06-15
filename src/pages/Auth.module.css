@@ -206,6 +206,25 @@
   line-height: 1.5;
 }
 
+.resendRow {
+  margin-bottom: 16px;
+  margin-top: -8px;
+}
+.resendBtn {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #276749;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.15s;
+}
+.resendBtn:disabled { opacity: 0.5; cursor: default; text-decoration: none; }
+
 .submitBtn {
   width: 100%;
   padding: 16px;

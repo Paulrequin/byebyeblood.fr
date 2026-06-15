@@ -7,6 +7,18 @@ import s from './Auth.module.css'
 
 type Mode = 'login' | 'signup' | 'forgot' | 'reset'
 
+function parseAuthError(err: unknown): string {
+  const raw = (typeof err === 'object' && err !== null ? (err as { message?: string }).message : null) ?? ''
+  const msg = raw.toLowerCase()
+  if (msg.includes('invalid login credentials'))    return 'Email ou mot de passe incorrect.'
+  if (msg.includes('email not confirmed'))           return 'Confirme ton email avant de te connecter. Vérifie ta boîte mail.'
+  if (msg.includes('user already registered'))       return 'Un compte existe déjà avec cet email. Connecte-toi.'
+  if (msg.includes('password should be at least'))  return 'Le mot de passe doit contenir au moins 6 caractères.'
+  if (msg.includes('rate limit'))                    return 'Trop de tentatives. Réessaie dans quelques minutes.'
+  if (msg.includes('invalid email'))                 return 'Adresse email invalide.'
+  return raw || 'Une erreur est survenue. Réessaie.'
+}
+
 export default function Auth() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -19,9 +31,23 @@ export default function Auth() {
   const [firstName, setFirstName]     = useState('')
   const [password, setPassword]       = useState('')
   const [newPassword, setNewPassword] = useState('')
-  const [loading, setLoading]       = useState(false)
-  const [error, setError]           = useState<string | null>(null)
-  const [message, setMessage]       = useState<string | null>(null)
+  const [loading, setLoading]         = useState(false)
+  const [error, setError]             = useState<string | null>(null)
+  const [message, setMessage]         = useState<string | null>(null)
+  const [signupEmail, setSignupEmail] = useState<string | null>(null)
+  const [resendCooldown, setResendCooldown] = useState(0)
+
+  useEffect(() => {
+    if (resendCooldown <= 0) return
+    const t = setTimeout(() => setResendCooldown(c => c - 1), 1000)
+    return () => clearTimeout(t)
+  }, [resendCooldown])
+
+  async function handleResend() {
+    if (!signupEmail) return
+    setResendCooldown(60)
+    await supabase.auth.resend({ type: 'signup', email: signupEmail })
+  }
 
   // Detect PASSWORD_RECOVERY event when user arrives from reset email
   useEffect(() => {
@@ -43,6 +69,7 @@ export default function Auth() {
     try {
       if (mode === 'signup') {
         await signUp(email, password, firstName.trim() || undefined)
+        setSignupEmail(email)
         setMessage('Vérifie tes emails pour confirmer ton compte.')
       } else if (mode === 'forgot') {
         await resetPassword(email)
@@ -57,9 +84,7 @@ export default function Auth() {
         else navigate(from, { replace: true })
       }
     } catch (err) {
-      const isObj = typeof err === 'object' && err !== null
-      const e = isObj ? (err as { message?: string; status?: number }) : null
-      setError(e?.message ?? 'Une erreur est survenue. Réessaie.')
+      setError(parseAuthError(err))
     } finally {
       setLoading(false)
     }
@@ -213,6 +238,18 @@ export default function Auth() {
 
           {error   && <div className={s.errorBox}>{error}</div>}
           {message && <div className={s.successBox}>{message}</div>}
+          {message && mode === 'signup' && signupEmail && (
+            <div className={s.resendRow}>
+              <button
+                type="button"
+                className={s.resendBtn}
+                onClick={handleResend}
+                disabled={resendCooldown > 0}
+              >
+                {resendCooldown > 0 ? `Renvoyer dans ${resendCooldown}s` : "Renvoyer l'email"}
+              </button>
+            </div>
+          )}
 
           <button className={s.submitBtn} type="submit" disabled={loading}>
             {loading ? 'Chargement…' :
