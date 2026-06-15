@@ -13,14 +13,14 @@
 
 .page {
   min-height: 100vh;
-  background: #F7F4EF;
+  background: #FBF5EA;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 48px 24px;
-  font-family: 'Urbanist', sans-serif;
-  color: #0A0A0A;
+  font-family: 'Hanken Grotesk', sans-serif;
+  color: #1C1714;
 }
 
 .logo {
@@ -28,11 +28,12 @@
   top: 28px;
   left: 50%;
   transform: translateX(-50%);
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 0.95rem;
   font-weight: 800;
-  color: #0A0A0A;
+  color: #1C1714;
 }
-.logoRed { color: #E53935; }
+.logoRed { color: #EE3D2E; }
 
 .container {
   width: 100%;
@@ -46,8 +47,8 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 3px solid #E8E8E8;
-  border-top-color: #E53935;
+  border: 3px solid #E7DCC9;
+  border-top-color: #EE3D2E;
   animation: spin 0.9s linear infinite;
   margin: 0 auto 24px;
 }
@@ -72,6 +73,7 @@
   animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .successTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -79,15 +81,15 @@
 }
 .successSub {
   font-size: 0.9rem;
-  color: #666;
+  color: #888;
   line-height: 1.65;
   margin-bottom: 28px;
   font-weight: 400;
 }
 
 .checklist {
-  background: #fff;
-  border: 1.5px solid #E8E8E8;
+  background: #FFFDF8;
+  border: 1.5px solid #E7DCC9;
   border-radius: 16px;
   padding: 20px 24px;
   text-align: left;
@@ -105,7 +107,7 @@
   font-weight: 400;
 }
 .checkMark {
-  color: #E53935;
+  color: #EE3D2E;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -115,7 +117,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #FFF0F0;
+  background: #FFF5F0;
   border: 2px solid #FFCCCC;
   display: flex;
   align-items: center;
@@ -125,6 +127,7 @@
   animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .errorTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -132,7 +135,7 @@
 }
 .errorMsg {
   font-size: 0.9rem;
-  color: #C62828;
+  color: #C32A1E;
   margin-bottom: 12px;
   font-weight: 400;
 }
@@ -148,9 +151,9 @@
 .btnPrimary {
   width: 100%;
   padding: 16px;
-  background: #0A0A0A;
-  color: #fff;
-  font-family: 'Urbanist', sans-serif;
+  background: #1C1714;
+  color: #FBF5EA;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.9rem;
   font-weight: 800;
   border: none;
@@ -158,7 +161,7 @@
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
 }
-.btnPrimary:hover { background: #E53935; transform: scale(1.02); }
+.btnPrimary:hover { background: #EE3D2E; transform: scale(1.02); }
 
 .btnRow {
   display: flex;
@@ -169,22 +172,22 @@
   flex: 1;
   padding: 14px;
   background: transparent;
-  color: #0A0A0A;
-  font-family: 'Urbanist', sans-serif;
+  color: #1C1714;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.88rem;
   font-weight: 400;
-  border: 1.5px solid #D8D8D8;
+  border: 1.5px solid #E7DCC9;
   border-radius: 12px;
   cursor: pointer;
   transition: border-color 0.15s;
 }
-.btnOutline:hover { border-color: #aaa; }
+.btnOutline:hover { border-color: #1C1714; }
 .btnRed {
   flex: 1;
   padding: 14px;
-  background: #E53935;
+  background: #EE3D2E;
   color: #fff;
-  font-family: 'Urbanist', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.88rem;
   font-weight: 800;
   border: none;
@@ -192,4 +195,4 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-.btnRed:hover { background: #C62828; }
+.btnRed:hover { background: #C32A1E; }

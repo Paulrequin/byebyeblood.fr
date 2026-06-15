@@ -7,9 +7,9 @@
 
 .page {
   min-height: 100vh;
-  background: #FFFCF7;
-  color: #111;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #FBF5EA;
+  color: #1C1714;
+  font-family: 'Hanken Grotesk', sans-serif;
 }
 
 .loading {
@@ -17,13 +17,13 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: #FFFCF7;
+  background: #FBF5EA;
 }
 .spinner {
   width: 36px;
   height: 36px;
-  border: 3px solid #ddd;
-  border-top-color: #E53935;
+  border: 3px solid #E7DCC9;
+  border-top-color: #EE3D2E;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -35,26 +35,28 @@
   justify-content: space-between;
   padding: 0 48px;
   height: 56px;
-  background: #fff;
-  border-bottom: 1px solid #111;
+  background: rgba(251,245,234,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #E7DCC9;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 .navLogo {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 0.95rem;
   font-weight: 800;
-  color: #111;
+  color: #1C1714;
   letter-spacing: -0.01em;
   text-transform: uppercase;
 }
-.navLogoRed { color: #E53935; }
+.navLogoRed { color: #EE3D2E; }
 .navRight { display: flex; align-items: center; gap: 1rem; }
 .avatar {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #E53935;
+  background: #EE3D2E;
   color: #fff;
   font-weight: 800;
   font-size: 0.85rem;
@@ -63,20 +65,20 @@
   justify-content: center;
 }
 .signOutBtn {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   background: none;
-  border: 1px solid #111;
-  color: #111;
+  border: 1px solid #1C1714;
+  color: #1C1714;
   padding: 6px 16px;
-  border-radius: 0;
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
-.signOutBtn:hover { background: #111; color: #fff; }
+.signOutBtn:hover { background: #1C1714; color: #FBF5EA; }
 
 /* ── MAIN ── */
 .main {
@@ -88,14 +90,15 @@
 
 .greeting { margin-bottom: 40px; }
 .greetTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 2.2rem;
   font-weight: 800;
-  color: #111;
+  color: #1C1714;
   letter-spacing: -0.04em;
   margin: 0 0 6px;
   line-height: 1.0;
 }
-.greetSub { font-size: 0.9rem; color: #888; margin: 0; font-weight: 400; }
+.greetSub { font-size: 0.9rem; color: #999; margin: 0; font-weight: 400; }
 
 /* ── LAYOUT ── */
 .layout {
@@ -109,31 +112,31 @@
 /* ── STAT CARDS ── */
 .statsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .statCard {
-  background: #fff;
-  border: 1px solid #111;
-  border-radius: 0;
+  background: #FFFDF8;
+  border: 1.5px solid #E7DCC9;
+  border-radius: 12px;
   padding: 16px 20px;
-  box-shadow: 4px 4px 0 #111;
+  box-shadow: 4px 4px 0 #E7DCC9;
 }
 .statLabel {
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #999;
+  color: #aaa;
   text-transform: uppercase;
   margin: 0 0 8px;
   display: block;
 }
-.statValue { font-size: 2rem; font-weight: 800; color: #E53935; line-height: 1; }
+.statValue { font-size: 2rem; font-weight: 800; color: #EE3D2E; line-height: 1; }
 .statDenom { font-size: 1rem; color: #ccc; margin-left: 2px; }
 
 /* ── CARDS ── */
 .card {
-  background: #fff;
-  border: 1px solid #111;
-  border-radius: 0;
+  background: #FFFDF8;
+  border: 1.5px solid #E7DCC9;
+  border-radius: 12px;
   padding: 20px;
-  box-shadow: 4px 4px 0 #111;
+  box-shadow: 4px 4px 0 #E7DCC9;
 }
 .cardHeader {
   display: flex;
@@ -145,10 +148,10 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #999;
+  color: #aaa;
   text-transform: uppercase;
 }
-.cardCount { font-size: 0.75rem; color: #bbb; }
+.cardCount { font-size: 0.75rem; color: #ccc; }
 
 /* ── PROGRESS ── */
 .progressHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
@@ -156,13 +159,13 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #999;
+  color: #aaa;
   text-transform: uppercase;
 }
-.progressPct { font-size: 0.85rem; font-weight: 800; color: #E53935; }
-.progressTrack { height: 4px; background: #eee; border-radius: 0; overflow: hidden; margin-bottom: 12px; }
-.progressFill { height: 100%; background: #E53935; border-radius: 0; transition: width 0.6s ease; }
-.progressHint { font-size: 0.78rem; color: #888; margin: 0; }
+.progressPct { font-size: 0.85rem; font-weight: 800; color: #EE3D2E; }
+.progressTrack { height: 4px; background: #E7DCC9; border-radius: 99px; overflow: hidden; margin-bottom: 12px; }
+.progressFill { height: 100%; background: #EE3D2E; border-radius: 99px; transition: width 0.6s ease; }
+.progressHint { font-size: 0.78rem; color: #999; margin: 0; }
 
 /* ── BADGES ── */
 .badgeGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
@@ -173,43 +176,44 @@
   align-items: center;
   gap: 4px;
   padding: 8px 4px;
-  border-radius: 0;
-  border: 1px solid #111;
+  border-radius: 10px;
+  border: 1.5px solid #E7DCC9;
   text-align: center;
   transition: all 0.15s;
 }
-.badgeEarned { background: #fff5f5; border-color: #E53935; box-shadow: 2px 2px 0 #E53935; }
+.badgeEarned { background: #FFF5F0; border-color: #EE3D2E; box-shadow: 2px 2px 0 #EE3D2E; }
 .badgeLocked { opacity: 0.25; filter: grayscale(1); }
-.badgeDot { position: absolute; top: 4px; right: 4px; width: 6px; height: 6px; border-radius: 50%; background: #E53935; }
+.badgeDot { position: absolute; top: 4px; right: 4px; width: 6px; height: 6px; border-radius: 50%; background: #EE3D2E; }
 .badgeIcon { font-size: 1.4rem; line-height: 1; }
-.badgeLabel { font-size: 0.52rem; color: #888; line-height: 1.2; }
+.badgeLabel { font-size: 0.52rem; color: #999; line-height: 1.2; }
 
 /* ── JOURNAL ── */
 .journalEmpty { text-align: center; padding: 16px 0; }
 .journalEmptyIcon { font-size: 1.8rem; margin-bottom: 8px; }
-.journalEmptyText { font-size: 0.78rem; color: #888; margin: 0; }
+.journalEmptyText { font-size: 0.78rem; color: #999; margin: 0; }
 .journalList { display: flex; flex-direction: column; gap: 8px; }
 .journalItem {
   padding: 12px;
-  background: #FFFCF7;
-  border-radius: 0;
-  border: 1px solid #e0e0e0;
+  background: #FBF5EA;
+  border-radius: 8px;
+  border: 1px solid #E7DCC9;
 }
 .journalTop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
-.journalMod { font-size: 0.8rem; font-weight: 700; color: #111; margin: 0; }
-.journalDate { font-size: 0.7rem; color: #bbb; margin: 0 0 4px; }
-.journalNote { font-size: 0.75rem; color: #666; margin: 0; font-style: italic; }
+.journalMod { font-size: 0.8rem; font-weight: 700; color: #1C1714; margin: 0; }
+.journalDate { font-size: 0.7rem; color: #ccc; margin: 0 0 4px; }
+.journalNote { font-size: 0.75rem; color: #888; margin: 0; font-style: italic; }
 .ratingGood { font-size: 0.75rem; font-weight: 700; color: #2e7d32; }
 .ratingMid  { font-size: 0.75rem; font-weight: 700; color: #e65100; }
-.ratingBad  { font-size: 0.75rem; font-weight: 700; color: #E53935; }
+.ratingBad  { font-size: 0.75rem; font-weight: 700; color: #EE3D2E; }
 
 /* ── MODULES ── */
 .content { display: flex; flex-direction: column; }
 .modulesSectionTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #999;
+  color: #aaa;
   text-transform: uppercase;
   margin: 0 0 16px;
 }
@@ -219,40 +223,47 @@
   align-items: center;
   gap: 20px;
   padding: 20px 24px;
-  background: #fff;
-  border: 1px solid #111;
-  border-radius: 0;
+  background: #FFFDF8;
+  border: 1.5px solid #E7DCC9;
+  border-radius: 12px;
   transition: box-shadow 0.15s, transform 0.15s;
-  box-shadow: 4px 4px 0 #111;
+  box-shadow: 4px 4px 0 #E7DCC9;
 }
 .moduleCardClickable { cursor: pointer; }
-.moduleCardClickable:hover { box-shadow: 6px 6px 0 #111; transform: translate(-1px, -1px); }
-.moduleCardLocked { opacity: 0.4; cursor: default; box-shadow: none; border-color: #ddd; }
-.moduleCardCurrent { border-color: #E53935; box-shadow: 4px 4px 0 #E53935; }
-.moduleCardCurrent:hover { box-shadow: 6px 6px 0 #E53935; }
-.moduleCardDone { border-color: #111; background: #fafff8; }
+.moduleCardClickable:hover { box-shadow: 6px 6px 0 #E7DCC9; transform: translate(-1px, -1px); }
+.moduleCardLocked { opacity: 0.4; cursor: default; box-shadow: none; border-color: #F0EAD8; }
+.moduleCardCurrent { border-color: #EE3D2E; box-shadow: 4px 4px 0 #EE3D2E; }
+.moduleCardCurrent:hover { box-shadow: 6px 6px 0 #EE3D2E; }
+.moduleCardDone { border-color: #E7DCC9; background: #F8F4EC; }
 
 .moduleNum {
   width: 42px;
   height: 42px;
-  border-radius: 0;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
   font-weight: 800;
-  color: #bbb;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
+  color: #ccc;
+  background: #F3E9D6;
+  border: 1px solid #E7DCC9;
   flex-shrink: 0;
 }
-.moduleNumCurrent { background: #E53935; color: #fff; border-color: #E53935; }
-.moduleNumDone { background: #111; color: #fff; border-color: #111; }
+.moduleNumCurrent { background: #EE3D2E; color: #fff; border-color: #EE3D2E; }
+.moduleNumDone { background: #1C1714; color: #FBF5EA; border-color: #1C1714; }
 
 .moduleInfo { flex: 1; min-width: 0; }
-.moduleTitle { font-size: 1rem; font-weight: 700; color: #111; margin: 0 0 4px; letter-spacing: -0.02em; }
-.moduleTitleCurrent { color: #111; }
-.moduleSub { font-size: 0.8rem; color: #888; margin: 0 0 8px; }
+.moduleTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1C1714;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+.moduleTitleCurrent { color: #1C1714; }
+.moduleSub { font-size: 0.8rem; color: #999; margin: 0 0 8px; }
 .moduleMeta { display: flex; align-items: center; gap: 8px; }
 
 .tagDone {
@@ -263,7 +274,7 @@
   color: #2e7d32;
   background: #e8f5e9;
   padding: 3px 8px;
-  border-radius: 0;
+  border-radius: 6px;
   border: 1px solid #c8e6c9;
 }
 .tagCurrent {
@@ -274,57 +285,57 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #E53935;
-  background: #fff0f0;
+  color: #EE3D2E;
+  background: #FFF5F0;
   padding: 3px 8px;
-  border-radius: 0;
-  border: 1px solid #E53935;
+  border-radius: 6px;
+  border: 1px solid #EE3D2E;
 }
 .tagDot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #E53935;
+  background: #EE3D2E;
   animation: pulse 1.5s ease-in-out infinite;
   flex-shrink: 0;
 }
-.tagDuration { font-size: 0.7rem; color: #bbb; }
+.tagDuration { font-size: 0.7rem; color: #ccc; }
 
 .moduleActions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
-.xpBadge { font-size: 0.72rem; font-weight: 700; color: #E53935; white-space: nowrap; }
+.xpBadge { font-size: 0.72rem; font-weight: 700; color: #EE3D2E; white-space: nowrap; }
 
 .btnContinue {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  background: #E53935;
+  background: #EE3D2E;
   color: #fff;
   border: none;
   padding: 10px 20px;
-  border-radius: 0;
+  border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.15s;
 }
-.btnContinue:hover { background: #c62828; }
+.btnContinue:hover { background: #C32A1E; }
 
 .btnReview {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   background: transparent;
-  color: #999;
-  border: 1px solid #ddd;
+  color: #aaa;
+  border: 1px solid #E7DCC9;
   padding: 8px 16px;
-  border-radius: 0;
+  border-radius: 8px;
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
 }
-.btnReview:hover { border-color: #111; color: #111; }
+.btnReview:hover { border-color: #1C1714; color: #1C1714; }
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
