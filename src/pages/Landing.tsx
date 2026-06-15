@@ -230,14 +230,13 @@ export default function Landing() {
           </div>
 
           <div className={s.ctaRow}>
-            <button className={s.btnPrimary} onClick={() => navigate('/auth?next=checkout')}>
-              Réserver en pré-vente — 280€
+            <button className={s.btnPrimary} onClick={() => navigate('/auth')}>
+              Faire ma 1ʳᵉ séance — c'est gratuit
             </button>
             <a href="#methode" className={s.btnOutline}>Comment ça marche ?</a>
           </div>
 
           {error && <p className={s.heroError}>{error}</p>}
-          <p className={s.heroNote}>Pré-vente · Accès garanti le 4 août 2026</p>
         </div>
 
         <div className={s.heroRight}>
@@ -324,28 +323,28 @@ export default function Landing() {
             <div className={s.col}>
               <div className={s.eyebrow}>L'accès</div>
               <h2 className={s.h2}>
-                Rejoins la pré-vente.<br />
-                <span className={s.accent}>Accès garanti le 4 août.</span>
+                Commence gratuitement.<br />
+                <span className={s.accent}>Garde-le à vie.</span>
               </h2>
               <p className={s.bodyText} style={{ maxWidth: '28rem' }}>
-                Les places sont limitées. Réserve maintenant à tarif pré-vente et accède au programme complet dès son ouverture le 4 août 2026.
+                La première séance est offerte. Si l'histoire te porte, tu débloques les cinq chapitres une bonne fois pour toutes — pas d'abonnement, pas de rappel, pas de date limite.
               </p>
             </div>
             <div className={s.priceCard}>
-              <div className={s.priceLabel}>Pré-vente · accès le 4 août 2026</div>
+              <div className={s.priceLabel}>Accès complet · à vie</div>
               <div className={s.priceRow}>
-                <span className={s.priceAmt}>280€</span>
+                <span className={s.priceAmt}>29€</span>
                 <span className={s.priceOnce}>une seule fois</span>
               </div>
               <ul className={s.inclList}>
-                <li><b>—</b>Les 5 niveaux du programme complet</li>
+                <li><b>—</b>Les 5 chapitres du récit, dans l'ordre</li>
                 <li><b>—</b>La technique de tension appliquée à chaque étape</li>
                 <li><b>—</b>Ton rythme : avance, recule, reviens</li>
                 <li><b>—</b>Accès à vie, mises à jour comprises</li>
               </ul>
               {error && <p className={s.priceError}>{error}</p>}
               <button className={s.btnAmber} onClick={handleCheckout} disabled={loading}>
-                {loading ? 'Redirection…' : 'Réserver ma place →'}
+                {loading ? 'Redirection…' : 'Commencer ma 1ʳᵉ séance →'}
               </button>
             </div>
           </div>
@@ -360,8 +359,8 @@ export default function Landing() {
         <p className={s.ctaSerif}>
           Un chapitre après l'autre, la peur perd du terrain. Tu n'as qu'à commencer à lire.
         </p>
-        <button className={`${s.btnPrimary} ${s.btnLg}`} onClick={() => navigate('/auth?next=checkout')}>
-          Réserver en pré-vente — 280€
+        <button className={`${s.btnPrimary} ${s.btnLg}`} onClick={() => navigate('/auth')}>
+          Faire ma 1ʳᵉ séance — c'est gratuit
         </button>
       </section>
 
