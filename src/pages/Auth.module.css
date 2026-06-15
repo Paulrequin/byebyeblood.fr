@@ -7,12 +7,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
 }
 
 /* ── LEFT — brand panel ── */
 .left {
-  background: #111;
+  background: #1C1714;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,6 +22,7 @@
   border-right: 1px solid #222;
 }
 .leftLogo {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 0.95rem;
   font-weight: 800;
   color: #fff;
@@ -36,6 +37,7 @@
   gap: 24px;
 }
 .leftTagline {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: clamp(2rem, 3.5vw, 3.2rem);
   font-weight: 800;
   color: #fff;
@@ -67,7 +69,7 @@
 
 /* ── RIGHT — form panel ── */
 .right {
-  background: #FFFCF7;
+  background: #FBF5EA;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,7 +79,7 @@
 
 .backBtn {
   align-self: flex-start;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -93,6 +95,7 @@
 .backBtn:hover { color: #111; }
 
 .formTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 2rem;
   font-weight: 800;
   color: #111;
@@ -118,7 +121,7 @@
 .tab {
   flex: 1;
   padding: 10px 0;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -156,7 +159,7 @@
 .labelRow .label { margin-bottom: 0; }
 
 .forgotLink {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   color: #999;
@@ -172,7 +175,7 @@
 .input {
   width: 100%;
   padding: 14px 16px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.9rem;
   background: #fff;
   border: 1px solid #111;
@@ -211,7 +214,7 @@
   margin-top: -8px;
 }
 .resendBtn {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   color: #276749;
@@ -228,9 +231,9 @@
 .submitBtn {
   width: 100%;
   padding: 16px;
-  background: #E53935;
+  background: #EE3D2E;
   color: #fff;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -245,7 +248,7 @@
 .submitBtn:disabled { opacity: 0.55; cursor: default; }
 
 .backToLogin {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -275,7 +278,7 @@
   width: 100%;
   margin-top: 12px;
   padding: 11px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 0.82rem;
   color: #bbb;
   background: transparent;
