@@ -50,7 +50,6 @@ export default function Dashboard() {
       return !!data
     },
     enabled: !!user && !!profile?.has_access,
-    staleTime: Infinity,
   })
 
   useEffect(() => { window.scrollTo(0, 0) }, [])

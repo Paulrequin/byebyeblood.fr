@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import s from './DiagnosticSUD.module.css'
@@ -51,11 +52,14 @@ export default function DiagnosticSUD() {
   const navigate = useNavigate()
   const { user } = useAuth()
 
+  const queryClient = useQueryClient()
+
   const [step, setStep] = useState(0)
   const [scores, setScores] = useState<(number | null)[]>(Array(8).fill(null))
   const [showResult, setShowResult] = useState(false)
   const [result, setResult] = useState<{ score: number; profile: Profile } | null>(null)
   const [saveError, setSaveError] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
 
   function handleSelectScore(value: number) {
     setScores(prev => {
@@ -72,9 +76,12 @@ export default function DiagnosticSUD() {
     }
     const finalScore = scores.reduce<number>((sum, v) => sum + (v ?? 0), 0)
     const finalProfile = getProfile(finalScore)
+    setSaving(true)
+    await saveResults(finalScore, finalProfile)
+    queryClient.invalidateQueries({ queryKey: ['diagnostic', user?.id] })
+    setSaving(false)
     setResult({ score: finalScore, profile: finalProfile })
     setShowResult(true)
-    await saveResults(finalScore, finalProfile)
   }
 
   function handlePrev() {
@@ -170,9 +177,9 @@ export default function DiagnosticSUD() {
           <button
             className={s.btnNext}
             onClick={handleNext}
-            disabled={!canNext}
+            disabled={!canNext || saving}
           >
-            {step === 7 ? 'Voir mon résultat' : 'Suivant →'}
+            {saving ? 'Sauvegarde…' : step === 7 ? 'Voir mon résultat' : 'Suivant →'}
           </button>
         </div>
 

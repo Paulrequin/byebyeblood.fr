@@ -70,12 +70,20 @@ export async function startCheckout(): Promise<void> {
 }
 
 export async function verifyPayment(sessionId: string): Promise<void> {
-  const { error } = await supabase.functions.invoke('verify-payment', {
-    body: { session_id: sessionId },
-  })
+  const MAX_RETRIES = 3
+  let lastError: unknown
 
-  if (error) {
-    const body = await parseFunctionError(error)
-    throw new Error(body.error ?? toErrorMessage(error, 'Erreur lors de la vérification du paiement.'))
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    const { error } = await supabase.functions.invoke('verify-payment', {
+      body: { session_id: sessionId },
+    })
+    if (!error) return
+    lastError = error
+    if (attempt < MAX_RETRIES) {
+      await new Promise(resolve => setTimeout(resolve, attempt * 2000))
+    }
   }
+
+  const body = await parseFunctionError(lastError)
+  throw new Error(body.error ?? toErrorMessage(lastError, 'Erreur lors de la vérification du paiement.'))
 }
