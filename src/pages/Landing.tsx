@@ -1,73 +1,169 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { startCheckout } from '@/services/profileService'
-import HowItWorks from '@/components/HowItWorks'
 import s from './Landing.module.css'
 
+/* ── Types ── */
+type StepState = 'done' | 'active' | 'todo'
+interface NiveauData {
+  name: string
+  sub: string
+  pct: number
+  locked: boolean
+  steps: [string, StepState][]
+}
+
 /* ── Data ── */
-const LEVELS = [
-  { label: 'Niveau 1', state: 'done'   },
-  { label: 'Niveau 2', state: 'done'   },
-  { label: 'Niveau 3', state: 'active' },
-  { label: 'Niveau 4', state: 'locked' },
-  { label: 'Niveau 5', state: 'locked' },
+const NIVEAUX: NiveauData[] = [
+  {
+    name: 'Les mots', sub: 'Apprivoiser par le récit', pct: 100, locked: false,
+    steps: [
+      ["Comprendre l'hémophobie", 'done'],
+      ["Nommer ce qui fait peur", 'done'],
+      ["Premier chapitre du récit", 'done'],
+      ["Respiration de base", 'done'],
+    ],
+  },
+  {
+    name: 'Les images', sub: 'Illustrations, puis photos douces', pct: 100, locked: false,
+    steps: [
+      ["Dessins et schémas", 'done'],
+      ["Photographies choisies", 'done'],
+      ["Le récit s'illustre", 'done'],
+      ["Ancrage respiratoire", 'done'],
+    ],
+  },
+  {
+    name: 'Observation directe', sub: 'Images médicales, en douceur', pct: 62, locked: false,
+    steps: [
+      ["Introduction à l'hémophobie", 'done'],
+      ["Observation d'images médicales", 'active'],
+      ["Vidéos de prélèvements sanguins", 'todo'],
+      ["Exercice de respiration avancé", 'todo'],
+    ],
+  },
+  {
+    name: 'La scène', sub: 'Vidéos de prélèvements', pct: 0, locked: true,
+    steps: [
+      ["Clips courts et contrôlés", 'todo'],
+      ["Le geste de soin", 'todo'],
+      ["Le récit prend vie", 'todo'],
+      ["Tension appliquée", 'todo'],
+    ],
+  },
+  {
+    name: 'Le réel', sub: 'Vers la vraie prise de sang', pct: 0, locked: true,
+    steps: [
+      ["Préparation mentale", 'todo'],
+      ["Simulation complète", 'todo'],
+      ["Dernier chapitre", 'todo'],
+      ["Le vrai rendez-vous", 'todo'],
+    ],
+  },
 ]
 
-const HOW_STEPS = [
-  { num: '01', step: 'Étape 1', title: 'Évalue ton niveau',      desc: "8 questions, 2 minutes. On identifie ton degré d'hémophobie et place ton point de départ." },
-  { num: '02', step: 'Étape 2', title: 'Suis le protocole',      desc: "Chaque niveau expose progressivement à des stimuli plus intenses — textes, images, vidéos." },
-  { num: '03', step: 'Étape 3', title: 'Progresse graduellement', desc: "Le système adapte la cadence. Tu ne passes au suivant que quand tu es prêt·e." },
-  { num: '04', step: 'Étape 4', title: 'Maîtrise complète',       desc: "Au niveau 5, la vue du sang ne déclenche plus de réponse de panique." },
+const PARCOURS = [
+  { bg: '#FFFDF8', border: '#E7DCC9', numColor: '#1C1714', tagColor: '#A0907A',
+    num: '01', name: 'Les mots',
+    story: "Rien que des mots. Tu lis, tu nommes ce qui te terrifie. Le sang devient un sujet — pas encore une image.",
+    tag: 'Le seuil' },
+  { bg: '#FCF2E8', border: '#EAD9C6', numColor: '#C32A1E', tagColor: '#B79172',
+    num: '02', name: 'Les images',
+    story: "Des illustrations douces, puis des photographies choisies et dosées. Tu regardes. Tu respires. Tu restes une seconde de plus.",
+    tag: 'Le regard' },
+  { bg: '#F9E4D6', border: '#ECCDB9', numColor: '#C32A1E', tagColor: '#B5876A',
+    num: '03', name: 'La scène',
+    story: "Le récit s'anime : un pansement, une éraflure, un geste de soin. Le mouvement arrive, mais l'histoire te tient la main.",
+    tag: 'Le mouvement' },
+  { bg: '#F4D2C2', border: '#E6B7A2', numColor: '#A6261A', tagColor: '#A6786A',
+    num: '04', name: 'Le geste',
+    story: "Le décor d'une prise de sang : l'aiguille, le garrot, le coton. Tu t'y familiarises au calme, la tension appliquée en renfort.",
+    tag: 'Le soin' },
+  { bg: '#EFC0AD', border: '#DFA48C', numColor: '#8E1E12', tagColor: '#955F52',
+    num: '05', name: 'Le réel',
+    story: "Une vraie prise de sang, au bout du chemin. Tu tends, tu respires, tu tournes la dernière page. Et tu restes debout.",
+    tag: 'Le réel' },
 ]
 
-const GAMIF_CARDS = [
-  { num: '01', title: 'Streak quotidien',   desc: 'Reviens chaque jour pour maintenir ton rythme. La régularité est la clé de la désensibilisation.' },
-  { num: '02', title: 'Points XP',          desc: 'Chaque exercice complété rapporte des XP. Monte de niveau et débloque la suite du parcours.' },
-  { num: '03', title: 'Badges de maîtrise', desc: 'Décroche des badges à chaque palier franchi. Une preuve concrète de tes progrès réels.' },
+const METHODE_STEPS = [
+  { n: '01', t: 'Doser',
+    p: "Chaque chapitre n'ajoute qu'une nuance : un mot plus précis, une image un peu plus nette. Jamais le grand saut." },
+  { n: '02', t: 'Tendre',
+    p: "La tension appliquée : tu contractes bras et jambes quelques secondes. Ta pression remonte, le malaise recule. C'est ce qui t'évite de tomber." },
+  { n: '03', t: 'Répéter',
+    p: "L'habituation se gagne par la répétition. Tu relis, tu reviens. Ce qui faisait peur hier devient banal aujourd'hui." },
 ]
 
-const STATS = [
-  { value: '5 niveaux',   label: 'progressifs' },
-  { value: '14 jours',    label: 'satisfait ou remboursé' },
-  { value: '100% fondé',  label: 'sur la science' },
-  { value: 'Pré-vente', label: 'accès le 4 août 2026' },
-]
-
-/* ── Product Mockup ── */
-function ProductMockup() {
+/* ── Sub-components ── */
+function LockSvg() {
   return (
-    <div className={s.mockup}>
-      <div className={s.mockupHeader}>
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" style={{ display: 'block' }}>
+      <rect x="4.5" y="10.5" width="15" height="10" rx="2.2" />
+      <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
+    </svg>
+  )
+}
+
+function NiveauCard({ nv }: { nv: NiveauData }) {
+  return (
+    <div className={s.card}>
+      <div className={s.cardHead}>
         <div>
-          <div className={s.mockupTitle}>Niveau 3</div>
-          <div className={s.mockupSub}>Observation directe</div>
+          <div className={s.cardTitle}>{nv.name}</div>
+          <div className={s.cardSub}>{nv.sub}</div>
         </div>
-        <span className={s.mockupPct}>62%</span>
+        <div className={s.cardPct}>{nv.locked ? 'Verrouillé' : `${nv.pct} %`}</div>
       </div>
-      <div className={s.mockupTrack}><div className={s.mockupFill} /></div>
-      <ul className={s.mockupList}>
-        <li className={`${s.mockupItem} ${s.mockupItemDone}`}>
-          <span className={s.mockupDot} />Introduction à l'hémophobie
-        </li>
-        <li className={`${s.mockupItem} ${s.mockupItemActive}`}>
-          <span className={s.mockupDot} />Observation d'images médicales
-        </li>
-        <li className={`${s.mockupItem} ${s.mockupItemLocked}`}>
-          <span className={s.mockupDot} />Vidéos de prélèvements sanguins
-        </li>
-        <li className={`${s.mockupItem} ${s.mockupItemLocked}`}>
-          <span className={s.mockupDot} />Exercice de respiration avancé
-        </li>
+      <div className={s.track}>
+        <div
+          className={s.bar}
+          style={{
+            width: `${nv.locked ? 0 : nv.pct}%`,
+            background: nv.locked ? '#E0D4C0' : '#EE3D2E',
+          }}
+        />
+      </div>
+      <ul className={s.cardSteps}>
+        {nv.steps.map(([label, state]) => (
+          <li key={label} className={s.cardStep}>
+            <span
+              className={s.stepDot}
+              style={{
+                background: state === 'done' ? '#1C1714' : state === 'active' ? '#EE3D2E' : '#D8CCB8',
+                boxShadow: state === 'active' ? '0 0 0 3px rgba(238,61,46,.18)' : 'none',
+              }}
+            />
+            <span
+              className={s.stepLabel}
+              style={{
+                color: state === 'todo' ? '#A0907A' : '#1C1714',
+                fontWeight: state === 'active' ? 700 : 500,
+              }}
+            >
+              {label}
+            </span>
+          </li>
+        ))}
       </ul>
+      {nv.locked && (
+        <div className={s.lockNote}>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+            <rect x="4.5" y="10.5" width="15" height="10" rx="2.2" />
+            <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
+          </svg>
+          Termine le niveau précédent pour ouvrir ce chapitre.
+        </div>
+      )}
     </div>
   )
 }
 
-/* ── Component ── */
+/* ── Page ── */
 export default function Landing() {
   const navigate = useNavigate()
+  const [current, setCurrent] = useState(2)
   const [loading, setLoading] = useState(false)
-  const [error,   setError]   = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   async function handleCheckout() {
     setLoading(true)
@@ -81,172 +177,204 @@ export default function Landing() {
     }
   }
 
+  function chipClass(i: number): string {
+    if (i === current) return `${s.chip} ${s.chipActive}`
+    if (NIVEAUX[i].pct === 100 && !NIVEAUX[i].locked) return `${s.chip} ${s.chipDone}`
+    if (NIVEAUX[i].locked) return `${s.chip} ${s.chipLocked}`
+    return s.chip
+  }
+
   return (
     <div className={s.page}>
-      <div className={s.grain} aria-hidden="true" />
 
-      {/* ── NAV ── */}
+      {/* NAV */}
       <nav className={s.nav}>
-        <span className={s.navLogo}>
-          Bye Bye <span className={s.navLogoRed}>Blood</span>
-        </span>
-        <button className={s.navBtn} onClick={() => navigate('/auth')}>
-          Se connecter
-        </button>
+        <a href="#top" className={s.logo}>Bye Bye <span>Blood</span></a>
+        <div className={s.navLinks}>
+          <a href="#methode" className={s.navLink}>La méthode</a>
+          <a href="#parcours" className={s.navLink}>Le parcours</a>
+          <a href="#prix" className={s.navLink}>Accès</a>
+          <button className={s.navLoginBtn} onClick={() => navigate('/auth')}>Se connecter</button>
+        </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section className={s.hero}>
-        <div className={s.heroTopLine} aria-hidden="true" />
+      {/* HERO */}
+      <section id="top" className={s.hero}>
+        <div className={s.glow} aria-hidden="true" />
 
-        {/* Colonne gauche */}
         <div className={s.heroLeft}>
-          <h1 className={s.heroTitle}>
+          <div className={s.kicker}>
+            <span className={s.kickerDot} />
+            Désensibilisation à l'hémophobie
+          </div>
+
+          <h1 className={s.h1}>
             Peur du sang ?<br />
-            <span className={s.heroTitleRed}>Plus pour longtemps.</span>
+            <span className={s.h1Red}>Plus pour longtemps.</span>
           </h1>
 
-          <div className={s.heroDivider} aria-hidden="true" />
+          <p className={s.sub}>
+            Désensibilise-toi à la vue du sang, progressivement, à ton rythme.
+          </p>
+          <p className={s.subSerif}>
+            Une méthode d'exposition progressive — racontée comme une histoire qu'on a envie de finir.
+          </p>
 
-          <div className={s.heroBottom}>
-            <p className={s.heroSub}>
-              Désensibilise-toi à la vue du sang, progressivement, à ton rythme.
-            </p>
-            <p className={s.heroReassurance}>
-              Méthode basée sur la thérapie d'exposition progressive, validée cliniquement.
-            </p>
-
-            <div className={s.levels}>
-              {LEVELS.map((lv) => (
-                <span
-                  key={lv.label}
-                  className={`${s.levelPill} ${
-                    lv.state === 'done'   ? s.levelDone   :
-                    lv.state === 'active' ? s.levelActive :
-                    s.levelLocked
-                  }`}
-                >
-                  {lv.state === 'locked' ? `🔒 ${lv.label}` : lv.label}
-                </span>
-              ))}
-            </div>
-
-            <div className={s.heroBtns}>
-              <button className={s.btnPrimary} onClick={() => navigate('/auth')}>
-                Réserver en pré-vente — 280€
+          <div className={s.chips}>
+            {NIVEAUX.map((nv, i) => (
+              <button key={i} className={chipClass(i)} onClick={() => setCurrent(i)}>
+                {nv.locked && i !== current && <LockSvg />}
+                Niveau {i + 1}
               </button>
-              <button
-                className={s.btnSecondary}
-                onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Comment ça marche ?
-              </button>
+            ))}
+          </div>
+
+          <div className={s.ctaRow}>
+            <button className={s.btnPrimary} onClick={() => navigate('/auth?next=checkout')}>
+              Réserver en pré-vente — 280€
+            </button>
+            <a href="#methode" className={s.btnOutline}>Comment ça marche ?</a>
+          </div>
+
+          {error && <p className={s.heroError}>{error}</p>}
+          <p className={s.heroNote}>Pré-vente · Accès garanti le 4 août 2026</p>
+        </div>
+
+        <div className={s.heroRight}>
+          <NiveauCard nv={NIVEAUX[current]} />
+          <p className={s.hint}>Touche un niveau, à gauche, pour voir où mène le récit.</p>
+        </div>
+      </section>
+
+      {/* L'IDÉE */}
+      <section id="idee" className={s.section}>
+        <div className={s.wrap}>
+          <div className={s.two}>
+            <div className={s.col}>
+              <div className={s.eyebrow}>Pourquoi ça marche</div>
+              <h2 className={s.h2}>
+                Tu ne fixes pas<br />des images.<br />
+                <span className={s.accent}>Tu lis une histoire.</span>
+              </h2>
             </div>
-            <p className={s.heroNote}>
-              Pré-vente · Accès garanti le 4 août 2026 · 2 min pour le diagnostic
-            </p>
-
-            <div className={s.heroSignIn}>
-              <span className={s.heroSignInText}>Déjà un compte ?</span>
-              <button className={s.heroSignInBtn} onClick={() => navigate('/auth')}>
-                Se connecter →
-              </button>
+            <div className={s.col}>
+              <p className={s.lead}>
+                L'exposition brutale, frontale, on l'abandonne au bout de trois images. Un récit, lui, te donne une raison de continuer.
+              </p>
+              <p className={s.bodyText}>
+                Le sang n'est plus le sujet : il fait partie du décor, il arrive quand l'histoire l'amène. Ton attention reste sur le personnage. Pendant ce temps, sans bruit, ton cerveau s'habitue — et la peur, privée de carburant, redescend.
+              </p>
             </div>
-
-            {error && <p className={s.heroError}>{error}</p>}
-
-            <p className={s.heroGuarantees}>
-              ✓ Pré-vente limitée · ✓ Accès le 4 août 2026 · ✓ Remboursé si non satisfait
-            </p>
           </div>
         </div>
-
-        {/* Colonne droite — mockup */}
-        <div className={s.heroRight}>
-          <ProductMockup />
-        </div>
       </section>
 
-      <HowItWorks />
-
-      {/* ── STATS ── */}
-      <section className={s.stats}>
-        <div className={s.statsGrid}>
-          {STATS.map((st) => (
-            <div key={st.value} className={s.statItem}>
-              <div className={s.statValue}>{st.value}</div>
-              <div className={s.statLabel}>{st.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── HOW IT WORKS ── */}
-      <section className={s.how}>
-        <p className={s.sectionEyebrow}>Méthode</p>
-        <h2 className={s.sectionTitle}>Comment ça marche, concrètement ?</h2>
-        <div className={s.howCards}>
-          {HOW_STEPS.map((step) => (
-            <div key={step.step} className={s.howCard}>
-              <div className={s.howCardNum}>{step.num}</div>
-              <p className={s.howCardStep}>{step.step}</p>
-              <h3 className={s.howCardTitle}>{step.title}</h3>
-              <p className={s.howCardDesc}>{step.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── GAMIFICATION ── */}
-      <section className={s.gamif}>
-        <div className={s.gamifInner}>
-          <p className={`${s.sectionEyebrow} ${s.gamifEyebrow}`}>Tu ne lâcheras pas</p>
-          <h2 className={`${s.sectionTitle} ${s.gamifTitle}`}>
-            Un système conçu pour te garder motivé·e.
-          </h2>
-          <div className={s.gamifCards}>
-            {GAMIF_CARDS.map((card) => (
-              <div key={card.title} className={s.gamifCard}>
-                <div className={s.gamifNum}>{card.num}</div>
-                <h3 className={s.gamifCardTitle}>{card.title}</h3>
-                <p className={s.gamifCardDesc}>{card.desc}</p>
+      {/* LA MÉTHODE */}
+      <section id="methode" className={`${s.section} ${s.sectionCard}`}>
+        <div className={s.wrap}>
+          <div className={s.col} style={{ maxWidth: '40rem', marginBottom: '3rem' }}>
+            <div className={s.eyebrow}>La méthode · exposition progressive</div>
+            <h2 className={s.h2}>Un pas, <span className={s.accent}>puis le suivant.</span></h2>
+            <p className={s.bodyText}>
+              Validée cliniquement, l'exposition graduelle réapprend à ton cerveau que l'image du sang n'annonce aucun danger. On ne saute jamais une marche : c'est le récit qui dose pour toi.
+            </p>
+          </div>
+          <div className={s.steps3}>
+            {METHODE_STEPS.map((step) => (
+              <div key={step.t} className={s.stepCard}>
+                <div className={s.stepCardN}>{step.n}</div>
+                <div className={s.stepCardT}>{step.t}</div>
+                <p className={s.stepCardP}>{step.p}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA FINAL ── */}
-      <section className={s.cta}>
-        <span className={s.ctaLine} aria-hidden="true" />
+      {/* LE PARCOURS */}
+      <section id="parcours" className={s.section}>
+        <div className={s.wrap}>
+          <div className={s.col} style={{ maxWidth: '40rem', marginBottom: '2.6rem' }}>
+            <div className={s.eyebrow}>Le parcours · cinq chapitres</div>
+            <h2 className={s.h2}>Du mot <span className={s.accent}>au réel.</span></h2>
+          </div>
+          <div className={s.levels}>
+            {PARCOURS.map((lv) => (
+              <div
+                key={lv.num}
+                className={s.level}
+                style={{ background: lv.bg, border: `1.5px solid ${lv.border}` }}
+              >
+                <div className={s.levelNum} style={{ color: lv.numColor }}>{lv.num}</div>
+                <div>
+                  <div className={s.levelName}>{lv.name}</div>
+                  <div className={s.levelStory}>{lv.story}</div>
+                </div>
+                <div className={s.levelTag} style={{ color: lv.tagColor }}>{lv.tag}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PRIX */}
+      <section id="prix" className={`${s.section} ${s.sectionCard}`}>
+        <div className={s.wrap}>
+          <div className={s.twoPrice}>
+            <div className={s.col}>
+              <div className={s.eyebrow}>L'accès</div>
+              <h2 className={s.h2}>
+                Rejoins la pré-vente.<br />
+                <span className={s.accent}>Accès garanti le 4 août.</span>
+              </h2>
+              <p className={s.bodyText} style={{ maxWidth: '28rem' }}>
+                Les places sont limitées. Réserve maintenant à tarif pré-vente et accède au programme complet dès son ouverture le 4 août 2026.
+              </p>
+            </div>
+            <div className={s.priceCard}>
+              <div className={s.priceLabel}>Pré-vente · accès le 4 août 2026</div>
+              <div className={s.priceRow}>
+                <span className={s.priceAmt}>280€</span>
+                <span className={s.priceOnce}>une seule fois</span>
+              </div>
+              <ul className={s.inclList}>
+                <li><b>—</b>Les 5 niveaux du programme complet</li>
+                <li><b>—</b>La technique de tension appliquée à chaque étape</li>
+                <li><b>—</b>Ton rythme : avance, recule, reviens</li>
+                <li><b>—</b>Accès à vie, mises à jour comprises</li>
+              </ul>
+              {error && <p className={s.priceError}>{error}</p>}
+              <button className={s.btnAmber} onClick={handleCheckout} disabled={loading}>
+                {loading ? 'Redirection…' : 'Réserver ma place →'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA FINAL */}
+      <section id="commencer" className={s.ctaSection}>
         <h2 className={s.ctaTitle}>
-          Prêt·e à arrêter<br />
-          <span className={s.ctaTitleRed}>de fuir ?</span>
+          Bye bye, <span className={s.ctaRed}>blood.</span>
         </h2>
-        <p className={s.ctaSub}>280€ · Pré-vente · Accès garanti le 4 août 2026.</p>
-        {error && <p className={s.ctaError}>{error}</p>}
-        <button className={s.btnCta} onClick={handleCheckout} disabled={loading}>
-          {loading ? 'Redirection…' : 'Réserver ma place — 280€'}
-        </button>
-        <p className={s.ctaNote}>Places limitées. Accès complet dès le 4 août 2026.</p>
-      </section>
-
-      {/* ── BOTTOM CTA ── */}
-      <section className={s.bottomCta}>
-        <h2 className={s.bottomCtaTitle}>Prêt à dire bye bye à ta peur&nbsp;?</h2>
-        <p className={s.bottomCtaSub}>Pré-vente ouverte · Accès le 4 août 2026.</p>
-        <button className={s.bottomCtaBtn} onClick={() => navigate('/auth')}>
-          Réserver ma place — 280€
+        <p className={s.ctaSerif}>
+          Un chapitre après l'autre, la peur perd du terrain. Tu n'as qu'à commencer à lire.
+        </p>
+        <button className={`${s.btnPrimary} ${s.btnLg}`} onClick={() => navigate('/auth?next=checkout')}>
+          Réserver en pré-vente — 280€
         </button>
       </section>
 
-      {/* ── FOOTER ── */}
+      {/* FOOTER */}
       <footer className={s.footer}>
-        <span className={s.footerLogo}>
-          Bye Bye <span className={s.footerLogoRed}>Blood</span>
-        </span>
-        <span className={s.footerCopy}>© 2026 Bye Bye Blood. Tous droits réservés.</span>
+        <div className={s.footerInner}>
+          <div className={s.footerLogo}>Bye Bye <span>Blood</span></div>
+          <div className={s.footerDisclaimer}>
+            Ceci n'est pas un dispositif médical. En cas de phobie sévère ou de malaises répétés, parles-en à un professionnel de santé. · © Bye Bye Blood 2026
+          </div>
+        </div>
       </footer>
+
     </div>
   )
 }
