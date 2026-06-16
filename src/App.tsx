@@ -10,9 +10,11 @@ import DiagnosticSUD from './pages/DiagnosticSUD'
 export default function App() {
   return (
     <Routes>
-      {/* Routes publiques — redirigent vers /dashboard si déjà connecté */}
+      {/* Landing — accessible à tous, connecté ou non */}
+      <Route path="/" element={<Landing />} />
+
+      {/* Auth — redirige vers /dashboard si déjà connecté */}
       <Route element={<PublicOnlyRoute />}>
-        <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
       </Route>
 
