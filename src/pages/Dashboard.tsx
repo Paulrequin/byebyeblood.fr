@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useAuth } from '@/contexts/AuthContext'
 import { useProfile } from '@/hooks/useProfile'
@@ -35,6 +35,7 @@ function ratingClass(r: number): string {
 
 export default function Dashboard() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { user } = useAuth()
 
   const { data: profile, isLoading: profileLoading } = useProfile()
@@ -56,10 +57,11 @@ export default function Dashboard() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   useEffect(() => {
-    if (!diagnosticLoading && !diagnosticFetching && hasDiagnostic === false && profile?.has_access) {
+    const fromDiagnostic = location.state?.fromDiagnostic
+    if (!diagnosticLoading && !diagnosticFetching && hasDiagnostic === false && profile?.has_access && !fromDiagnostic) {
       navigate('/diagnostic', { replace: true })
     }
-  }, [hasDiagnostic, diagnosticLoading, diagnosticFetching, profile, navigate])
+  }, [hasDiagnostic, diagnosticLoading, diagnosticFetching, profile, navigate, location.state])
 
   if (profileLoading || progressLoading || diagnosticLoading || diagnosticFetching) {
     return <div className={s.loading}><div className={s.spinner} /></div>

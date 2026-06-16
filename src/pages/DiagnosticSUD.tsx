@@ -121,7 +121,7 @@ export default function DiagnosticSUD() {
             <span className={s.scoreValue}>{result.score} / 80</span>
           </div>
           {saveError && <p className={s.saveError}>{saveError}</p>}
-          <button className={s.btnStart} onClick={() => navigate('/dashboard')}>
+          <button className={s.btnStart} onClick={() => navigate('/dashboard', { state: { fromDiagnostic: true } })}>
             Commencer mon programme
           </button>
         </div>
