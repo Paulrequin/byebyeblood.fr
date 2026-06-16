@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useProfile } from '@/hooks/useProfile'
 import { useProgress } from '@/hooks/useProgress'
 import { signOut } from '@/services/authService'
+import { startCheckout } from '@/services/profileService'
 import { supabase } from '@/lib/supabase'
 import { MODULES } from '@/data/modules'
 import s from './Dashboard.module.css'
@@ -39,7 +40,7 @@ export default function Dashboard() {
   const { data: profile, isLoading: profileLoading } = useProfile()
   const { progress, isLoading: progressLoading, isModuleCompleted, isModuleUnlocked } = useProgress()
 
-  const { data: hasDiagnostic, isLoading: diagnosticLoading } = useQuery({
+  const { data: hasDiagnostic, isLoading: diagnosticLoading, isFetching: diagnosticFetching } = useQuery({
     queryKey: ['diagnostic', user?.id],
     queryFn: async () => {
       const { data } = await supabase
@@ -55,26 +56,24 @@ export default function Dashboard() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   useEffect(() => {
-    if (!profileLoading && profile && !profile.has_access) {
-      navigate('/')
-    }
-  }, [profile, profileLoading, navigate])
-
-  useEffect(() => {
-    if (!diagnosticLoading && hasDiagnostic === false && profile?.has_access) {
+    if (!diagnosticLoading && !diagnosticFetching && hasDiagnostic === false && profile?.has_access) {
       navigate('/diagnostic', { replace: true })
     }
-  }, [hasDiagnostic, diagnosticLoading, profile, navigate])
+  }, [hasDiagnostic, diagnosticLoading, diagnosticFetching, profile, navigate])
 
-  if (profileLoading || progressLoading || diagnosticLoading) {
+  if (profileLoading || progressLoading || diagnosticLoading || diagnosticFetching) {
     return <div className={s.loading}><div className={s.spinner} /></div>
   }
 
-  if (!profile?.has_access) return null
+  const hasAccess = profile?.has_access ?? false
 
   async function handleSignOut() {
     await signOut()
     navigate('/')
+  }
+
+  async function handleCheckout() {
+    await startCheckout()
   }
 
   const xp             = progress.xp
@@ -111,6 +110,18 @@ export default function Dashboard() {
           </h1>
           <p className={s.greetSub}>{greetingFromCount(completedCount)}</p>
         </div>
+
+        {!hasAccess && (
+          <div className={s.upsellBanner}>
+            <div className={s.upsellText}>
+              <span className={s.upsellTitle}>1ʳᵉ séance gratuite débloquée</span>
+              <span className={s.upsellSub}>Débloque les {MODULES.length} modules pour 29€, une seule fois.</span>
+            </div>
+            <button className={s.upsellBtn} onClick={handleCheckout}>
+              Débloquer l'accès complet →
+            </button>
+          </div>
+        )}
 
         <div className={s.layout}>
 
@@ -206,7 +217,7 @@ export default function Dashboard() {
             <div className={s.modulesList}>
               {MODULES.map(mod => {
                 const isCompleted = isModuleCompleted(mod.id)
-                const isUnlocked  = isModuleUnlocked(mod.id)
+                const isUnlocked  = hasAccess ? isModuleUnlocked(mod.id) : mod.id === 1
                 const isCurrent   = isUnlocked && !isCompleted
 
                 return (

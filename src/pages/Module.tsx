@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useProgress } from '@/hooks/useProgress'
+import { useProfile } from '@/hooks/useProfile'
 import { MODULES } from '@/data/modules'
 import type {
   Module as ModuleType,
@@ -657,6 +658,7 @@ export default function Module() {
   const { id }       = useParams<{ id: string }>()
   const navigate     = useNavigate()
   const { isModuleUnlocked, completeExercise, completeModule, addJournalEntry } = useProgress()
+  const { data: profile } = useProfile()
 
   const [exerciseIndex, setExerciseIndex] = useState(0)
   const [completed, setCompleted]         = useState(false)
@@ -668,12 +670,16 @@ export default function Module() {
   const moduleId   = id ? parseInt(id, 10) : NaN
   const moduleData = !isNaN(moduleId) ? MODULES.find(m => m.id === moduleId) : undefined
 
-  // Guard : id invalide, module inexistant ou verrouillé
+  // Guard : id invalide, module inexistant, verrouillé, ou accès payant requis
   useEffect(() => {
     if (isNaN(moduleId) || !moduleData || !isModuleUnlocked(moduleId)) {
       navigate('/dashboard')
+      return
     }
-  }, [moduleId, moduleData, isModuleUnlocked, navigate])
+    if (profile !== undefined && !profile?.has_access && moduleId > 1) {
+      navigate('/dashboard')
+    }
+  }, [moduleId, moduleData, isModuleUnlocked, navigate, profile])
 
   // Reset footer + scroll quand l'exercice change
   useEffect(() => {
