@@ -96,12 +96,12 @@ export default function DiagnosticSUD() {
       SITUATIONS.forEach((situation, i) => {
         scoresDetails[situation] = scores[i] ?? 0
       })
-      const { error } = await supabase.from('diagnostic_results').upsert({
+      const { error } = await supabase.from('diagnostic_results').insert({
         user_id: user.id,
         score_total: finalScore,
         profil: finalProfile.name,
         scores_details: scoresDetails,
-      }, { onConflict: 'user_id' })
+      })
       if (error) throw new Error(error.message)
     } catch (err) {
       setSaveError('Erreur lors de la sauvegarde des résultats.')
