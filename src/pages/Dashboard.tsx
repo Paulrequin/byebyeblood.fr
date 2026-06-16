@@ -48,8 +48,8 @@ export default function Dashboard() {
         .from('diagnostic_results')
         .select('id')
         .eq('user_id', user!.id)
-        .maybeSingle()
-      return !!data
+        .limit(1)
+      return Array.isArray(data) && data.length > 0
     },
     enabled: !!user && !!profile?.has_access,
   })
