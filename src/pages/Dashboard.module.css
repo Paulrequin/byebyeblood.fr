@@ -206,6 +206,64 @@
 .ratingMid  { font-size: 0.75rem; font-weight: 700; color: #e65100; }
 .ratingBad  { font-size: 0.75rem; font-weight: 700; color: #EE3D2E; }
 
+/* ── HERO CARD ── */
+.heroCard {
+  background: #1C1714;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 #EE3D2E;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.heroCard:hover { transform: translate(-1px, -1px); box-shadow: 7px 7px 0 #EE3D2E; }
+.heroTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #EE3D2E;
+  margin-bottom: 14px;
+}
+.heroTagDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #EE3D2E;
+  animation: pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.heroTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #FBF5EA;
+  letter-spacing: -0.04em;
+  margin: 0 0 8px;
+  line-height: 1.1;
+}
+.heroSub { font-size: 0.9rem; color: rgba(251,245,234,0.5); margin: 0 0 24px; }
+.heroFooter { display: flex; align-items: center; justify-content: space-between; }
+.heroDuration { font-size: 0.8rem; color: rgba(251,245,234,0.35); }
+.heroCta {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #EE3D2E;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.heroCta:hover { background: #C32A1E; }
+
 /* ── MODULES ── */
 .content { display: flex; flex-direction: column; }
 .modulesSectionTitle {

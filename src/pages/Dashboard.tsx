@@ -83,6 +83,12 @@ export default function Dashboard() {
   const journal        = progress.journal
   const badgeIds       = progress.badges
 
+  const currentMod = MODULES.find(mod => {
+    const isCompleted = progress.completedModules.includes(mod.id)
+    const isUnlocked  = hasAccess ? (mod.id === 1 || progress.completedModules.includes(mod.id - 1)) : mod.id === 1
+    return isUnlocked && !isCompleted
+  })
+
   const xpPercent     = Math.min(100, Math.round((xp / MAX_XP) * 100))
   const recentJournal = [...journal].reverse().slice(0, 5)
   const GENERIC_NAMES = ['dev', 'user', 'admin', 'test', 'null']
@@ -215,7 +221,28 @@ export default function Dashboard() {
 
           {/* ── MODULES ── */}
           <div className={s.content}>
-            <p className={s.modulesSectionTitle}>Modules</p>
+
+            {currentMod && (
+              <div className={s.heroCard} onClick={() => navigate(`/module/${currentMod.id}`)}>
+                <span className={s.heroTag}>
+                  <span className={s.heroTagDot} />
+                  Module en cours
+                </span>
+                <h2 className={s.heroTitle}>{currentMod.title}</h2>
+                <p className={s.heroSub}>{currentMod.subtitle}</p>
+                <div className={s.heroFooter}>
+                  <span className={s.heroDuration}>{currentMod.duration} · +{currentMod.xpBonus} XP</span>
+                  <button
+                    className={s.heroCta}
+                    onClick={e => { e.stopPropagation(); navigate(`/module/${currentMod.id}`) }}
+                  >
+                    Continuer →
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <p className={s.modulesSectionTitle}>Tous les modules</p>
             <div className={s.modulesList}>
               {MODULES.map(mod => {
                 const isCompleted = isModuleCompleted(mod.id)
