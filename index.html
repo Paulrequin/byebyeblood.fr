@@ -7,6 +7,20 @@
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="RteVAdPVr8nC58N0dr_ZoEcw_bWtVbGKc2GVt9tnlUY" />
 
+    <!-- Google Analytics GA4 - consent mode v2 (analytics désactivé par défaut) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDQ7QVJXVQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        wait_for_update: 500
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-LDQ7QVJXVQ', { anonymize_ip: true });
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

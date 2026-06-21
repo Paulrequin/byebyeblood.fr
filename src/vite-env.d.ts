@@ -11,3 +11,9 @@ declare module '*.css' {
   const css: string
   export default css
 }
+
+// Google Analytics
+interface Window {
+  gtag?: (...args: unknown[]) => void
+  dataLayer?: unknown[]
+}

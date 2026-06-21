@@ -175,6 +175,57 @@
   padding-top:  2px;
 }
 
+/* Related articles */
+.related {
+  margin-top:     3rem;
+  padding-top:    2rem;
+  border-top:     1px solid var(--line);
+}
+.relatedLabel {
+  font-size:      11px;
+  font-weight:    700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color:          var(--faint);
+  margin-bottom:  1rem;
+}
+.relatedLinks {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap:                   1rem;
+}
+.relatedLink {
+  display:         flex;
+  flex-direction:  column;
+  gap:             .4rem;
+  background:      #FFFDF8;
+  border:          1px solid var(--line);
+  border-radius:   14px;
+  padding:         1.2rem 1.4rem;
+  text-decoration: none;
+  color:           inherit;
+  transition:      border-color .2s, transform .15s;
+}
+.relatedLink:hover {
+  border-color: var(--red);
+  transform:    translateY(-2px);
+}
+.relatedLinkTag {
+  font-size:      10.5px;
+  font-weight:    700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color:          var(--red-deep);
+}
+.relatedLinkTitle {
+  font-family:    'Bricolage Grotesque', sans-serif;
+  font-weight:    700;
+  font-size:      15px;
+  line-height:    1.25;
+  color:          var(--ink);
+  margin:         0;
+}
+
 /* CTA box */
 .cta {
   background:    var(--ink);

@@ -264,6 +264,7 @@ export default function Landing() {
           <a href="#methode" className={s.navLink}>La méthode</a>
           <a href="#parcours" className={s.navLink}>Le parcours</a>
           <a href="#faq" className={s.navLink}>FAQ</a>
+          <a href="/blog" className={s.navLink}>Articles</a>
           <a href="#prix" className={s.navLink}>Accès</a>
           <button className={s.navLoginBtn} onClick={() => navigate('/auth')}>Se connecter</button>
         </div>
@@ -396,6 +397,42 @@ export default function Landing() {
           </div>
           <div className={s.faqList}>
             {FAQ.map((item, i) => <FaqItem key={i} q={item.q} a={item.a} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ARTICLES */}
+      <section id="articles" className={s.section}>
+        <div className={s.wrap}>
+          <div className={s.col} style={{ maxWidth: '40rem', marginBottom: '2.6rem' }}>
+            <div className={s.eyebrow}>À lire</div>
+            <h2 className={s.h2}>Comprendre pour <span className={s.accent}>mieux surmonter.</span></h2>
+          </div>
+          <div className={s.articleGrid}>
+            <a href="/blog/hemophobie-traitement" className={s.articleCard}>
+              <div className={s.articleTag}>Comprendre</div>
+              <h3 className={s.articleTitle}>Hémophobie : ce que c'est vraiment et comment s'en sortir</h3>
+              <p className={s.articleExcerpt}>Pourquoi les conseils habituels ne marchent pas, et ce qui fonctionne vraiment selon la science.</p>
+              <span className={s.articleLink}>Lire l'article →</span>
+            </a>
+            <a href="/blog/prise-de-sang-peur-evanouissement" className={s.articleCard}>
+              <div className={s.articleTag}>Conseils pratiques</div>
+              <h3 className={s.articleTitle}>Prise de sang : que faire quand on a peur de s'évanouir</h3>
+              <p className={s.articleExcerpt}>Le mécanisme vasovagal, la technique d'Öst, ce qu'il faut dire à l'infirmier·e. Tout ce que personne n'explique vraiment.</p>
+              <span className={s.articleLink}>Lire l'article →</span>
+            </a>
+            <a href="/blog/enfant-peur-prise-de-sang" className={s.articleCard}>
+              <div className={s.articleTag}>Parents</div>
+              <h3 className={s.articleTitle}>Mon enfant a peur des prises de sang : que lui dire, que faire</h3>
+              <p className={s.articleExcerpt}>Ce n'est pas du caprice. Voici ce qui aide vraiment, et ce qu'il ne faut pas dire.</p>
+              <span className={s.articleLink}>Lire l'article →</span>
+            </a>
+            <a href="/blog/don-du-sang-peur-hemophobie" className={s.articleCard}>
+              <div className={s.articleTag}>Don du sang</div>
+              <h3 className={s.articleTitle}>Donner son sang quand on a peur du sang : est-ce possible ?</h3>
+              <p className={s.articleExcerpt}>Ce que les centres font déjà pour toi, et ce que tu peux préparer de ton côté.</p>
+              <span className={s.articleLink}>Lire l'article →</span>
+            </a>
           </div>
         </div>
       </section>

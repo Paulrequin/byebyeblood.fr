@@ -689,6 +689,59 @@
   max-width:   640px;
 }
 
+/* ── Articles ───────────────────────────────────────────────────────────────── */
+.articleGrid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap:                   1.5rem;
+}
+.articleCard {
+  display:         flex;
+  flex-direction:  column;
+  gap:             .9rem;
+  background:      var(--card-bg);
+  border:          1px solid var(--line);
+  border-radius:   20px;
+  padding:         2rem 2rem 1.6rem;
+  text-decoration: none;
+  color:           inherit;
+  transition:      border-color .2s, transform .2s;
+  max-width:       520px;
+}
+.articleCard:hover {
+  border-color: var(--red);
+  transform:    translateY(-3px);
+}
+.articleTag {
+  font-size:      11px;
+  font-weight:    700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color:          var(--red-deep);
+}
+.articleTitle {
+  font-family:    'Bricolage Grotesque', sans-serif;
+  font-weight:    800;
+  font-size:      clamp(18px, 2.5vw, 22px);
+  line-height:    1.2;
+  letter-spacing: -.015em;
+  margin:         0;
+  color:          var(--ink);
+}
+.articleExcerpt {
+  font-size:   15.5px;
+  line-height: 1.65;
+  color:       var(--muted);
+  margin:      0;
+  flex:        1;
+}
+.articleLink {
+  font-size:   14px;
+  font-weight: 600;
+  color:       var(--red);
+  margin-top:  .4rem;
+}
+
 /* ── Responsive ────────────────────────────────────────────────────────────── */
 @media (max-width: 880px) {
   .hero           { grid-template-columns: 1fr; }
