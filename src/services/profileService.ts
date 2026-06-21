@@ -19,7 +19,7 @@ async function parseFunctionError(error: unknown): Promise<FunctionErrorBody> {
       return await (ctx as { json: () => Promise<FunctionErrorBody> }).json()
     }
   } catch {
-    // Corps non parseable — on ignore
+    // Corps non parseable, on ignore
   }
   return {}
 }

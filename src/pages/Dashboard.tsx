@@ -105,6 +105,7 @@ export default function Dashboard() {
           Bye Bye <span className={s.navLogoRed}>Blood</span>
         </span>
         <div className={s.navRight}>
+          <a href="/sources" style={{fontSize:'0.75rem', color:'#A0907A', textDecoration:'none', marginRight:'8px'}} title="Fondements scientifiques">Sciences</a>
           <div className={s.avatar}>{userInitial}</div>
           <button className={s.signOutBtn} onClick={handleSignOut}>Déconnexion</button>
         </div>
@@ -123,7 +124,7 @@ export default function Dashboard() {
           <div className={s.upsellBanner}>
             <div className={s.upsellText}>
               <span className={s.upsellTitle}>1ʳᵉ séance gratuite débloquée</span>
-              <span className={s.upsellSub}>Débloque les {MODULES.length} modules pour 29€, une seule fois.</span>
+              <span className={s.upsellSub}>Débloque les {MODULES.length} modules pour 295€ TTC, une seule fois.</span>
             </div>
             <button className={s.upsellBtn} onClick={handleCheckout}>
               Débloquer l'accès complet →

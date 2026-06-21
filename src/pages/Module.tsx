@@ -14,7 +14,9 @@ import type {
   ShapeExposureExerciseData,
   ImageExposureExerciseData,
   ScenarioExerciseData,
+  Study,
 } from '@/types'
+import { getSource } from '@/data/sources'
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
 
@@ -66,9 +68,75 @@ function CompletionScreen({ module: mod, totalXP, onDashboard }: { module: Modul
   )
 }
 
+// ─── SafetyNotice ─────────────────────────────────────────────────────────────
+
+function SafetyNotice() {
+  return (
+    <div style={{display:'flex', alignItems:'flex-start', gap:'10px', padding:'12px 14px', background:'#EFF6F5', border:'1px solid #BFDAD6', fontSize:'0.78rem', color:'#1F5F58', lineHeight:1.55}}>
+      <span style={{fontSize:'1rem', flexShrink:0}}>🛟</span>
+      <span>
+        Si ça part vraiment (vision qui se trouble, sueurs froides, jambes molles) : assieds-toi ou allonge-toi, jambes surélevées si possible, et arrête l'exercice. Ce n'est pas un échec, reprends plus tard, à ton rythme.
+      </span>
+    </div>
+  )
+}
+
+// ─── SourceChips ─────────────────────────────────────────────────────────────
+
+function SourceChips({ sourceIds }: { sourceIds: string[] }) {
+  const resolved = sourceIds.map(id => getSource(id)).filter(Boolean) as NonNullable<ReturnType<typeof getSource>>[]
+  if (!resolved.length) return null
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:'6px'}}>
+      <p style={{fontSize:'0.63rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#3B6EA0'}}>Sources</p>
+      <div style={{display:'flex', flexWrap:'wrap', gap:'6px'}}>
+        {resolved.map(src => (
+          <a
+            key={src.id}
+            href={`/sources#${src.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display:'inline-flex', alignItems:'center', gap:'4px',
+              padding:'4px 10px', background:'#EDF2F7', border:'1px solid #C5D5E8',
+              fontSize:'0.72rem', color:'#3B6EA0', fontWeight:600,
+              textDecoration:'none', lineHeight:1,
+              whiteSpace:'nowrap',
+            }}
+          >
+            🔬 {src.theme} ({src.id.replace(/\D/g, '')})
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ─── StudiesBlock ─────────────────────────────────────────────────────────────
+
+function StudiesBlock({ studies }: { studies: Study[] }) {
+  return (
+    <div style={{padding:'20px 24px', background:'#F0F4F8', border:'1px solid #C5D5E8', boxShadow:'3px 3px 0 #C5D5E8'}}>
+      <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#3B6EA0', marginBottom:'16px'}}>
+        Ce que dit la science
+      </p>
+      <div style={{display:'flex', flexDirection:'column', gap:'14px'}}>
+        {studies.map((s, i) => (
+          <div key={i} style={{display:'flex', flexDirection:'column', gap:'4px'}}>
+            <p style={{fontSize:'0.82rem', color:'#1C1714', lineHeight:1.55}}>{s.finding}</p>
+            <p style={{fontSize:'0.72rem', color:'#5A7A9A', fontWeight:600}}>
+              {s.authors} ({s.year}) · {s.source}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ─── ReadingExercise ──────────────────────────────────────────────────────────
 
-function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction }: ReadingExerciseData & BaseExerciseProps) {
+function ReadingExercise({ title, content, keyPoints, studies, sources, onNext, setFooterAction }: ReadingExerciseData & BaseExerciseProps) {
   const paragraphs = content.split('\n\n')
 
   useEffect(() => {
@@ -96,6 +164,8 @@ function ReadingExercise({ title, content, keyPoints, onNext, setFooterAction }:
           </ul>
         </div>
       )}
+      {studies && studies.length > 0 && <StudiesBlock studies={studies} />}
+      {sources && sources.length > 0 && <SourceChips sourceIds={sources} />}
     </div>
   )
 }
@@ -339,8 +409,9 @@ function ColorExposureExercise({ colors, onNext, setFooterAction }: ColorExposur
     <div className="flex flex-col gap-6">
       <div style={{display:'flex', alignItems:'center', gap:'8px', padding:'10px 14px', background:'#fff0f0', border:'1px solid #E53935', fontSize:'0.82rem', color:'#EE3D2E'}}>
         <span>💪</span>
-        <span>Tension musculaire active — contracte bras et jambes</span>
+        <span>Tension musculaire active : contracte bras et jambes</span>
       </div>
+      <SafetyNotice />
       <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', padding:'16px 0'}}>
         <div
           style={{ width:'240px', height:'240px', backgroundColor: current.hex, transition:'background-color 0.7s ease' }}
@@ -386,8 +457,9 @@ function ShapeExposureExercise({ shapes, onNext, setFooterAction }: ShapeExposur
     <div className="flex flex-col gap-6">
       <div style={{display:'flex', alignItems:'center', gap:'8px', padding:'10px 14px', background:'#fff0f0', border:'1px solid #E53935', fontSize:'0.82rem', color:'#EE3D2E'}}>
         <span>💪</span>
-        <span>Appliquer la tension — contracte bras et jambes</span>
+        <span>Appliquer la tension : contracte bras et jambes</span>
       </div>
+      <SafetyNotice />
       <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', padding:'16px 0'}}>
         <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
           {renderShape(current.variant)}
@@ -450,8 +522,9 @@ function ImageExposureExercise({ level, title, description, onNext, setFooterAct
       </div>
       <div style={{display:'flex', alignItems:'center', gap:'8px', padding:'10px 14px', background:'#fff0f0', border:'1px solid #E53935', fontSize:'0.82rem', color:'#EE3D2E'}}>
         <span>💪</span>
-        <span>Tension avant de regarder — contracte tes muscles maintenant</span>
+        <span>Tension avant de regarder : contracte tes muscles maintenant</span>
       </div>
+      <SafetyNotice />
       <div style={{display:'flex', flexDirection:'column', alignItems:'center', padding:'32px 0', background:'#FBF5EA', border:'1px solid #ddd'}}>
         {renderSVG()}
       </div>
@@ -631,6 +704,7 @@ function ScenarioExercise({ title, situation, steps, onNext, setFooterAction }: 
 
   return (
     <div className="flex flex-col gap-5">
+      <SafetyNotice />
       <div>
         <h2 style={{fontSize:'1.3rem', fontWeight:800, letterSpacing:'-0.03em', marginBottom:'12px'}}>{title}</h2>
         <div style={{padding:'14px 16px', background:'#FBF5EA', border:'1px solid #ddd'}}>

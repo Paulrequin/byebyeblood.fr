@@ -1,0 +1,239 @@
+.page {
+  background: #FBF5EA;
+  color: #1C1714;
+  font-family: 'Hanken Grotesk', sans-serif;
+  min-height: 100dvh;
+}
+
+/* ── Nav ── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid #E7DCC9;
+  position: sticky;
+  top: 0;
+  background: #FBF5EA;
+  z-index: 10;
+}
+
+.navLogo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: #1C1714;
+}
+
+.navLogo span { color: #EE3D2E; }
+
+.backLink {
+  font-size: 0.82rem;
+  color: #888;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s;
+}
+
+.backLink:hover { color: #1C1714; }
+
+/* ── Wrap ── */
+.wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 64px 0 48px;
+  border-bottom: 1px solid #E7DCC9;
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #EE3D2E;
+  margin-bottom: 16px;
+}
+
+.h1 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.h1 span { color: #EE3D2E; }
+
+.intro {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #555;
+  max-width: 580px;
+}
+
+.disclaimer {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 10px 14px;
+  background: #FFF8E8;
+  border: 1px solid #E7D8B0;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  color: #7A6A40;
+  line-height: 1.5;
+}
+
+/* ── Section titles ── */
+.sectionTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.sectionSub {
+  font-size: 0.88rem;
+  color: #888;
+  margin-bottom: 32px;
+}
+
+/* ── Theme groups ── */
+.themeGroup {
+  margin-bottom: 40px;
+}
+
+.themeLabel {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3B6EA0;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #C5D5E8;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  padding: 18px 20px;
+  background: #fff;
+  border: 1px solid #E7DCC9;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardFinding {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #1C1714;
+}
+
+.cardN {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #EE3D2E;
+}
+
+.cardCitationSmall {
+  font-size: 0.7rem;
+  color: #999;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.cardLink {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  color: #3B6EA0;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cardLink:hover { text-decoration: underline; }
+
+/* ── Divider ── */
+.divider {
+  border: none;
+  border-top: 1px solid #E7DCC9;
+  margin: 56px 0;
+}
+
+/* ── Bibliography ── */
+.bibList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bibItem {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #E7DCC9;
+}
+
+.bibNum {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #EE3D2E;
+  flex-shrink: 0;
+  width: 24px;
+  padding-top: 2px;
+}
+
+.bibContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bibCitation {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #1C1714;
+  font-family: Georgia, serif;
+}
+
+.bibFinding {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* ── Footer ── */
+.footer {
+  padding: 24px 32px;
+  border-top: 1px solid #E7DCC9;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #A0907A;
+}
+
+@media (max-width: 640px) {
+  .nav { padding: 14px 18px; }
+  .wrap { padding: 0 18px 60px; }
+  .hero { padding: 40px 0 36px; }
+}

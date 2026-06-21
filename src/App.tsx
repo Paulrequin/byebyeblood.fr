@@ -6,19 +6,27 @@ import Dashboard from './pages/Dashboard'
 import Module from './pages/Module'
 import Success from './pages/Success'
 import DiagnosticSUD from './pages/DiagnosticSUD'
+import SourcesScientifiques from './pages/SourcesScientifiques'
+import PeurPriseDeSang from './pages/blog/PeurPriseDeSang'
 
 export default function App() {
   return (
     <Routes>
-      {/* Landing — accessible à tous, connecté ou non */}
+      {/* Landing - accessible à tous, connecté ou non */}
       <Route path="/" element={<Landing />} />
 
-      {/* Auth — redirige vers /dashboard si déjà connecté */}
+      {/* Sources scientifiques - page publique */}
+      <Route path="/sources" element={<SourcesScientifiques />} />
+
+      {/* Blog */}
+      <Route path="/blog/prise-de-sang-peur-evanouissement" element={<PeurPriseDeSang />} />
+
+      {/* Auth - redirige vers /dashboard si déjà connecté */}
       <Route element={<PublicOnlyRoute />}>
         <Route path="/auth" element={<Auth />} />
       </Route>
 
-      {/* Routes protégées — redirigent vers /auth si non connecté */}
+      {/* Routes protégées - redirigent vers /auth si non connecté */}
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/module/:id" element={<Module />} />

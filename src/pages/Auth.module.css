@@ -10,7 +10,7 @@
   font-family: 'Hanken Grotesk', sans-serif;
 }
 
-/* ── LEFT — brand panel ── */
+/* ── LEFT - brand panel ── */
 .left {
   background: #1C1714;
   display: flex;
@@ -67,7 +67,7 @@
 
 .leftDeco { display: none; }
 
-/* ── RIGHT — form panel ── */
+/* ── RIGHT - form panel ── */
 .right {
   background: #FBF5EA;
   display: flex;

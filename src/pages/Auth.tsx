@@ -141,7 +141,7 @@ export default function Auth() {
         <h1 className={s.formTitle}>{titles[mode]}</h1>
         <p className={s.formSub}>{subs[mode]}</p>
 
-        {/* Tabs — login / signup only */}
+        {/* Tabs - login / signup only */}
         {(mode === 'login' || mode === 'signup') && (
           <div className={s.tabs}>
             {([
@@ -161,7 +161,7 @@ export default function Auth() {
 
         <form onSubmit={handleSubmit}>
 
-          {/* First name — signup only */}
+          {/* First name - signup only */}
           {mode === 'signup' && (
             <div className={s.field}>
               <label htmlFor="auth-firstname" className={s.label}>Prénom</label>
@@ -177,7 +177,7 @@ export default function Auth() {
             </div>
           )}
 
-          {/* Email — shown in login, signup, forgot */}
+          {/* Email - shown in login, signup, forgot */}
           {mode !== 'reset' && (
             <div className={s.field}>
               <label htmlFor="auth-email" className={s.label}>Email</label>
@@ -194,7 +194,7 @@ export default function Auth() {
             </div>
           )}
 
-          {/* Password — shown in login, signup */}
+          {/* Password - shown in login, signup */}
           {(mode === 'login' || mode === 'signup') && (
             <div className={s.field}>
               <div className={s.labelRow}>
@@ -218,7 +218,7 @@ export default function Auth() {
             </div>
           )}
 
-          {/* New password — shown in reset mode */}
+          {/* New password - shown in reset mode */}
           {mode === 'reset' && (
             <div className={s.field}>
               <label htmlFor="auth-new-password" className={s.label}>Nouveau mot de passe</label>

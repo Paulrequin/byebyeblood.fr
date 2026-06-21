@@ -4,5 +4,18 @@
     <loc>https://www.byebyeblood.fr/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <lastmod>2026-06-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.byebyeblood.fr/sources</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.byebyeblood.fr/blog/prise-de-sang-peur-evanouissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-21</lastmod>
   </url>
 </urlset>

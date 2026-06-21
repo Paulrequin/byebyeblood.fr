@@ -58,7 +58,7 @@ export default function Success() {
               {[
                 `${MODULES_COUNT} modules complets débloqués`,
                 'Progression XP + badges actifs',
-                'Accès à vie — aucune limite',
+                'Accès à vie, aucune limite',
               ].map((item) => (
                 <div key={item} className={s.checkItem}>
                   <span className={s.checkMark}>✓</span>
@@ -78,7 +78,7 @@ export default function Success() {
             <h1 className={s.errorTitle}>Une erreur est survenue</h1>
             <p className={s.errorMsg}>{errorMsg}</p>
             <p className={s.errorHelp}>
-              Si tu as été débité·e, contacte-nous — nous réglerons ça rapidement.
+              Si tu as été débité·e, contacte-nous, nous réglerons ça rapidement.
             </p>
             <div className={s.btnRow}>
               <button className={s.btnOutline} onClick={() => navigate('/')}>

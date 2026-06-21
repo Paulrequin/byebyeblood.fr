@@ -1,10 +1,19 @@
 // ─── Exercises ───────────────────────────────────────────────────────────────
 
+export interface Study {
+  authors: string
+  year: number
+  finding: string
+  source: string
+}
+
 export interface ReadingExerciseData {
   type: 'reading'
   title: string
   content: string
   keyPoints?: string[]
+  studies?: Study[]
+  sources?: string[]
 }
 
 export interface QuizQuestion {
