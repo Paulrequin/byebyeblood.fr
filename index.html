@@ -92,7 +92,39 @@
         "price": "295",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
-        "priceValidUntil": "2027-12-31"
+        "priceValidUntil": "2027-12-31",
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "FR",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+        },
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "EUR"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 0,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 0,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "FR"
+          }
+        }
       },
       "brand": {
         "@type": "Brand",
@@ -100,7 +132,7 @@
       },
       "category": "Programme de thérapie comportementale",
       "audience": {
-        "@type": "Audience",
+        "@type": "PeopleAudience",
         "audienceType": "Personnes souffrant d'hémophobie ou de peur du sang"
       }
     }
