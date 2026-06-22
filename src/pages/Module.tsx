@@ -804,7 +804,7 @@ export default function Module() {
       <div className="sticky top-0 z-10" style={{background:'rgba(251,245,234,.92)', backdropFilter:'blur(12px)', borderBottom:'1px solid #E7DCC9'}}>
         <div style={{maxWidth:'680px', margin:'0 auto', padding:'1rem 3rem'}}>
           <div className="flex items-center justify-between mb-4">
-            <button onClick={() => navigate('/dashboard')} style={{fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', color:'#999', background:'none', border:'none', cursor:'pointer', padding:0, fontFamily:"'Hanken Grotesk', sans-serif"}} onMouseEnter={e=>(e.currentTarget.style.color='#1C1714')} onMouseLeave={e=>(e.currentTarget.style.color='#999')}>← Dashboard</button>
+            <button onClick={() => navigate('/dashboard')} style={{fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', color:'#999', background:'none', border:'none', cursor:'pointer', padding:'8px 12px 8px 0', margin:'-8px 0 -8px -4px', fontFamily:"'Hanken Grotesk', sans-serif"}} onMouseEnter={e=>(e.currentTarget.style.color='#1C1714')} onMouseLeave={e=>(e.currentTarget.style.color='#999')}>← Dashboard</button>
             <span style={{fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.04em', color:'#EE3D2E', background:'#FFF5F0', border:'1px solid #EE3D2E', padding:'4px 10px', borderRadius:6}}>+50 XP</span>
           </div>
           <p className="mb-3" style={{fontSize:'0.82rem', fontWeight:700, color:'#1C1714'}}>{moduleData.title}</p>
