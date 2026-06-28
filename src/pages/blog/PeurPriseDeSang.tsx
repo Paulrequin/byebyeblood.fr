@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { injectOgMeta } from '@/lib/seoMeta'
 import s from './Article.module.css'
 
 export default function PeurPriseDeSang() {
@@ -9,6 +10,12 @@ export default function PeurPriseDeSang() {
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
     meta?.setAttribute('content', "Tu as une prise de sang et tu as peur de t'évanouir ? Voici la technique validée scientifiquement pour ne pas faire de malaise, ce qu'il faut dire à l'infirmier·e, et comment préparer le rendez-vous.")
+
+    const restoreOg = injectOgMeta({
+      title: 'Prise de sang : que faire quand on a peur de s\'évanouir',
+      description: "Tu as une prise de sang et tu as peur de t'évanouir ? Voici la technique validée scientifiquement pour ne pas faire de malaise.",
+      url: 'https://www.byebyeblood.fr/blog/prise-de-sang-peur-evanouissement',
+    })
 
     const canonical = document.createElement('link')
     canonical.rel = 'canonical'
@@ -40,6 +47,7 @@ export default function PeurPriseDeSang() {
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
+      restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
     }

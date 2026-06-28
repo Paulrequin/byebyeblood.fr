@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { injectOgMeta } from '@/lib/seoMeta'
 import s from './Article.module.css'
 
 export default function HemophobieTraitement() {
@@ -9,6 +10,12 @@ export default function HemophobieTraitement() {
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
     meta?.setAttribute('content', "Hémophobie : définition, symptômes, causes et traitements validés scientifiquement. Tout ce qu'on ne vous a probablement jamais expliqué sur la peur du sang.")
+
+    const restoreOg = injectOgMeta({
+      title: "Hémophobie : ce que c'est vraiment et comment s'en sortir",
+      description: "Hémophobie : définition, symptômes, causes et traitements validés scientifiquement. Tout ce qu'on ne vous a probablement jamais expliqué sur la peur du sang.",
+      url: 'https://www.byebyeblood.fr/blog/hemophobie-traitement',
+    })
 
     const canonical = document.createElement('link')
     canonical.rel = 'canonical'
@@ -40,6 +47,7 @@ export default function HemophobieTraitement() {
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
+      restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
     }

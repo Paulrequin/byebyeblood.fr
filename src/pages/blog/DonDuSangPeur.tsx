@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { injectOgMeta } from '@/lib/seoMeta'
 import s from './Article.module.css'
 
 export default function DonDuSangPeur() {
@@ -9,6 +10,12 @@ export default function DonDuSangPeur() {
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
     meta?.setAttribute('content', "Tu veux donner ton sang mais tu as peur du sang ou des aiguilles ? Voici ce qu'on peut faire concrètement avant, pendant et après, et ce que les centres de don proposent pour t'aider.")
+
+    const restoreOg = injectOgMeta({
+      title: "Donner son sang quand on a peur du sang : est-ce possible ?",
+      description: "Tu veux donner ton sang mais tu as peur des aiguilles ? Ce que les centres prévoient déjà, et ce que tu peux préparer pour éviter le malaise vasovagal.",
+      url: 'https://www.byebyeblood.fr/blog/don-du-sang-peur-hemophobie',
+    })
 
     const canonical = document.createElement('link')
     canonical.rel = 'canonical'
@@ -40,6 +47,7 @@ export default function DonDuSangPeur() {
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
+      restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
     }

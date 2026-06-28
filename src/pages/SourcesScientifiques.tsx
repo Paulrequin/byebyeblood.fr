@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { injectOgMeta } from '@/lib/seoMeta'
 import { SOURCES, sourcesByTheme } from '@/data/sources'
 import s from './SourcesScientifiques.module.css'
 
@@ -24,9 +25,25 @@ export default function SourcesScientifiques() {
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
     meta?.setAttribute('content', "Les études et sources scientifiques derrière Bye Bye Blood : exposition graduelle, tension musculaire appliquée (Öst 1987), ACT et respiration. Références académiques complètes sur l'hémophobie.")
+
+    const restoreOg = injectOgMeta({
+      title: 'Fondements scientifiques - Bye Bye Blood',
+      description: "Les études et sources scientifiques derrière Bye Bye Blood : exposition graduelle, tension musculaire appliquée (Öst 1987), ACT et respiration.",
+      url: 'https://www.byebyeblood.fr/sources',
+      type: 'website',
+    })
+
+    const canonical = document.createElement('link')
+    canonical.rel = 'canonical'
+    canonical.href = 'https://www.byebyeblood.fr/sources'
+    canonical.id = 'page-canonical'
+    document.head.appendChild(canonical)
+
     return () => {
       document.title = prev
       meta?.setAttribute('content', prevDesc)
+      restoreOg()
+      document.getElementById('page-canonical')?.remove()
     }
   }, [])
 

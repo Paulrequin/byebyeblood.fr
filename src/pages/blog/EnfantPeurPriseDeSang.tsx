@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { injectOgMeta } from '@/lib/seoMeta'
 import s from './Article.module.css'
 
 export default function EnfantPeurPriseDeSang() {
@@ -9,6 +10,12 @@ export default function EnfantPeurPriseDeSang() {
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
     meta?.setAttribute('content', "Votre enfant pleure, se débat ou s'évanouit à chaque prise de sang ? Ce n'est pas du caprice. Voici ce que dit la science sur la peur du sang chez l'enfant et comment l'aider concrètement.")
+
+    const restoreOg = injectOgMeta({
+      title: "Mon enfant a peur des prises de sang : que lui dire, que faire",
+      description: "Votre enfant pleure ou s'évanouit à chaque prise de sang ? Ce n'est pas du caprice. Voici ce que dit la science et comment l'aider concrètement.",
+      url: 'https://www.byebyeblood.fr/blog/enfant-peur-prise-de-sang',
+    })
 
     const canonical = document.createElement('link')
     canonical.rel = 'canonical'
@@ -40,6 +47,7 @@ export default function EnfantPeurPriseDeSang() {
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
+      restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
     }

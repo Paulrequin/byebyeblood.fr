@@ -4,5 +4,6 @@ Disallow: /dashboard
 Disallow: /auth
 Disallow: /success
 Disallow: /module/
+Disallow: /diagnostic
 
 Sitemap: https://www.byebyeblood.fr/sitemap.xml

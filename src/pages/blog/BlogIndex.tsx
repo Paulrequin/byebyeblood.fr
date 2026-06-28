@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { injectOgMeta } from '@/lib/seoMeta'
 import s from './BlogIndex.module.css'
 
 const ARTICLES = [
@@ -41,6 +42,13 @@ export default function BlogIndex() {
     const prevDesc = meta?.getAttribute('content') ?? ''
     meta?.setAttribute('content', "Articles pratiques et scientifiques sur l'hémophobie, la peur du sang et des aiguilles. Conseils pour les prises de sang, le don du sang, les enfants, et comment s'en sortir vraiment.")
 
+    const restoreOg = injectOgMeta({
+      title: "Articles sur l'hémophobie et la peur du sang",
+      description: "Articles pratiques et scientifiques sur l'hémophobie, la peur du sang et des aiguilles. Conseils pour les prises de sang, le don du sang, les enfants.",
+      url: 'https://www.byebyeblood.fr/blog',
+      type: 'website',
+    })
+
     const canonical = document.createElement('link')
     canonical.rel = 'canonical'
     canonical.href = 'https://www.byebyeblood.fr/blog'
@@ -69,6 +77,7 @@ export default function BlogIndex() {
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
+      restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('page-schema')?.remove()
     }
