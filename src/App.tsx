@@ -13,6 +13,9 @@ import PeurPriseDeSang from './pages/blog/PeurPriseDeSang'
 import EnfantPeurPriseDeSang from './pages/blog/EnfantPeurPriseDeSang'
 import HemophobieTraitement from './pages/blog/HemophobieTraitement'
 import DonDuSangPeur from './pages/blog/DonDuSangPeur'
+import MalaiseVagal from './pages/blog/MalaiseVagal'
+import PeurDesAiguilles from './pages/blog/PeurDesAiguilles'
+import GrossessePeurDuSang from './pages/blog/GrossessePeurDuSang'
 
 export default function App() {
   return (
@@ -30,6 +33,9 @@ export default function App() {
       <Route path="/blog/enfant-peur-prise-de-sang" element={<EnfantPeurPriseDeSang />} />
       <Route path="/blog/hemophobie-traitement" element={<HemophobieTraitement />} />
       <Route path="/blog/don-du-sang-peur-hemophobie" element={<DonDuSangPeur />} />
+      <Route path="/blog/malaise-vagal-causes-symptomes" element={<MalaiseVagal />} />
+      <Route path="/blog/peur-des-aiguilles-trypanophobie" element={<PeurDesAiguilles />} />
+      <Route path="/blog/grossesse-peur-du-sang-analyses" element={<GrossessePeurDuSang />} />
 
       {/* Auth - redirige vers /dashboard si déjà connecté */}
       <Route element={<PublicOnlyRoute />}>
