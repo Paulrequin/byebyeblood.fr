@@ -125,7 +125,7 @@ export default function Auth() {
           </h2>
           <p className={s.leftSub}>
             Désensibilise-toi progressivement à la vue du sang.
-            5 niveaux. À ton rythme.
+            7 modules. À ton rythme.
           </p>
         </div>
         <span className={s.leftFooter}>© 2026 Bye Bye Blood</span>
