@@ -37,21 +37,21 @@ const ARTICLES = [
     tag: 'Comprendre',
     title: "Malaise vagal : pourquoi ça arrive et comment l'éviter",
     excerpt: "Le mécanisme du nerf vague, les signes avant-coureurs, et ce qu'on fait dans les secondes qui comptent.",
-    readTime: '7 min',
+    readTime: '12 min',
   },
   {
     slug: '/blog/peur-des-aiguilles-trypanophobie',
     tag: 'Comprendre',
     title: "Peur des aiguilles : pourquoi ça arrive et comment s'en sortir",
     excerpt: "La trypanophobie touche 1 adulte sur 4. Elle n'est pas irréductible, et les techniques qui marchent sont connues.",
-    readTime: '7 min',
+    readTime: '12 min',
   },
   {
     slug: '/blog/grossesse-peur-du-sang-analyses',
     tag: 'Conseils pratiques',
     title: "Grossesse et peur du sang : comment gérer les analyses",
     excerpt: "Jusqu'à 15 prises de sang pendant une grossesse. Voici ce qu'on peut demander, préparer, et anticiper.",
-    readTime: '8 min',
+    readTime: '13 min',
   },
 ]
 

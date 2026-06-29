@@ -58,7 +58,7 @@ export default function EnfantPeurPriseDeSang() {
 
       <nav className={s.nav}>
         <Link to="/" className={s.navLogo}>Bye Bye <span>Blood</span></Link>
-        <Link to="/" className={s.backLink}>← Accueil</Link>
+        <Link to="/blog" className={s.backLink}>← Blog</Link>
       </nav>
 
       <article className={s.wrap}>

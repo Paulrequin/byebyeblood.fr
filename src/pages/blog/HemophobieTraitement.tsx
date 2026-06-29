@@ -58,7 +58,7 @@ export default function HemophobieTraitement() {
 
       <nav className={s.nav}>
         <Link to="/" className={s.navLogo}>Bye Bye <span>Blood</span></Link>
-        <Link to="/" className={s.backLink}>← Accueil</Link>
+        <Link to="/blog" className={s.backLink}>← Blog</Link>
       </nav>
 
       <article className={s.wrap}>
@@ -112,7 +112,7 @@ export default function HemophobieTraitement() {
           <div className={s.science}>
             <div className={s.scienceLabel}>Ce que dit la science</div>
             <p className={s.scienceText}>
-              Le professeur Lars-Göran Öst a documenté ce mécanisme diphasique dès 1987, montrant que l'hémophobie est biologiquement distincte de toutes les autres phobies spécifiques. Cette particularité a une conséquence directe : le traitement standard des phobies (exposition seule, respiration, relaxation) est insuffisant pour l'hémophobie. Il faut une technique qui agit directement sur la pression artérielle.
+              Le professeur Lars-Göran Öst a documenté ce mécanisme biphasique dès 1987, montrant que l'hémophobie est biologiquement distincte de toutes les autres phobies spécifiques. Cette particularité a une conséquence directe : le traitement standard des phobies (exposition seule, respiration, relaxation) est insuffisant pour l'hémophobie. Il faut une technique qui agit directement sur la pression artérielle.
             </p>
           </div>
 
@@ -178,9 +178,9 @@ export default function HemophobieTraitement() {
               <span className={s.relatedLinkTag}>Conseils pratiques</span>
               <p className={s.relatedLinkTitle}>Prise de sang : que faire quand on a peur de s'évanouir</p>
             </Link>
-            <Link to="/blog/don-du-sang-peur-hemophobie" className={s.relatedLink}>
-              <span className={s.relatedLinkTag}>Don du sang</span>
-              <p className={s.relatedLinkTitle}>Donner son sang quand on a peur du sang : est-ce possible ?</p>
+            <Link to="/blog/peur-des-aiguilles-trypanophobie" className={s.relatedLink}>
+              <span className={s.relatedLinkTag}>Comprendre</span>
+              <p className={s.relatedLinkTitle}>Peur des aiguilles : pourquoi ça arrive et comment s'en sortir</p>
             </Link>
           </div>
         </div>

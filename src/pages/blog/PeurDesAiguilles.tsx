@@ -130,7 +130,7 @@ export default function PeurDesAiguilles() {
           </p>
 
           <p>
-            Pourtant, les deux phobies partagent le même mécanisme physiologique. Dans les deux cas, le système nerveux autonome déclenche une réponse vasovagale : le nerf vague ralentit le coeur, dilate les vaisseaux périphériques, et la pression artérielle chute. C'est pourquoi on peut faire un malaise pendant une prise de sang sans avoir jamais eu de problème face à la vue du sang au cinéma. Le déclencheur sensoriel est différent, mais le circuit neurologique est le même.
+            Pourtant, les deux phobies partagent le même mécanisme physiologique. Dans les deux cas, le système nerveux autonome déclenche une réponse vasovagale : le nerf vague ralentit le cœur, dilate les vaisseaux périphériques, et la pression artérielle chute. C'est pourquoi on peut faire un malaise pendant une prise de sang sans avoir jamais eu de problème face à la vue du sang au cinéma. Le déclencheur sensoriel est différent, mais le circuit neurologique est le même.
           </p>
 
           <p>

@@ -58,7 +58,7 @@ export default function PeurPriseDeSang() {
 
       <nav className={s.nav}>
         <Link to="/" className={s.navLogo}>Bye Bye <span>Blood</span></Link>
-        <Link to="/" className={s.backLink}>← Accueil</Link>
+        <Link to="/blog" className={s.backLink}>← Blog</Link>
       </nav>
 
       <article className={s.wrap}>
@@ -98,7 +98,7 @@ export default function PeurPriseDeSang() {
           <div className={s.science}>
             <div className={s.scienceLabel}>Ce que dit la science</div>
             <p className={s.scienceText}>
-              Le professeur Lars-Göran Öst, de l'Université de Stockholm, a documenté ce mécanisme dès 1987 dans Behaviour Research and Therapy. Ses travaux ont montré que l'hémophobie est la seule phobie spécifique associée à une réponse diphasique : accélération cardiaque initiale suivie d'une chute brutale. Cette particularité implique une technique de traitement différente de toutes les autres phobies.
+              Le professeur Lars-Göran Öst, de l'Université de Stockholm, a documenté ce mécanisme dès 1987 dans Behaviour Research and Therapy. Ses travaux ont montré que l'hémophobie est la seule phobie spécifique associée à une réponse biphasique : accélération cardiaque initiale suivie d'une chute brutale. Cette particularité implique une technique de traitement différente de toutes les autres phobies.
             </p>
           </div>
 

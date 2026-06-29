@@ -84,17 +84,17 @@ export default function MalaiseVagal() {
           <h2>Ce qu'est vraiment le nerf vague</h2>
 
           <p>
-            Le "vagal" dans malaise vagal vient du nerf vague, le dixième nerf crânien. C'est l'un des nerfs les plus longs du corps humain : il part du tronc cérébral et descend jusqu'aux intestins en passant par le coeur, les poumons et la quasi-totalité des organes abdominaux. Il est l'autoroute principale du système nerveux parasympathique, celui qui freine, ralentit, régule. Son nom vient du latin "vagus", qui signifie errant, en référence à son trajet long et sinueux à travers le corps.
+            Le "vagal" dans malaise vagal vient du nerf vague, le dixième nerf crânien. C'est l'un des nerfs les plus longs du corps humain : il part du tronc cérébral et descend jusqu'aux intestins en passant par le cœur, les poumons et la quasi-totalité des organes abdominaux. Il est l'autoroute principale du système nerveux parasympathique, celui qui freine, ralentit, régule. Son nom vient du latin "vagus", qui signifie errant, en référence à son trajet long et sinueux à travers le corps.
           </p>
 
           <p>
-            Dans des conditions normales, le nerf vague travaille discrètement à te maintenir en équilibre. Il ralentit légèrement le coeur après l'effort, stimule la digestion quand tu manges, régule la respiration. Mais dans certaines situations, il peut se déclencher de façon excessive et brutale, comme si quelqu'un appuyait sur le frein d'urgence à pleine vitesse. C'est ça, un malaise vagal.
+            Dans des conditions normales, le nerf vague travaille discrètement à te maintenir en équilibre. Il ralentit légèrement le cœur après l'effort, stimule la digestion quand tu manges, régule la respiration. Mais dans certaines situations, il peut se déclencher de façon excessive et brutale, comme si quelqu'un appuyait sur le frein d'urgence à pleine vitesse. C'est ça, un malaise vagal.
           </p>
 
           <h2>Ce qui se passe dans le corps</h2>
 
           <p>
-            Quand le nerf vague s'emballe, il envoie deux signaux simultanés au coeur. D'abord, il le ralentit brusquement via les fibres parasympathiques. Ensuite, il provoque une dilatation des vaisseaux sanguins périphériques, principalement dans les jambes. Ces deux effets combinés font chuter la pression artérielle en quelques secondes. Le cerveau, situé en haut du corps et dépendant de la gravité pour recevoir son irrigation, reçoit momentanément moins de sang qu'il n'en a besoin pour fonctionner. Tu perds connaissance, ou tu es sur le point de le faire.
+            Quand le nerf vague s'emballe, il envoie deux signaux simultanés au cœur. D'abord, il le ralentit brusquement via les fibres parasympathiques. Ensuite, il provoque une dilatation des vaisseaux sanguins périphériques, principalement dans les jambes. Ces deux effets combinés font chuter la pression artérielle en quelques secondes. Le cerveau, situé en haut du corps et dépendant de la gravité pour recevoir son irrigation, reçoit momentanément moins de sang qu'il n'en a besoin pour fonctionner. Tu perds connaissance, ou tu es sur le point de le faire.
           </p>
 
           <p>
@@ -125,7 +125,7 @@ export default function MalaiseVagal() {
           <h2>Les personnes plus vulnérables</h2>
 
           <p>
-            Tout le monde peut faire un malaise vagal, mais certains profils y sont plus exposés. Les personnes minces avec une faible masse musculaire ont tendance à avoir une pression artérielle naturellement plus basse et moins de "réserve" vasculaire avant la chute. Les femmes enceintes sont plus vulnérables, notamment au deuxième trimestre, en raison des changements hormonaux et de la compression de la veine cave par l'utérus en position couchée sur le dos. Les adolescents en période de croissance rapide font partie des groupes les plus touchés. Les personnes avec une tendance naturelle à la bradycardie (coeur qui bat lentement) sont aussi plus à risque.
+            Tout le monde peut faire un malaise vagal, mais certains profils y sont plus exposés. Les personnes minces avec une faible masse musculaire ont tendance à avoir une pression artérielle naturellement plus basse et moins de "réserve" vasculaire avant la chute. Les femmes enceintes sont plus vulnérables, notamment au deuxième trimestre, en raison des changements hormonaux et de la compression de la veine cave par l'utérus en position couchée sur le dos. Les adolescents en période de croissance rapide font partie des groupes les plus touchés. Les personnes avec une tendance naturelle à la bradycardie (cœur qui bat lentement) sont aussi plus à risque.
           </p>
 
           <p>
@@ -149,7 +149,7 @@ export default function MalaiseVagal() {
           <h2>Ce qu'on fait quand ça commence</h2>
 
           <p>
-            La règle d'or : s'allonger immédiatement, jambes surélevées si possible. Cette position neutralise l'effet de la gravité sur la circulation. Le sang revient vers le coeur et le cerveau sans effort, et la pression remonte en quelques dizaines de secondes. Dans la plupart des cas, les symptômes reculent en moins d'une minute. Si tu es dans un endroit public, ne te préoccupe pas de ce que les gens pensent. S'allonger dans un couloir d'hôpital ou au sol d'une salle d'attente vaut infiniment mieux qu'une chute et un crâne contre le carrelage.
+            La règle d'or : s'allonger immédiatement, jambes surélevées si possible. Cette position neutralise l'effet de la gravité sur la circulation. Le sang revient vers le cœur et le cerveau sans effort, et la pression remonte en quelques dizaines de secondes. Dans la plupart des cas, les symptômes reculent en moins d'une minute. Si tu es dans un endroit public, ne te préoccupe pas de ce que les gens pensent. S'allonger dans un couloir d'hôpital ou au sol d'une salle d'attente vaut infiniment mieux qu'une chute et un crâne contre le carrelage.
           </p>
 
           <p>
@@ -196,7 +196,7 @@ export default function MalaiseVagal() {
           </p>
 
           <p>
-            Une syncope cardiaque, à l'inverse, peut survenir n'importe où y compris allongé ou assis, arrive souvent sans prodrome ou avec un prodrome très court, peut être accompagnée de palpitations, de douleur thoracique ou d'une sensation de coeur qui "rate", et peut laisser une confusion prolongée après le réveil. Elle survient parfois à l'effort.
+            Une syncope cardiaque, à l'inverse, peut survenir n'importe où y compris allongé ou assis, arrive souvent sans prodrome ou avec un prodrome très court, peut être accompagnée de palpitations, de douleur thoracique ou d'une sensation de cœur qui "rate", et peut laisser une confusion prolongée après le réveil. Elle survient parfois à l'effort.
           </p>
 
           <p>
@@ -214,7 +214,7 @@ export default function MalaiseVagal() {
           </p>
 
           <p>
-            L'activité physique régulière, notamment le renforcement musculaire des jambes, améliore la tolérance orthostatique à long terme. Les muscles des mollets et des cuisses agissent comme une pompe secondaire qui aide le sang à remonter vers le coeur. Une personne bien musclée des jambes est nettement moins susceptible aux malaises vagaux positionnels.
+            L'activité physique régulière, notamment le renforcement musculaire des jambes, améliore la tolérance orthostatique à long terme. Les muscles des mollets et des cuisses agissent comme une pompe secondaire qui aide le sang à remonter vers le cœur. Une personne bien musclée des jambes est nettement moins susceptible aux malaises vagaux positionnels.
           </p>
 
           <p>

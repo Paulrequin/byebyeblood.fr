@@ -58,7 +58,7 @@ export default function DonDuSangPeur() {
 
       <nav className={s.nav}>
         <Link to="/" className={s.navLogo}>Bye Bye <span>Blood</span></Link>
-        <Link to="/" className={s.backLink}>← Accueil</Link>
+        <Link to="/blog" className={s.backLink}>← Blog</Link>
       </nav>
 
       <article className={s.wrap}>
@@ -149,9 +149,9 @@ export default function DonDuSangPeur() {
               <span className={s.relatedLinkTag}>Conseils pratiques</span>
               <p className={s.relatedLinkTitle}>Prise de sang : que faire quand on a peur de s'évanouir</p>
             </Link>
-            <Link to="/blog/hemophobie-traitement" className={s.relatedLink}>
+            <Link to="/blog/malaise-vagal-causes-symptomes" className={s.relatedLink}>
               <span className={s.relatedLinkTag}>Comprendre</span>
-              <p className={s.relatedLinkTitle}>Hémophobie : ce que c'est vraiment et comment s'en sortir</p>
+              <p className={s.relatedLinkTitle}>Malaise vagal : pourquoi ça arrive et comment l'éviter</p>
             </Link>
           </div>
         </div>
