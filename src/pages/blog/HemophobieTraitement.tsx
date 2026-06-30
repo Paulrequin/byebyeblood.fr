@@ -194,9 +194,9 @@ export default function HemophobieTraitement() {
               <span className={s.relatedLinkTag}>Conseils pratiques</span>
               <p className={s.relatedLinkTitle}>Prise de sang : que faire quand on a peur de s'évanouir</p>
             </Link>
-            <Link to="/blog/peur-des-aiguilles-trypanophobie" className={s.relatedLink}>
-              <span className={s.relatedLinkTag}>Comprendre</span>
-              <p className={s.relatedLinkTitle}>Peur des aiguilles : pourquoi ça arrive et comment s'en sortir</p>
+            <Link to="/blog/enfant-peur-prise-de-sang" className={s.relatedLink}>
+              <span className={s.relatedLinkTag}>Parents</span>
+              <p className={s.relatedLinkTitle}>Mon enfant a peur des prises de sang : que lui dire, que faire</p>
             </Link>
           </div>
         </div>

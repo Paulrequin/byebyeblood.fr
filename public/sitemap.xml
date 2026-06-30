@@ -4,31 +4,37 @@
     <loc>https://www.byebyeblood.fr/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/sources</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
+  </url>
+  <url>
+    <loc>https://www.byebyeblood.fr/legal</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/blog/hemophobie-traitement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/blog/prise-de-sang-peur-evanouissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/blog/enfant-peur-prise-de-sang</loc>
@@ -40,19 +46,19 @@
     <loc>https://www.byebyeblood.fr/blog/don-du-sang-peur-hemophobie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/blog/malaise-vagal-causes-symptomes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/blog/peur-des-aiguilles-trypanophobie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-06-30</lastmod>
   </url>
   <url>
     <loc>https://www.byebyeblood.fr/blog/grossesse-peur-du-sang-analyses</loc>

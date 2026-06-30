@@ -270,9 +270,9 @@ export default function MalaiseVagal() {
               <span className={s.relatedLinkTag}>Comprendre</span>
               <p className={s.relatedLinkTitle}>Hémophobie : ce que c'est vraiment et comment s'en sortir</p>
             </Link>
-            <Link to="/blog/prise-de-sang-peur-evanouissement" className={s.relatedLink}>
-              <span className={s.relatedLinkTag}>Conseils pratiques</span>
-              <p className={s.relatedLinkTitle}>Prise de sang : que faire quand on a peur de s'évanouir</p>
+            <Link to="/blog/grossesse-peur-du-sang-analyses" className={s.relatedLink}>
+              <span className={s.relatedLinkTag}>Cas particulier</span>
+              <p className={s.relatedLinkTitle}>Grossesse et peur du sang : comment gérer les analyses</p>
             </Link>
           </div>
         </div>
