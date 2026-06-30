@@ -9,7 +9,7 @@ export default function PeurPriseDeSang() {
     document.title = 'Prise de sang : que faire quand on a peur de s\'évanouir - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "Tu as une prise de sang et tu as peur de t'évanouir ? Voici la technique validée scientifiquement pour ne pas faire de malaise, ce qu'il faut dire à l'infirmier·e, et comment préparer le rendez-vous.")
+    meta?.setAttribute('content', "Tu as peur de t'évanouir à la prise de sang ? La technique clinique pour éviter le malaise vasovagal, ce qu'il faut dire à l'infirmier·e, et comment préparer le rendez-vous.")
 
     const restoreOg = injectOgMeta({
       title: 'Prise de sang : que faire quand on a peur de s\'évanouir',
@@ -44,12 +44,28 @@ export default function PeurPriseDeSang() {
     script.textContent = JSON.stringify(schema)
     document.head.appendChild(script)
 
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.byebyeblood.fr/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.byebyeblood.fr/blog' },
+        { '@type': 'ListItem', position: 3, name: 'Prise de sang : peur et malaise', item: 'https://www.byebyeblood.fr/blog/prise-de-sang-peur-evanouissement' },
+      ],
+    }
+    const breadcrumbScript = document.createElement('script')
+    breadcrumbScript.type = 'application/ld+json'
+    breadcrumbScript.id = 'breadcrumb-schema'
+    breadcrumbScript.textContent = JSON.stringify(breadcrumb)
+    document.head.appendChild(breadcrumbScript)
+
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
       restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
+      document.getElementById('breadcrumb-schema')?.remove()
     }
   }, [])
 

@@ -9,7 +9,7 @@ export default function DonDuSangPeur() {
     document.title = 'Donner son sang quand on a peur du sang : est-ce possible ? - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "Tu veux donner ton sang mais tu as peur du sang ou des aiguilles ? Voici ce qu'on peut faire concrètement avant, pendant et après, et ce que les centres de don proposent pour t'aider.")
+    meta?.setAttribute('content', "Tu veux donner ton sang mais tu as peur du sang ? Ce que les centres prévoient déjà, et ce que tu peux préparer pour éviter le malaise vasovagal pendant le don.")
 
     const restoreOg = injectOgMeta({
       title: "Donner son sang quand on a peur du sang : est-ce possible ?",
@@ -44,12 +44,28 @@ export default function DonDuSangPeur() {
     script.textContent = JSON.stringify(schema)
     document.head.appendChild(script)
 
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.byebyeblood.fr/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.byebyeblood.fr/blog' },
+        { '@type': 'ListItem', position: 3, name: 'Don du sang avec hémophobie', item: 'https://www.byebyeblood.fr/blog/don-du-sang-peur-hemophobie' },
+      ],
+    }
+    const breadcrumbScript = document.createElement('script')
+    breadcrumbScript.type = 'application/ld+json'
+    breadcrumbScript.id = 'breadcrumb-schema'
+    breadcrumbScript.textContent = JSON.stringify(breadcrumb)
+    document.head.appendChild(breadcrumbScript)
+
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
       restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
+      document.getElementById('breadcrumb-schema')?.remove()
     }
   }, [])
 

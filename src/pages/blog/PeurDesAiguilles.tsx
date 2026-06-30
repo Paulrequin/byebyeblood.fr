@@ -6,10 +6,10 @@ import s from './Article.module.css'
 export default function PeurDesAiguilles() {
   useEffect(() => {
     const prevTitle = document.title
-    document.title = 'Peur des aiguilles (trypanophobie) : pourquoi ça arrive et comment s\'en sortir - Bye Bye Blood'
+    document.title = 'Peur des aiguilles : pourquoi ça arrive et comment s\'en sortir - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "La peur des aiguilles touche 1 adulte sur 4. Elle fait repousser les vaccins, les bilans sanguins, les soins dentaires. Comprendre la trypanophobie, ses causes, et les techniques validées pour s'en sortir.")
+    meta?.setAttribute('content', "La peur des aiguilles (trypanophobie) touche 1 adulte sur 4. Elle fait éviter vaccins et soins dentaires. Causes, mécanisme vasovagal, et techniques validées pour s'en sortir.")
 
     const restoreOg = injectOgMeta({
       title: 'Peur des aiguilles (trypanophobie) : pourquoi ça arrive et comment s\'en sortir',
@@ -44,12 +44,28 @@ export default function PeurDesAiguilles() {
     script.textContent = JSON.stringify(schema)
     document.head.appendChild(script)
 
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.byebyeblood.fr/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.byebyeblood.fr/blog' },
+        { '@type': 'ListItem', position: 3, name: 'Peur des aiguilles et trypanophobie', item: 'https://www.byebyeblood.fr/blog/peur-des-aiguilles-trypanophobie' },
+      ],
+    }
+    const breadcrumbScript = document.createElement('script')
+    breadcrumbScript.type = 'application/ld+json'
+    breadcrumbScript.id = 'breadcrumb-schema'
+    breadcrumbScript.textContent = JSON.stringify(breadcrumb)
+    document.head.appendChild(breadcrumbScript)
+
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
       restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
+      document.getElementById('breadcrumb-schema')?.remove()
     }
   }, [])
 

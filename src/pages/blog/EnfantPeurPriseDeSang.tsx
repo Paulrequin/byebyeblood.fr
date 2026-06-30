@@ -9,7 +9,7 @@ export default function EnfantPeurPriseDeSang() {
     document.title = 'Mon enfant a peur des prises de sang : que faire - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "Votre enfant pleure, se débat ou s'évanouit à chaque prise de sang ? Ce n'est pas du caprice. Voici ce que dit la science sur la peur du sang chez l'enfant et comment l'aider concrètement.")
+    meta?.setAttribute('content', "Ton enfant pleure ou s'évanouit à la prise de sang ? Ce n'est pas du caprice. Ce que dit la science sur la peur du sang chez l'enfant, et ce qui aide vraiment.")
 
     const restoreOg = injectOgMeta({
       title: "Mon enfant a peur des prises de sang : que lui dire, que faire",
@@ -44,12 +44,28 @@ export default function EnfantPeurPriseDeSang() {
     script.textContent = JSON.stringify(schema)
     document.head.appendChild(script)
 
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://www.byebyeblood.fr/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.byebyeblood.fr/blog' },
+        { '@type': 'ListItem', position: 3, name: 'Enfant et peur des prises de sang', item: 'https://www.byebyeblood.fr/blog/enfant-peur-prise-de-sang' },
+      ],
+    }
+    const breadcrumbScript = document.createElement('script')
+    breadcrumbScript.type = 'application/ld+json'
+    breadcrumbScript.id = 'breadcrumb-schema'
+    breadcrumbScript.textContent = JSON.stringify(breadcrumb)
+    document.head.appendChild(breadcrumbScript)
+
     return () => {
       document.title = prevTitle
       meta?.setAttribute('content', prevDesc)
       restoreOg()
       document.getElementById('page-canonical')?.remove()
       document.getElementById('article-schema')?.remove()
+      document.getElementById('breadcrumb-schema')?.remove()
     }
   }, [])
 
