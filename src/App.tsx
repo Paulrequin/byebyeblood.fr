@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { ProtectedRoute, PublicOnlyRoute } from '@/components/ProtectedRoute'
 import CookieBanner from '@/components/CookieBanner'
 import Landing from './pages/Landing'
@@ -17,9 +18,20 @@ import MalaiseVagal from './pages/blog/MalaiseVagal'
 import PeurDesAiguilles from './pages/blog/PeurDesAiguilles'
 import GrossessePeurDuSang from './pages/blog/GrossessePeurDuSang'
 
+function PageViewTracker() {
+  const location = useLocation()
+  useEffect(() => {
+    window.gtag?.('event', 'page_view', {
+      page_path: location.pathname + location.search,
+    })
+  }, [location])
+  return null
+}
+
 export default function App() {
   return (
     <>
+    <PageViewTracker />
     <Routes>
       {/* Landing - accessible à tous, connecté ou non */}
       <Route path="/" element={<Landing />} />
