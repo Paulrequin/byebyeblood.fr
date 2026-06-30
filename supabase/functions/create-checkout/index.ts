@@ -13,7 +13,7 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'Missing STRIPE_SECRET_KEY' }), { status: 500, headers: corsHeaders })
   }
 
-  // Extract and verify user from JWT
+  // Vérifie le JWT et récupère l'utilisateur
   const authHeader = req.headers.get('Authorization')
   if (!authHeader) {
     return new Response(JSON.stringify({ error: 'Missing authorization' }), { status: 401, headers: corsHeaders })
@@ -29,9 +29,10 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'Invalid token' }), { status: 401, headers: corsHeaders })
   }
   const userId = userData.id
+  const userEmail: string | undefined = userData.email
   const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
-  // Check if user already has access
+  // Vérifie que l'utilisateur n'a pas déjà payé
   const profileRes = await fetch(`${supabaseUrl}/rest/v1/profiles?id=eq.${userId}&select=has_access`, {
     headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey },
   })
@@ -48,12 +49,15 @@ Deno.serve(async (req) => {
   const params = new URLSearchParams({
     mode: 'payment',
     'payment_method_types[]': 'card',
-    'line_items[0][price]': Deno.env.get('STRIPE_PRICE_ID') ?? 'price_1TkJA5ECHHg3iEHHqnsHcoRN',
+    'line_items[0][price]': Deno.env.get('STRIPE_PRICE_ID') ?? '',
     'line_items[0][quantity]': '1',
     'metadata[user_id]': userId,
     success_url: `${siteUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${siteUrl}/`,
   })
+
+  // Pré-remplit l'email dans la page Stripe
+  if (userEmail) params.set('customer_email', userEmail)
 
   const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
     method: 'POST',

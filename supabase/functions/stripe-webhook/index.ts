@@ -1,8 +1,3 @@
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
-
 async function verifyStripeSignature(payload: string, sigHeader: string, secret: string): Promise<boolean> {
   const parts = Object.fromEntries(sigHeader.split(',').map(p => p.split('=')))
   const timestamp = parts['t']
@@ -33,10 +28,6 @@ async function verifyStripeSignature(payload: string, sigHeader: string, secret:
 }
 
 Deno.serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
-  }
-
   const webhookSecret = Deno.env.get('STRIPE_WEBHOOK_SECRET')
   if (!webhookSecret) {
     console.error('[stripe-webhook] Missing STRIPE_WEBHOOK_SECRET')
@@ -79,13 +70,19 @@ Deno.serve(async (req) => {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
-    // Idempotence : ne pas traiter deux fois la même session
+    // Idempotence : vérifie si déjà traité, et si le profil existe
     const profileRes = await fetch(
       `${supabaseUrl}/rest/v1/profiles?id=eq.${userId}&select=stripe_session_id,has_access`,
       { headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey } },
     )
     const [profile] = await profileRes.json()
-    if (profile?.stripe_session_id === session.id && profile?.has_access) {
+
+    if (!profile) {
+      console.error('[stripe-webhook] Profile not found for user:', userId, 'session:', session.id)
+      return new Response('Profile not found', { status: 500 })
+    }
+
+    if (profile.stripe_session_id === session.id && profile.has_access) {
       console.log('[stripe-webhook] Already processed:', session.id)
       return new Response(JSON.stringify({ received: true }), {
         headers: { 'Content-Type': 'application/json' },

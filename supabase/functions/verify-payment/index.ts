@@ -9,6 +9,29 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Vérifie le JWT de l'appelant
+    const authHeader = req.headers.get('Authorization')
+    if (!authHeader) {
+      return new Response(JSON.stringify({ error: 'Missing authorization' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+    const token = authHeader.replace('Bearer ', '')
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
+    const userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
+      headers: { Authorization: `Bearer ${token}`, apikey: supabaseAnonKey },
+    })
+    const userData = await userRes.json()
+    if (!userRes.ok || !userData.id) {
+      return new Response(JSON.stringify({ error: 'Invalid token' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+    const callerId = userData.id
+
     const { session_id } = await req.json()
 
     if (!session_id) {
@@ -20,7 +43,6 @@ Deno.serve(async (req) => {
 
     const stripeKey = Deno.env.get('STRIPE_SECRET_KEY')!
 
-    // Retrieve Stripe session
     const stripeRes = await fetch(`https://api.stripe.com/v1/checkout/sessions/${session_id}`, {
       headers: { Authorization: `Bearer ${stripeKey}` },
     })
@@ -50,10 +72,18 @@ Deno.serve(async (req) => {
       })
     }
 
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    // L'appelant doit être l'utilisateur qui a créé la session de paiement
+    if (userId !== callerId) {
+      console.error('[verify-payment] Caller mismatch: caller=%s session_user=%s', callerId, userId)
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 403,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
-    // Idempotency check: if this session was already processed, return success immediately
+    // Idempotence : si déjà traité, retourner succès immédiatement
     const profileRes = await fetch(
       `${supabaseUrl}/rest/v1/profiles?id=eq.${userId}&select=stripe_session_id,has_access`,
       { headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey } },
@@ -65,7 +95,14 @@ Deno.serve(async (req) => {
       })
     }
 
-    // Update has_access via Supabase REST API
+    if (!existingProfile) {
+      console.error('[verify-payment] Profile not found for user:', userId)
+      return new Response(JSON.stringify({ error: 'Profile not found' }), {
+        status: 404,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
     const updateRes = await fetch(
       `${supabaseUrl}/rest/v1/profiles?id=eq.${userId}`,
       {
@@ -89,11 +126,12 @@ Deno.serve(async (req) => {
       })
     }
 
+    console.log('[verify-payment] Access granted for user:', userId, 'session:', session_id)
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
+    return new Response(JSON.stringify({ error: (err as Error).message }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
