@@ -9,7 +9,7 @@ export default function MalaiseVagal() {
     document.title = 'Malaise vagal : pourquoi ça arrive et comment l\'éviter - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "Tu as failli t'évanouir sans raison apparente ? C'est probablement un malaise vagal. Mécanisme, signes avant-coureurs, déclencheurs, et ce qu'on peut faire concrètement.")
+    meta?.setAttribute('content', "Tu as failli t'évanouir sans raison apparente ? C'est probablement un malaise vagal. Mécanisme, signes avant-coureurs et déclencheurs.")
 
     const restoreOg = injectOgMeta({
       title: 'Malaise vagal : pourquoi ça arrive et comment l\'éviter',

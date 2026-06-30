@@ -9,7 +9,7 @@ export default function PeurPriseDeSang() {
     document.title = 'Prise de sang : que faire quand on a peur de s\'évanouir - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "Tu as peur de t'évanouir à la prise de sang ? La technique clinique pour éviter le malaise vasovagal, ce qu'il faut dire à l'infirmier·e, et comment préparer le rendez-vous.")
+    meta?.setAttribute('content', "Tu as peur de t'évanouir à la prise de sang ? La technique clinique pour éviter le malaise vasovagal et ce qu'il faut dire à l'infirmier·e.")
 
     const restoreOg = injectOgMeta({
       title: 'Prise de sang : que faire quand on a peur de s\'évanouir',

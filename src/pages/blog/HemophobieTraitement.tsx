@@ -6,14 +6,14 @@ import s from './Article.module.css'
 export default function HemophobieTraitement() {
   useEffect(() => {
     const prevTitle = document.title
-    document.title = 'Hémophobie : ce que c\'est vraiment et comment s\'en sortir - Bye Bye Blood'
+    document.title = 'Hémophobie : ce que c\'est et comment s\'en sortir - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "Hémophobie : définition, symptômes, causes et traitements validés scientifiquement. Tout ce qu'on ne vous a probablement jamais expliqué sur la peur du sang.")
+    meta?.setAttribute('content', "Hémophobie : définition, symptômes, causes et traitements validés scientifiquement. Tout ce qu'on ne t'a probablement jamais expliqué sur la peur du sang.")
 
     const restoreOg = injectOgMeta({
       title: "Hémophobie : ce que c'est vraiment et comment s'en sortir",
-      description: "Hémophobie : définition, symptômes, causes et traitements validés scientifiquement. Tout ce qu'on ne vous a probablement jamais expliqué sur la peur du sang.",
+      description: "Hémophobie : définition, symptômes, causes et traitements validés scientifiquement. Tout ce qu'on ne t'a probablement jamais expliqué sur la peur du sang.",
       url: 'https://www.byebyeblood.fr/blog/hemophobie-traitement',
     })
 

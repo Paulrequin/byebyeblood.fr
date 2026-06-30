@@ -6,10 +6,10 @@ import s from './Article.module.css'
 export default function PeurDesAiguilles() {
   useEffect(() => {
     const prevTitle = document.title
-    document.title = 'Peur des aiguilles : pourquoi ça arrive et comment s\'en sortir - Bye Bye Blood'
+    document.title = 'Peur des aiguilles : trypanophobie et traitement - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
-    meta?.setAttribute('content', "La peur des aiguilles (trypanophobie) touche 1 adulte sur 4. Elle fait éviter vaccins et soins dentaires. Causes, mécanisme vasovagal, et techniques validées pour s'en sortir.")
+    meta?.setAttribute('content', "La peur des aiguilles (trypanophobie) touche 1 adulte sur 4. Elle fait éviter vaccins et soins dentaires. Causes, mécanisme vasovagal, techniques validées.")
 
     const restoreOg = injectOgMeta({
       title: 'Peur des aiguilles (trypanophobie) : pourquoi ça arrive et comment s\'en sortir',

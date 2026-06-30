@@ -6,7 +6,7 @@ import s from './Article.module.css'
 export default function DonDuSangPeur() {
   useEffect(() => {
     const prevTitle = document.title
-    document.title = 'Donner son sang quand on a peur du sang : est-ce possible ? - Bye Bye Blood'
+    document.title = 'Donner son sang quand on a peur du sang - Bye Bye Blood'
     const meta = document.querySelector('meta[name="description"]')
     const prevDesc = meta?.getAttribute('content') ?? ''
     meta?.setAttribute('content', "Tu veux donner ton sang mais tu as peur du sang ? Ce que les centres prévoient déjà, et ce que tu peux préparer pour éviter le malaise vasovagal pendant le don.")
