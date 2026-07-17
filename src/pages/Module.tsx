@@ -14,6 +14,7 @@ import type {
   ShapeExposureExerciseData,
   ImageExposureExerciseData,
   ScenarioExerciseData,
+  VideoExerciseData,
   Study,
 } from '@/types'
 import { getSource } from '@/data/sources'
@@ -726,6 +727,112 @@ function ScenarioExercise({ title, situation, steps, onNext, setFooterAction }: 
   )
 }
 
+// ─── VideoExercise ────────────────────────────────────────────────────────────
+
+function getYouTubeEmbedUrl(src: string): string | null {
+  // Already an embed URL
+  if (src.includes('youtube.com/embed/')) return src
+  // youtu.be/ID
+  const shortMatch = src.match(/youtu\.be\/([a-zA-Z0-9_-]+)/)
+  if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`
+  // youtube.com/watch?v=ID
+  const watchMatch = src.match(/[?&]v=([a-zA-Z0-9_-]+)/)
+  if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`
+  return null
+}
+
+function VideoExercise({ title, description, src, minWatchSeconds = 0, showTension = true, onNext, setFooterAction }: VideoExerciseData & BaseExerciseProps) {
+  const [elapsed, setElapsed] = useState(0)
+  const [started, setStarted] = useState(false)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const isReady = elapsed >= minWatchSeconds
+  const embedUrl = getYouTubeEmbedUrl(src)
+  const isYouTube = embedUrl !== null
+
+  useEffect(() => {
+    if (isReady) {
+      setFooterAction({ label: "J'ai regardé, continuer →", disabled: false, onClick: onNext })
+    } else {
+      const remaining = minWatchSeconds - elapsed
+      setFooterAction({ label: `Encore ${remaining}s avant de continuer…`, disabled: true, onClick: null })
+    }
+  }, [isReady, elapsed, minWatchSeconds, onNext, setFooterAction])
+
+  useEffect(() => {
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
+  }, [])
+
+  function startTimer() {
+    if (intervalRef.current) return
+    setStarted(true)
+    intervalRef.current = setInterval(() => {
+      setElapsed(e => e + 1)
+    }, 1000)
+  }
+
+  // For self-hosted video: track play/pause
+  function handlePlay() { startTimer() }
+  function handlePause() {
+    if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null }
+  }
+
+  return (
+    <div className="flex flex-col gap-5">
+      <div>
+        <h2 className="text-xl font-black mb-1">{title}</h2>
+        <p className="text-sm text-[#888888]">{description}</p>
+      </div>
+      {showTension && (
+        <div style={{display:'flex', alignItems:'center', gap:'8px', padding:'10px 14px', background:'#fff0f0', border:'1px solid #E53935', fontSize:'0.82rem', color:'#EE3D2E'}}>
+          <span>💪</span>
+          <span>Contracte bras et jambes avant de lancer la vidéo</span>
+        </div>
+      )}
+      <SafetyNotice />
+      <div style={{position:'relative', background:'#000', borderRadius:4, overflow:'hidden'}}>
+        {isYouTube ? (
+          <>
+            <iframe
+              src={`${embedUrl}?rel=0&modestbranding=1`}
+              title={title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{width:'100%', aspectRatio:'16/9', border:'none', display:'block'}}
+              onLoad={minWatchSeconds > 0 ? startTimer : undefined}
+            />
+            {minWatchSeconds > 0 && !started && (
+              <div style={{position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.5)'}}>
+                <button
+                  onClick={startTimer}
+                  style={{padding:'12px 28px', background:'#EE3D2E', color:'#fff', border:'none', fontSize:'0.82rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', cursor:'pointer', fontFamily:"'Hanken Grotesk', sans-serif"}}
+                >
+                  ▶ Lancer
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <video
+            ref={videoRef}
+            src={src}
+            controls
+            onPlay={handlePlay}
+            onPause={handlePause}
+            style={{width:'100%', aspectRatio:'16/9', display:'block', background:'#000'}}
+          />
+        )}
+      </div>
+      {minWatchSeconds > 0 && !isReady && (
+        <p style={{fontSize:'0.72rem', color:'#bbb', textAlign:'center'}}>
+          {started ? `${elapsed}s / ${minWatchSeconds}s` : `Regarde au moins ${minWatchSeconds} secondes pour continuer`}
+        </p>
+      )}
+    </div>
+  )
+}
+
 // ─── Main Module Component ────────────────────────────────────────────────────
 
 export default function Module() {
@@ -828,6 +935,7 @@ export default function Module() {
           {exercise.type === 'color_exposure'  && <ColorExposureExercise  key={exerciseIndex} {...exercise} {...baseProps} />}
           {exercise.type === 'shape_exposure'  && <ShapeExposureExercise  key={exerciseIndex} {...exercise} {...baseProps} />}
           {exercise.type === 'image_exposure'  && <ImageExposureExercise  key={exerciseIndex} {...exercise} {...baseProps} />}
+          {exercise.type === 'video'           && <VideoExercise          key={exerciseIndex} {...(exercise as VideoExerciseData)} {...baseProps} />}
           {exercise.type === 'quiz'            && <QuizExercise           key={exerciseIndex} {...exercise} {...baseProps} />}
           {exercise.type === 'journal'         && (
             <JournalExercise

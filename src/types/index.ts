@@ -88,6 +88,18 @@ export interface ScenarioExerciseData {
   steps: ScenarioStep[]
 }
 
+export interface VideoExerciseData {
+  type: 'video'
+  title: string
+  description: string
+  // YouTube watch URL, YouTube embed URL, or direct video URL (.mp4 etc.)
+  src: string
+  // Seconds the user must wait before "Continuer" unlocks (default: 0)
+  minWatchSeconds?: number
+  // Show applied tension reminder (default: true)
+  showTension?: boolean
+}
+
 export type ExerciseData =
   | ReadingExerciseData
   | QuizExerciseData
@@ -98,6 +110,7 @@ export type ExerciseData =
   | ShapeExposureExerciseData
   | ImageExposureExerciseData
   | ScenarioExerciseData
+  | VideoExerciseData
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 
