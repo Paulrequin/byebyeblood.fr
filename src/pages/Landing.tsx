@@ -292,6 +292,13 @@ export default function Landing() {
             Une méthode d'exposition progressive, racontée comme une histoire qu'on a envie de finir.
           </p>
 
+          <div className={s.ctaRow}>
+            <button className={s.btnPrimary} onClick={() => navigate('/auth')}>
+              Faire ma 1ʳᵉ séance, c'est gratuit
+            </button>
+            <a href="#methode" className={s.btnOutline}>Comment ça marche ?</a>
+          </div>
+
           <div className={s.chips}>
             {NIVEAUX.map((nv, i) => (
               <button key={i} className={chipClass(i)} onClick={() => setCurrent(i)}>
@@ -299,13 +306,6 @@ export default function Landing() {
                 Module {i + 1}
               </button>
             ))}
-          </div>
-
-          <div className={s.ctaRow}>
-            <button className={s.btnPrimary} onClick={() => navigate('/auth')}>
-              Faire ma 1ʳᵉ séance, c'est gratuit
-            </button>
-            <a href="#methode" className={s.btnOutline}>Comment ça marche ?</a>
           </div>
 
           {error && <p className={s.heroError}>{error}</p>}
