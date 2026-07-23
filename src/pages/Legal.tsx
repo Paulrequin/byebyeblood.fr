@@ -33,10 +33,10 @@ export default function Legal() {
           <h2>Éditeur du site</h2>
           <p>
             Le site <strong>byebyeblood.fr</strong> est édité par :<br />
-            <strong>Paul Defais</strong><br />
-            Statut : [À COMPLÉTER - auto-entrepreneur / SASU / etc.]<br />
-            SIRET : [À COMPLÉTER]<br />
-            Adresse : [À COMPLÉTER]<br />
+            <strong>saintvincent</strong> (SAS à associé unique)<br />
+            Président : Paul Defais<br />
+            RCS Marseille : 100 954 122<br />
+            Adresse : 26 Rue Aldebert, 13006 Marseille<br />
             Email : contact@pauldefais.fr
           </p>
 
