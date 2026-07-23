@@ -542,9 +542,9 @@ export const MODULES: Module[] = [
       {
         type: 'reading',
         title: 'Préparer ton regard',
-        content: "Tu arrives à une étape importante de ton parcours. Jusqu'ici, tu as travaillé avec des couleurs et des formes abstraites. Dans ce module, tu vas progresser vers des représentations visuelles plus concrètes, organisées en trois niveaux d'intensité croissante.\n\nLe niveau 1 est une composition artistique abstraite utilisant des teintes rouges. Elle n'est pas réaliste, mais elle mobilise tes associations visuelles de manière plus directe que les exercices précédents.\n\nLe niveau 2 est un schéma médical stylisé, le type d'illustration qu'on trouve dans les manuels médicaux ou les applications de santé. Reconnaissable mais épuré.\n\nLe niveau 3 est une représentation médicale plus réaliste, similaire à ce qu'on pourrait voir dans un contexte médical réel. C'est le niveau le plus intense de ce module.\n\nAvant chaque image, commence par contracter tes muscles. Maintiens la tension pendant que tu regardes. Respire normalement. Si tu ressens le besoin de t'arrêter, c'est tout à fait acceptable, reprends quand tu es prêt·e. Il n'y a aucune urgence.",
+        content: "Tu arrives à une étape importante de ton parcours. Jusqu'ici, tu as travaillé avec des couleurs et des formes abstraites. Dans ce module, tu vas progresser vers des représentations visuelles plus concrètes, organisées en cinq niveaux d'intensité croissante.\n\nLe niveau 1 est une composition artistique abstraite utilisant des teintes rouges. Elle n'est pas réaliste, mais elle mobilise tes associations visuelles de manière plus directe que les exercices précédents.\n\nLe niveau 2 est un schéma médical stylisé, le type d'illustration qu'on trouve dans les manuels médicaux. Reconnaissable mais épuré.\n\nLe niveau 3 est une représentation médicale plus concrète, avec du contexte visuel.\n\nLe niveau 4 représente un bras avec une veine visible, sans aucun matériel médical. C'est le pont entre le schéma et la réalité.\n\nLe niveau 5 montre du matériel de prélèvement posé sur un plateau : tubes, compresses, aiguille dans son capuchon. Rien d'invasif, mais le contexte médical est clairement réel.\n\nAvant chaque image, commence par contracter tes muscles. Maintiens la tension pendant que tu regardes. Il n'y a aucune urgence.",
         keyPoints: [
-          "Trois niveaux progressifs : abstrait, schéma médical, représentation réaliste",
+          "Cinq niveaux progressifs : abstrait → schéma → représentation → bras avec veine → matériel",
           "Contracter les muscles AVANT de regarder chaque image",
           "Maintenir la tension pendant toute l'observation",
           "Il est normal de ressentir une légère anxiété : c'est le signe que l'exposition fonctionne",
@@ -608,6 +608,18 @@ export const MODULES: Module[] = [
         description: "Une représentation plus réaliste dans un contexte médical. Tu as tous les outils. Tu sais pourquoi tu es là. Reste dans le moment présent.",
       },
       {
+        type: 'image_exposure',
+        level: 4,
+        title: 'Niveau 4 : Bras avec veine visible',
+        description: "Un avant-bras humain avec la veine antécubitale visible sous la peau. Pas de matériel, pas d'aiguille. Juste l'anatomie. Contracte tes muscles et regarde.",
+      },
+      {
+        type: 'image_exposure',
+        level: 5,
+        title: 'Niveau 5 : Matériel de prélèvement',
+        description: "Les tubes, la compresse, l'aiguille dans son capuchon. Le plateau de prélèvement vu de dessus, avant toute procédure. Tension maintenue.",
+      },
+      {
         type: 'journal',
         prompt: "Écris ta réponse à cette question : pourquoi veux-tu vraiment surmonter ta peur du sang ? Qu'est-ce qui devient possible dans ta vie concrète ? Pense à au moins une situation précise, une personne, un lieu, un moment, que cette peur t'empêche de vivre pleinement aujourd'hui.",
       },
@@ -616,12 +628,93 @@ export const MODULES: Module[] = [
 
   {
     id: 7,
+    title: 'Exposition par le son',
+    subtitle: 'Entendre avant de voir',
+    description: "Trois extraits audio d'un documentaire France Culture sur le sang. Pas d'images. Juste des mots, des voix, et tes outils ACT.",
+    duration: '20 min',
+    xpBonus: 100,
+    badge: { id: 'module_7', label: 'Oreille posée', icon: '🎙️' },
+    exercises: [
+      {
+        type: 'reading',
+        title: "Le son sans l'image",
+        content: "Tu viens de traverser cinq niveaux d'images progressives. La prochaine étape vers les vidéos, c'est le son.\n\nPourquoi le son d'abord ? Parce que le cerveau traite l'audio et la vidéo par des voies différentes. Entendre des mots sur le sang, une voix calme qui décrit une procédure médicale, c'est déjà une forme d'exposition. Et le son seul, sans image associée, est souvent plus facile à tolérer au départ.\n\nCe module utilise des extraits d'un documentaire France Culture, «Le sang de la veine», une série de quatre épisodes qui explore le sang sous ses angles culturels, médicaux et historiques. Le ton est calme, informatif, documentaire. Pas de mise en scène dramatique.\n\nTu vas écouter trois courts extraits, chacun légèrement plus proche du contexte médical. La règle reste la même : tension musculaire pendant l'écoute, présence dans le moment, et tu nommes les pensées qui surgissent sans les laisser prendre le volant.",
+        keyPoints: [
+          "Le son seul est un pallier intermédiaire entre l'image statique et la vidéo",
+          "Le cerveau traite audio et vidéo différemment : commencer par l'audio réduit la charge",
+          "Tension musculaire maintenue pendant toute l'écoute",
+          "Nommer les pensées qui surgissent : 'mon cerveau me dit que...'",
+        ],
+        studies: [
+          {
+            authors: "Craske, M. G. & Mystkowski, J. L.",
+            year: 2006,
+            finding: "L'exposition à travers différentes modalités sensorielles (visuelle, auditive, kinesthésique) produit une habituation plus robuste et plus généralisable que l'exposition uni-modale, en raison de la diversification des contextes d'apprentissage de la sécurité.",
+            source: "Craske, M. G. (Ed.), Anxiety: A Practitioner's Guide, Guilford Press",
+          },
+        ],
+      },
+      {
+        type: 'reading',
+        title: "ACT : Être présent avec les mots",
+        content: "Les mots ont un pouvoir particulier dans l'hémophobie. Pour beaucoup de personnes, lire ou entendre les mots «sang», «aiguille», «veine», «prise de sang» peut déclencher une réponse physique, même sans aucune image.\n\nC'est ce que la recherche en ACT appelle la «fusion cognitive avec le langage» : ton cerveau traite ces mots comme s'ils étaient la chose elle-même. Entendre «aiguille» active les mêmes circuits de peur qu'une vraie aiguille, même si tu sais pertinemment que tu écoutes juste un podcast.\n\nLa défusion cognitive, que tu as pratiquée depuis le module 3, s'applique ici de façon très concrète. Quand tu entends un mot qui déclenche quelque chose, remarque la réaction dans ton corps, nomme-la («mon cerveau réagit à ce mot»), et reviens à l'écoute. Le mot est un son. La réaction est de la météo. Toi, tu es le ciel.\n\nCette écoute consciente est une pratique de présence complète : tu es là, tu entends, tu remarques ce qui se passe en toi, et tu continues.",
+        keyPoints: [
+          "Les mots sur le sang peuvent déclencher la même réponse que les images",
+          "Fusion cognitive = traiter le mot comme la chose elle-même",
+          "Défusion en écoute : 'mon cerveau réagit à ce mot'",
+          "Écoute consciente = présence complète + observation sans fusion",
+        ],
+        studies: [
+          {
+            authors: "Hayes, S. C., Barnes-Holmes, D. & Roche, B.",
+            year: 2001,
+            finding: "La théorie des cadres relationnels (RFT) explique pourquoi les symboles linguistiques (mots, images) acquièrent les mêmes propriétés émotionnelles que les stimuli réels auxquels ils font référence. Cette «transformation des fonctions» est au cœur des phobies déclenchées par des représentations.",
+            source: "Relational Frame Theory: A Post-Skinnerian Account of Human Language and Cognition, Kluwer Academic",
+          },
+        ],
+      },
+      {
+        type: 'audio',
+        title: "Extrait 1 : Le sang dans l'histoire",
+        description: "Un extrait du documentaire «Le sang de la veine» (France Culture). Ton calme, angle historique et culturel. Écoute en maintenant la tension dans tes jambes.",
+        src: '/audio/extrait-sang-1.mp3',
+        minListenSeconds: 20,
+        caption: "France Culture, «Le sang de la veine» - extrait",
+        showTension: true,
+      },
+      {
+        type: 'audio',
+        title: "Extrait 2 : Le sang et la médecine",
+        description: "Un extrait sur le sang dans le contexte médical. Le vocabulaire devient plus clinique. Tension musculaire maintenue, défusion si des pensées surgissent.",
+        src: '/audio/extrait-sang-2.mp3',
+        minListenSeconds: 20,
+        caption: "France Culture, «Le sang de la veine» - extrait",
+        showTension: true,
+      },
+      {
+        type: 'audio',
+        title: "Extrait 3 : Le prélèvement sanguin",
+        description: "L'extrait le plus direct de ce module. Une description calme et précise du prélèvement sanguin. Tension maintenue du début à la fin.",
+        src: '/audio/extrait-sang-3.mp3',
+        minListenSeconds: 30,
+        caption: "France Culture, «Le sang de la veine» - extrait",
+        showTension: true,
+      },
+      {
+        type: 'journal',
+        prompt: "L'écoute de ces extraits audio était-elle plus facile ou plus difficile que de regarder les images ? Qu'est-ce qui se passait dans ton corps quand tu entendais certains mots (sang, aiguille, veine, prélèvement) ? As-tu utilisé la défusion ('mon cerveau réagit à ce mot') ? Qu'est-ce que tu remarques sur ta relation au langage médical ?",
+      },
+    ],
+  },
+
+  {
+    id: 8,
     title: 'Exposition par les vidéos',
     subtitle: 'Du mouvement et du son, en douceur',
-    description: "L'étape suivante après les images : des courtes vidéos de prises de sang réelles, progressivement plus intenses. Avec la tension appliquée activée.",
+    description: "L'étape suivante après les images et le son : des courtes vidéos de prises de sang réelles, progressivement plus intenses. Avec la tension appliquée activée.",
     duration: '30 min',
     xpBonus: 125,
-    badge: { id: 'module_7', label: 'Regard en mouvement', icon: '🎬' },
+    badge: { id: 'module_8', label: 'Regard en mouvement', icon: '🎬' },
     exercises: [
       {
         type: 'reading',
@@ -651,7 +744,7 @@ export const MODULES: Module[] = [
       {
         type: 'reading',
         title: "ACT : Cinq outils, une seule vidéo",
-        content: "Tu as maintenant cinq outils ACT dans ta boîte : reconnaître le piège du contrôle, ancrer dans le moment présent, défusionner de tes pensées, accepter l'inconfort, habiter le soi observateur, et clarifier tes valeurs. Ce sont exactement les outils dont tu as besoin pour traverser les vidéos qui suivent.\n\nFace à une vidéo difficile, ton esprit va générer des pensées. «Je ne vais pas tenir.» «C'est trop.» «Je vais faire un malaise.» Tu sais maintenant quoi faire avec ça : nommer la pensée («mon cerveau me dit que je ne peux pas tenir»), revenir à ce qui est réel maintenant (tu es assis·e, en sécurité, devant un écran), et continuer à regarder.\n\nLa tension musculaire maintient ta pression artérielle. L'ACT maintient ta présence. Les deux ensemble, c'est ce qui rend l'exposition vidéo supportable, puis banale.\n\nUn sixième outil t'attend dans le module suivant, le dernier. Mais pour l'instant, tu as tout ce qu'il faut.",
+        content: "Tu as maintenant cinq outils ACT dans ta boîte : reconnaître le piège du contrôle, ancrer dans le moment présent, défusionner de tes pensées, accepter l'inconfort, habiter le soi observateur, et clarifier tes valeurs. Dans le module précédent, tu as pratiqué la défusion avec les mots. Ici, tu vas l'appliquer au mouvement.\n\nFace à une vidéo difficile, ton esprit va générer des pensées. «Je ne vais pas tenir.» «C'est trop.» «Je vais faire un malaise.» Tu sais maintenant quoi faire avec ça : nommer la pensée («mon cerveau me dit que je ne peux pas tenir»), revenir à ce qui est réel maintenant (tu es assis·e, en sécurité, devant un écran), et continuer à regarder.\n\nLa tension musculaire maintient ta pression artérielle. L'ACT maintient ta présence. Les deux ensemble, c'est ce qui rend l'exposition vidéo supportable, puis banale.\n\nUn sixième outil t'attend dans le module final. Mais pour l'instant, tu as tout ce qu'il faut.",
         keyPoints: [
           "5 outils ACT déjà acquis, tous activables pendant la vision",
           "Nommer la pensée réduit son emprise : 'mon cerveau me dit que...'",
@@ -699,18 +792,18 @@ export const MODULES: Module[] = [
   },
 
   {
-    id: 8,
+    id: 9,
     title: 'Maîtrise totale',
     subtitle: 'Prêt·e pour la vraie vie',
     description: "Des scénarios réels, la synthèse ACT complète, et l'engagement vers la vie que tu veux.",
     duration: '35 min',
     xpBonus: 150,
-    badge: { id: 'module_8', label: 'Maître absolu', icon: '🏆' },
+    badge: { id: 'module_9', label: 'Maître absolu', icon: '🏆' },
     exercises: [
       {
         type: 'reading',
         title: 'De la théorie à la pratique',
-        content: "Tu as parcouru un long chemin. Tu comprends les mécanismes de ta peur, tu maîtrises deux techniques de respiration, tu pratiques la tension musculaire appliquée, tu as traversé des expositions visuelles progressives, et tu as regardé des prises de sang réelles en vidéo avec tes outils ACT.\n\nCe dernier module est celui de l'intégration. Ici, tu vas appliquer toutes ces compétences dans des scénarios de la vie réelle, les situations que tu redoutais peut-être avant de commencer ce programme.\n\nLa clé de la maîtrise, ce n'est pas l'absence totale de peur. C'est la capacité à agir malgré la peur, avec des outils concrets pour la gérer. La plupart des personnes qui terminent ce programme ne deviennent pas insensibles au sang : elles deviennent capables de faire face à une prise de sang, d'accompagner un proche blessé, de regarder une scène médicale à la télévision, sans être dépassées.\n\nLis chaque scénario attentivement. Visualise-toi en train de traverser les étapes. Ressens ce que tu ressentirais, et remarque que tu as maintenant les outils pour gérer ça.\n\nTu n'es plus la même personne qu'au début de ce programme.",
+        content: "Tu as parcouru un long chemin. Tu comprends les mécanismes de ta peur, tu maîtrises deux techniques de respiration, tu pratiques la tension musculaire appliquée, tu as traversé des expositions visuelles progressives, tu as écouté des documentaires sur le sang, et tu as regardé des prises de sang réelles en vidéo avec tes outils ACT.\n\nCe dernier module est celui de l'intégration. Ici, tu vas appliquer toutes ces compétences dans des scénarios de la vie réelle, les situations que tu redoutais peut-être avant de commencer ce programme.\n\nLa clé de la maîtrise, ce n'est pas l'absence totale de peur. C'est la capacité à agir malgré la peur, avec des outils concrets pour la gérer. La plupart des personnes qui terminent ce programme ne deviennent pas insensibles au sang : elles deviennent capables de faire face à une prise de sang, d'accompagner un proche blessé, de regarder une scène médicale à la télévision, sans être dépassées.\n\nLis chaque scénario attentivement. Visualise-toi en train de traverser les étapes. Ressens ce que tu ressentirais, et remarque que tu as maintenant les outils pour gérer ça.\n\nTu n'es plus la même personne qu'au début de ce programme.",
         keyPoints: [
           "La maîtrise = agir avec ses outils malgré la peur, pas l'absence de peur",
           "Les outils acquis : compréhension, respiration, tension musculaire, habituations",

@@ -45,7 +45,7 @@ export default function Legal() {
 
           <h2>Conditions générales de vente</h2>
           <p>
-            Bye Bye Blood est un programme numérique de 8 modules. Le module 1 est gratuit. L'accès complet est disponible au prix de <strong>295€ TTC</strong>, paiement unique sans abonnement, traité par Stripe.
+            Bye Bye Blood est un programme numérique de 9 modules. Le module 1 est gratuit. L'accès complet est disponible au prix de <strong>295€ TTC</strong>, paiement unique sans abonnement, traité par Stripe.
           </p>
           <p>
             Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux contenus numériques dont l'exécution a commencé avec l'accord exprès de l'acheteur. En accédant au contenu après paiement, tu renonces expressément à ce droit. Pour tout litige, écris à contact@pauldefais.fr.

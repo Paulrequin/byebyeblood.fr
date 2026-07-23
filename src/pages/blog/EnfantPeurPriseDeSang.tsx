@@ -192,7 +192,7 @@ export default function EnfantPeurPriseDeSang() {
             Pour les adultes qui ont gardé cette peur
           </h2>
           <p className={s.ctaText}>
-            Bye Bye Blood s'adresse aux adultes qui ont grandi avec cette peur et veulent s'en libérer. 8 modules progressifs, première séance gratuite, aucune image difficile.
+            Bye Bye Blood s'adresse aux adultes qui ont grandi avec cette peur et veulent s'en libérer. 9 modules progressifs, première séance gratuite, aucune image difficile.
           </p>
           <Link to="/auth" className={s.ctaBtn}>
             Commencer gratuitement →

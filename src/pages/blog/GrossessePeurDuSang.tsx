@@ -272,7 +272,7 @@ export default function GrossessePeurDuSang() {
             Traverser la grossesse sans redouter chaque analyse
           </h2>
           <p className={s.ctaText}>
-            8 modules progressifs. Tension musculaire appliquée, exposition graduelle, ACT. La première séance est gratuite et ne montre aucune image difficile.
+            9 modules progressifs. Tension musculaire appliquée, exposition graduelle, ACT. La première séance est gratuite et ne montre aucune image difficile.
           </p>
           <Link to="/auth" className={s.ctaBtn}>
             Commencer gratuitement →

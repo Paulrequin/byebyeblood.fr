@@ -100,6 +100,16 @@ export interface VideoExerciseData {
   showTension?: boolean
 }
 
+export interface AudioExerciseData {
+  type: 'audio'
+  title: string
+  description: string
+  src: string
+  minListenSeconds?: number
+  caption?: string
+  showTension?: boolean
+}
+
 export type ExerciseData =
   | ReadingExerciseData
   | QuizExerciseData
@@ -111,6 +121,7 @@ export type ExerciseData =
   | ImageExposureExerciseData
   | ScenarioExerciseData
   | VideoExerciseData
+  | AudioExerciseData
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 

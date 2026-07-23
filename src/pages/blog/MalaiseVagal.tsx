@@ -283,7 +283,7 @@ export default function MalaiseVagal() {
             Arrêter de subir les malaises
           </h2>
           <p className={s.ctaText}>
-            8 modules progressifs pour désensibiliser ton système nerveux à la vue du sang. Tension musculaire appliquée, exposition graduelle, ACT. La première séance est gratuite.
+            9 modules progressifs pour désensibiliser ton système nerveux à la vue du sang. Tension musculaire appliquée, exposition graduelle, ACT. La première séance est gratuite.
           </p>
           <Link to="/auth" className={s.ctaBtn}>
             Commencer gratuitement →
