@@ -458,7 +458,7 @@ export default function Landing() {
                 <span className={s.priceOnce}>TTC · une seule fois</span>
               </div>
               <ul className={s.inclList}>
-                <li>Les 7 modules du programme, dans l'ordre</li>
+                <li>Les 8 modules du programme, dans l'ordre</li>
                 <li>La technique de tension appliquée à chaque étape</li>
                 <li>Ton rythme : avance, recule, reviens</li>
                 <li>Accès à vie, mises à jour comprises</li>

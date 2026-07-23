@@ -289,7 +289,7 @@ export default function PeurDesAiguilles() {
             Se désensibiliser progressivement
           </h2>
           <p className={s.ctaText}>
-            7 modules qui combinent tension musculaire appliquée, exposition graduelle et ACT. Conçu pour la peur du sang et des aiguilles. La première séance est gratuite, sans image difficile.
+            8 modules qui combinent tension musculaire appliquée, exposition graduelle et ACT. Conçu pour la peur du sang et des aiguilles. La première séance est gratuite, sans image difficile.
           </p>
           <Link to="/auth" className={s.ctaBtn}>
             Commencer gratuitement →

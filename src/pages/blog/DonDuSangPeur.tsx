@@ -178,7 +178,7 @@ export default function DonDuSangPeur() {
             Construire les outils, dans l'ordre
           </h2>
           <p className={s.ctaText}>
-            Bye Bye Blood propose 7 modules progressifs pour aller de "je ne peux pas regarder du sang" à "je gère une prise de sang sans malaise". La première séance est gratuite.
+            Bye Bye Blood propose 8 modules progressifs pour aller de "je ne peux pas regarder du sang" à "je gère une prise de sang sans malaise". La première séance est gratuite.
           </p>
           <Link to="/auth" className={s.ctaBtn}>
             Commencer gratuitement →

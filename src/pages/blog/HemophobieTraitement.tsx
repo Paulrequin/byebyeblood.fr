@@ -207,7 +207,7 @@ export default function HemophobieTraitement() {
             Les bons outils, dans le bon ordre
           </h2>
           <p className={s.ctaText}>
-            7 modules progressifs qui combinent tension musculaire appliquée, exposition graduelle et ACT. La première séance est gratuite. Pas d'image difficile au départ.
+            8 modules progressifs qui combinent tension musculaire appliquée, exposition graduelle et ACT. La première séance est gratuite. Pas d'image difficile au départ.
           </p>
           <Link to="/auth" className={s.ctaBtn}>
             Commencer gratuitement →

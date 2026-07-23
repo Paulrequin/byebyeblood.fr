@@ -616,12 +616,96 @@ export const MODULES: Module[] = [
 
   {
     id: 7,
+    title: 'Exposition par les vidéos',
+    subtitle: 'Du mouvement et du son, en douceur',
+    description: "L'étape suivante après les images : des courtes vidéos de prises de sang réelles, progressivement plus intenses. Avec la tension appliquée activée.",
+    duration: '30 min',
+    xpBonus: 125,
+    badge: { id: 'module_7', label: 'Regard en mouvement', icon: '🎬' },
+    exercises: [
+      {
+        type: 'reading',
+        title: "Pourquoi la vidéo est différente",
+        content: "Les images statiques que tu as traversées dans le module précédent entraînent ton cerveau à désactiver la réponse de danger face aux stimuli visuels fixes. La vidéo ajoute deux dimensions nouvelles : le mouvement et le son.\n\nPour un cerveau hémophobe, ces deux dimensions sont souvent ce qui déclenche la réponse vasovagale là où une image ne suffirait pas. Le mouvement d'une aiguille, le son d'un flacon qui s'ouvre, la voix calme d'une infirmière : autant de signaux qui, pour un cerveau non habitué, peuvent déclencher le réflexe.\n\nL'exposition vidéo suit exactement le même principe que les expositions précédentes : tu vas voir des vidéos courtes, progressivement plus directes, en appliquant la tension musculaire pendant la vision. Ton système nerveux va s'habituer, comme il s'est habitué aux couleurs, aux formes et aux images.\n\nLa règle d'or reste la même : tu ne cherches pas à ne rien ressentir. Tu cherches à rester présent·e avec ce que tu ressens, en gardant tes muscles contractés.",
+        keyPoints: [
+          "Le mouvement et le son ajoutent de la réalité au stimulus visuel",
+          "La réponse vasovagale est plus facilement déclenchée par la vidéo que par les images",
+          "L'habituation fonctionne de la même façon : répétition, tolérance croissante",
+          "La tension musculaire appliquée se pratique tout au long de la vidéo",
+        ],
+        studies: [
+          {
+            authors: "Öst, L. G., Hellstrom, K. & Kaver, A.",
+            year: 1992,
+            finding: "Dans les protocoles d'exposition à l'hémophobie, les expositions vidéo produisent des résultats équivalents aux expositions in vivo pour la réduction de la réponse vasovagale, à condition que la tension musculaire appliquée soit maintenue pendant la vision.",
+            source: "Behaviour Research and Therapy",
+          },
+          {
+            authors: "Koch, H. J., Spörl, E. & Steger, J.",
+            year: 2004,
+            finding: "L'exposition vidéo à des procédures médicales (prises de sang, soins infirmiers) réduit significativement l'anxiété anticipatoire chez les patients hémophobes avant une intervention médicale réelle, avec un maintien des gains à 6 mois.",
+            source: "Journal of Anxiety Disorders",
+          },
+        ],
+      },
+      {
+        type: 'reading',
+        title: "ACT : La flexibilité psychologique en action",
+        content: "Tu as maintenant exploré les six processus de l'ACT : le piège du contrôle, le moment présent, la défusion cognitive, l'acceptation, le soi observateur, et tes valeurs. Dans ce module, tu vas les mobiliser tous ensemble face à un stimulus plus intense.\n\nSteven Hayes décrit la flexibilité psychologique comme la capacité à \"rester en contact avec l'expérience du moment présent comme un être humain conscient, et à changer ou maintenir son comportement en direction de ce qui compte pour soi\". Chaque outil que tu as appris t'aide à rester en contact avec l'expérience plutôt qu'à la fuir.\n\nFace à une vidéo difficile, ton esprit va générer des pensées. «Je ne vais pas tenir.» «C'est trop.» «Je vais faire un malaise.» Tu sais maintenant faire avec ces pensées : les nommer, les voir comme de la météo, et continuer à regarder. Pas parce que la peur a disparu. Parce que tu as choisi de regarder.\n\nC'est ça, la flexibilité psychologique. Pas l'invulnérabilité. La liberté de choisir ton comportement malgré ce que ressent ton corps.",
+        keyPoints: [
+          "Les 6 processus ACT s'activent simultanément face à la vidéo",
+          "Nommer les pensées pendant la vision réduit leur emprise ('mon cerveau me dit que...')",
+          "Rester présent·e = voir la vidéo telle qu'elle est, pas la catastrophe imaginée",
+          "Regarder, c'est un acte de liberté, pas une performance",
+        ],
+        studies: [
+          {
+            authors: "Twohig, M. P. et al.",
+            year: 2010,
+            finding: "Les personnes qui ont développé de la flexibilité psychologique avec l'ACT maintiennent leur capacité à tolérer un stimulus anxiogène plus longtemps et ressentent une détresse subjective significativement plus faible que les groupes contrôle, même à intensité de stimulus équivalente.",
+            source: "Journal of Consulting and Clinical Psychology",
+          },
+        ],
+      },
+      {
+        type: 'video',
+        title: "Vidéo 1 : Une prise de sang vue de loin",
+        description: "Une vidéo courte montrant l'environnement général d'un laboratoire d'analyses. Contraction des jambes pendant toute la durée.",
+        src: 'https://www.youtube.com/watch?v=REMPLACER_VIDEO_1',
+        minWatchSeconds: 0,
+        showTension: true,
+      },
+      {
+        type: 'video',
+        title: "Vidéo 2 : La préparation - garrot et veine",
+        description: "La phase de préparation : pose du garrot, nettoyage de la veine, sans aiguille encore. Tension musculaire maintenue.",
+        src: 'https://www.youtube.com/watch?v=REMPLACER_VIDEO_2',
+        minWatchSeconds: 15,
+        showTension: true,
+      },
+      {
+        type: 'video',
+        title: "Vidéo 3 : La prise de sang complète",
+        description: "Une prise de sang réelle et calme, du début à la fin. Environ 2 minutes. Tension musculaire maintenue tout au long.",
+        src: 'https://www.youtube.com/watch?v=REMPLACER_VIDEO_3',
+        minWatchSeconds: 30,
+        showTension: true,
+      },
+      {
+        type: 'journal',
+        prompt: "Tu viens de regarder des vidéos de prises de sang réelles. Décris ce qui s'est passé en toi pendant la vision : au niveau physique (tension, rythme cardiaque, nausée), au niveau des pensées (qu'est-ce que ton cerveau te disait ?), et au niveau du comportement (as-tu continué à regarder, as-tu eu envie d'arrêter, as-tu utilisé la tension musculaire ?). Qu'est-ce qui était différent par rapport aux images statiques du module précédent ?",
+      },
+    ],
+  },
+
+  {
+    id: 8,
     title: 'Maîtrise totale',
     subtitle: 'Prêt·e pour la vraie vie',
     description: "Des scénarios réels, la synthèse ACT complète, et l'engagement vers la vie que tu veux.",
     duration: '35 min',
     xpBonus: 150,
-    badge: { id: 'module_7', label: 'Maître absolu', icon: '🏆' },
+    badge: { id: 'module_8', label: 'Maître absolu', icon: '🏆' },
     exercises: [
       {
         type: 'reading',

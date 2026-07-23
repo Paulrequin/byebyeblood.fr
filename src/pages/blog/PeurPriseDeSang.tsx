@@ -217,7 +217,7 @@ export default function PeurPriseDeSang() {
             Aller plus loin que la prochaine prise de sang
           </h2>
           <p className={s.ctaText}>
-            7 modules progressifs. Exposition graduelle, tension musculaire appliquée, principes ACT. La première séance est gratuite, sans engagement, sans image difficile.
+            8 modules progressifs. Exposition graduelle, tension musculaire appliquée, principes ACT. La première séance est gratuite, sans engagement, sans image difficile.
           </p>
           <Link to="/auth" className={s.ctaBtn}>
             Commencer gratuitement →
