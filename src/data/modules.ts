@@ -650,13 +650,13 @@ export const MODULES: Module[] = [
       },
       {
         type: 'reading',
-        title: "ACT : La flexibilité psychologique en action",
-        content: "Tu as maintenant exploré les six processus de l'ACT : le piège du contrôle, le moment présent, la défusion cognitive, l'acceptation, le soi observateur, et tes valeurs. Dans ce module, tu vas les mobiliser tous ensemble face à un stimulus plus intense.\n\nSteven Hayes décrit la flexibilité psychologique comme la capacité à \"rester en contact avec l'expérience du moment présent comme un être humain conscient, et à changer ou maintenir son comportement en direction de ce qui compte pour soi\". Chaque outil que tu as appris t'aide à rester en contact avec l'expérience plutôt qu'à la fuir.\n\nFace à une vidéo difficile, ton esprit va générer des pensées. «Je ne vais pas tenir.» «C'est trop.» «Je vais faire un malaise.» Tu sais maintenant faire avec ces pensées : les nommer, les voir comme de la météo, et continuer à regarder. Pas parce que la peur a disparu. Parce que tu as choisi de regarder.\n\nC'est ça, la flexibilité psychologique. Pas l'invulnérabilité. La liberté de choisir ton comportement malgré ce que ressent ton corps.",
+        title: "ACT : Cinq outils, une seule vidéo",
+        content: "Tu as maintenant cinq outils ACT dans ta boîte : reconnaître le piège du contrôle, ancrer dans le moment présent, défusionner de tes pensées, accepter l'inconfort, habiter le soi observateur, et clarifier tes valeurs. Ce sont exactement les outils dont tu as besoin pour traverser les vidéos qui suivent.\n\nFace à une vidéo difficile, ton esprit va générer des pensées. «Je ne vais pas tenir.» «C'est trop.» «Je vais faire un malaise.» Tu sais maintenant quoi faire avec ça : nommer la pensée («mon cerveau me dit que je ne peux pas tenir»), revenir à ce qui est réel maintenant (tu es assis·e, en sécurité, devant un écran), et continuer à regarder.\n\nLa tension musculaire maintient ta pression artérielle. L'ACT maintient ta présence. Les deux ensemble, c'est ce qui rend l'exposition vidéo supportable, puis banale.\n\nUn sixième outil t'attend dans le module suivant, le dernier. Mais pour l'instant, tu as tout ce qu'il faut.",
         keyPoints: [
-          "Les 6 processus ACT s'activent simultanément face à la vidéo",
-          "Nommer les pensées pendant la vision réduit leur emprise ('mon cerveau me dit que...')",
-          "Rester présent·e = voir la vidéo telle qu'elle est, pas la catastrophe imaginée",
-          "Regarder, c'est un acte de liberté, pas une performance",
+          "5 outils ACT déjà acquis, tous activables pendant la vision",
+          "Nommer la pensée réduit son emprise : 'mon cerveau me dit que...'",
+          "L'écran n'est pas la situation réelle : tu es en sécurité, maintenant",
+          "Tension musculaire + présence ACT = exposition vidéo possible",
         ],
         studies: [
           {
@@ -710,7 +710,7 @@ export const MODULES: Module[] = [
       {
         type: 'reading',
         title: 'De la théorie à la pratique',
-        content: "Tu as parcouru un long chemin. Tu comprends les mécanismes de ta peur, tu maîtrises deux techniques de respiration, tu pratiques la tension musculaire appliquée, et tu as traversé des expositions visuelles progressives.\n\nCe dernier module est celui de l'intégration. Ici, tu vas appliquer toutes ces compétences dans des scénarios de la vie réelle, les situations que tu redoutais peut-être avant de commencer ce programme.\n\nLa clé de la maîtrise, ce n'est pas l'absence totale de peur. C'est la capacité à agir malgré la peur, avec des outils concrets pour la gérer. La plupart des personnes qui terminent ce programme ne deviennent pas insensibles au sang : elles deviennent capables de faire face à une prise de sang, d'accompagner un proche blessé, de regarder une scène médicale à la télévision, sans être dépassées.\n\nLis chaque scénario attentivement. Visualise-toi en train de traverser les étapes. Ressens ce que tu ressentirais, et remarque que tu as maintenant les outils pour gérer ça.\n\nTu n'es plus la même personne qu'au début de ce programme.",
+        content: "Tu as parcouru un long chemin. Tu comprends les mécanismes de ta peur, tu maîtrises deux techniques de respiration, tu pratiques la tension musculaire appliquée, tu as traversé des expositions visuelles progressives, et tu as regardé des prises de sang réelles en vidéo avec tes outils ACT.\n\nCe dernier module est celui de l'intégration. Ici, tu vas appliquer toutes ces compétences dans des scénarios de la vie réelle, les situations que tu redoutais peut-être avant de commencer ce programme.\n\nLa clé de la maîtrise, ce n'est pas l'absence totale de peur. C'est la capacité à agir malgré la peur, avec des outils concrets pour la gérer. La plupart des personnes qui terminent ce programme ne deviennent pas insensibles au sang : elles deviennent capables de faire face à une prise de sang, d'accompagner un proche blessé, de regarder une scène médicale à la télévision, sans être dépassées.\n\nLis chaque scénario attentivement. Visualise-toi en train de traverser les étapes. Ressens ce que tu ressentirais, et remarque que tu as maintenant les outils pour gérer ça.\n\nTu n'es plus la même personne qu'au début de ce programme.",
         keyPoints: [
           "La maîtrise = agir avec ses outils malgré la peur, pas l'absence de peur",
           "Les outils acquis : compréhension, respiration, tension musculaire, habituations",
