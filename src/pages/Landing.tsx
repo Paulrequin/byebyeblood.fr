@@ -490,7 +490,7 @@ export default function Landing() {
         <div className={s.footerInner}>
           <div className={s.footerLogo}>Bye Bye <span>Blood</span></div>
           <div className={s.footerDisclaimer}>
-            Ceci n'est pas un dispositif médical. En cas de phobie sévère ou de malaises répétés, parles-en à un professionnel de santé. · <a href="/sources" style={{color:'inherit', textDecorationColor:'currentColor'}}>Fondements scientifiques</a> · <a href="/blog/prise-de-sang-peur-evanouissement" style={{color:'inherit', textDecorationColor:'currentColor'}}>Prise de sang et peur</a> · © Bye Bye Blood 2026
+            Ceci n'est pas un dispositif médical. En cas de phobie sévère ou de malaises répétés, parles-en à un professionnel de santé. · <a href="/sources" style={{color:'inherit', textDecorationColor:'currentColor'}}>Fondements scientifiques</a> · <a href="/blog/prise-de-sang-peur-evanouissement" style={{color:'inherit', textDecorationColor:'currentColor'}}>Prise de sang et peur</a> · <a href="/legal" style={{color:'inherit', textDecorationColor:'currentColor'}}>Mentions légales et CGV</a> · © Bye Bye Blood 2026
           </div>
         </div>
       </footer>
