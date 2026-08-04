@@ -481,88 +481,77 @@ function ImageExposureExercise({ level, title, description, onNext, setFooterAct
   }, [onNext, setFooterAction])
 
   function renderSVG() {
-    if (level === 1) return (
-      <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
-        <defs>
-          <radialGradient id="g1" cx="50%" cy="50%">
-            <stop offset="0%" stopColor="#E53935" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#440011" stopOpacity="0.1" />
-          </radialGradient>
-        </defs>
-        <circle cx="100" cy="100" r="90" fill="url(#g1)" />
-        <path d="M60 80 Q100 40 140 80 Q160 110 140 140 Q100 170 60 140 Q40 110 60 80Z" fill="#E53935" opacity="0.4" />
-      </svg>
-    )
-    if (level === 2) return (
-      <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
-        <line x1="100" y1="20" x2="100" y2="180" stroke="#E53935" strokeWidth="8" strokeLinecap="round" />
-        <ellipse cx="100" cy="100" rx="40" ry="12" fill="none" stroke="#E53935" strokeWidth="3" opacity="0.6" />
-        <circle cx="100" cy="60" r="8" fill="#E53935" opacity="0.8" />
-        <circle cx="100" cy="140" r="8" fill="#E53935" opacity="0.8" />
-        <path d="M80 80 Q60 100 80 120" stroke="#AA1122" strokeWidth="4" fill="none" />
-        <path d="M120 80 Q140 100 120 120" stroke="#AA1122" strokeWidth="4" fill="none" />
-      </svg>
-    )
-    if (level === 3) return (
-      <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
-        <rect x="20" y="60" width="160" height="80" rx="8" fill="#F0EDE8" stroke="#E8E6E0" strokeWidth="2" />
-        <ellipse cx="100" cy="100" rx="55" ry="25" fill="#8B1A1A" opacity="0.9" />
-        <ellipse cx="100" cy="100" rx="40" ry="18" fill="#E53935" opacity="0.8" />
-        <circle cx="85" cy="95" r="5" fill="#FF4455" opacity="0.9" />
-        <circle cx="115" cy="105" r="3" fill="#FF4455" opacity="0.7" />
-        <path d="M50 100 Q70 85 90 100 Q110 115 130 100 Q150 85 160 100" stroke="#FF6677" strokeWidth="2.5" fill="none" opacity="0.8" />
-      </svg>
-    )
-    if (level === 4) return (
-      <svg viewBox="0 0 220 200" className="w-48 h-48 mx-auto">
-        {/* Fond neutre */}
-        <rect width="220" height="200" fill="#F5F0EA" />
-        {/* Avant-bras */}
-        <path d="M50 60 Q55 58 170 62 Q180 64 182 100 Q180 136 170 138 Q55 142 50 140 Q38 120 38 100 Q38 80 50 60Z" fill="#D4A987" />
-        {/* Ombre intérieure bras */}
-        <path d="M50 60 Q55 58 170 62 Q176 64 178 80 Q176 70 165 68 Q55 64 48 66Z" fill="#C4957A" opacity="0.5" />
-        {/* Veine principale */}
-        <path d="M60 95 Q90 88 130 92 Q155 95 170 100" stroke="#5B7FBB" strokeWidth="5" fill="none" strokeLinecap="round" opacity="0.75" />
-        {/* Veine secondaire */}
-        <path d="M80 100 Q100 106 120 103 Q140 100 155 104" stroke="#6A8FC9" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.5" />
-        {/* Pli du coude */}
-        <path d="M55 75 Q52 100 55 125" stroke="#B8896A" strokeWidth="2" fill="none" opacity="0.4" />
-        {/* Label */}
-        <text x="110" y="170" textAnchor="middle" fontSize="10" fill="#888" fontFamily="sans-serif">veine antécubitale</text>
-      </svg>
-    )
-    if (level === 5) return (
-      <svg viewBox="0 0 220 200" className="w-48 h-48 mx-auto">
-        {/* Fond plateau médical */}
-        <rect width="220" height="200" fill="#F5F0EA" />
-        <rect x="15" y="30" width="190" height="145" rx="6" fill="#E8E4DC" stroke="#D0C8BB" strokeWidth="1.5" />
-        {/* Tube de prélèvement */}
-        <rect x="30" y="50" width="22" height="80" rx="10" fill="#CC1111" opacity="0.9" />
-        <rect x="30" y="50" width="22" height="12" rx="5" fill="#880000" />
-        <rect x="33" y="56" width="6" height="60" rx="3" fill="#FF4444" opacity="0.3" />
-        {/* Second tube violet (EDTA) */}
-        <rect x="62" y="55" width="22" height="75" rx="10" fill="#7B3F9E" opacity="0.85" />
-        <rect x="62" y="55" width="22" height="12" rx="5" fill="#4A1A6E" />
-        <rect x="65" y="61" width="6" height="55" rx="3" fill="#BB88DD" opacity="0.3" />
-        {/* Étiquette tube */}
-        <rect x="32" y="82" width="18" height="20" rx="2" fill="white" opacity="0.85" />
-        <line x1="34" y1="87" x2="48" y2="87" stroke="#ccc" strokeWidth="1" />
-        <line x1="34" y1="91" x2="48" y2="91" stroke="#ccc" strokeWidth="1" />
-        <line x1="34" y1="95" x2="44" y2="95" stroke="#ccc" strokeWidth="1" />
-        {/* Compresse */}
-        <rect x="100" y="60" width="45" height="35" rx="3" fill="white" stroke="#D0C8BB" strokeWidth="1" />
-        <line x1="108" y1="68" x2="137" y2="68" stroke="#ddd" strokeWidth="0.8" />
-        <line x1="108" y1="73" x2="137" y2="73" stroke="#ddd" strokeWidth="0.8" />
-        <line x1="108" y1="78" x2="130" y2="78" stroke="#ddd" strokeWidth="0.8" />
-        <line x1="108" y1="83" x2="133" y2="83" stroke="#ddd" strokeWidth="0.8" />
-        {/* Aiguille (représentation neutre, capuchon posé) */}
-        <rect x="105" y="108" width="70" height="8" rx="4" fill="#A0A0A0" />
-        <rect x="105" y="108" width="18" height="8" rx="4" fill="#C8C8C8" />
-        <polygon points="175,108 183,112 175,116" fill="#888" />
-        <text x="110" y="165" textAnchor="middle" fontSize="9.5" fill="#888" fontFamily="sans-serif">matériel de prélèvement</text>
-      </svg>
-    )
-    return null
+    switch (level) {
+      case 1: return (
+        <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
+          <defs>
+            <radialGradient id="g1" cx="50%" cy="50%">
+              <stop offset="0%" stopColor="#E53935" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#440011" stopOpacity="0.1" />
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="90" fill="url(#g1)" />
+          <path d="M60 80 Q100 40 140 80 Q160 110 140 140 Q100 170 60 140 Q40 110 60 80Z" fill="#E53935" opacity="0.4" />
+        </svg>
+      )
+      case 2: return (
+        <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
+          <line x1="100" y1="20" x2="100" y2="180" stroke="#E53935" strokeWidth="8" strokeLinecap="round" />
+          <ellipse cx="100" cy="100" rx="40" ry="12" fill="none" stroke="#E53935" strokeWidth="3" opacity="0.6" />
+          <circle cx="100" cy="60" r="8" fill="#E53935" opacity="0.8" />
+          <circle cx="100" cy="140" r="8" fill="#E53935" opacity="0.8" />
+          <path d="M80 80 Q60 100 80 120" stroke="#AA1122" strokeWidth="4" fill="none" />
+          <path d="M120 80 Q140 100 120 120" stroke="#AA1122" strokeWidth="4" fill="none" />
+        </svg>
+      )
+      case 3: return (
+        <svg viewBox="0 0 200 200" className="w-48 h-48 mx-auto">
+          <rect x="20" y="60" width="160" height="80" rx="8" fill="#F0EDE8" stroke="#E8E6E0" strokeWidth="2" />
+          <ellipse cx="100" cy="100" rx="55" ry="25" fill="#8B1A1A" opacity="0.9" />
+          <ellipse cx="100" cy="100" rx="40" ry="18" fill="#E53935" opacity="0.8" />
+          <circle cx="85" cy="95" r="5" fill="#FF4455" opacity="0.9" />
+          <circle cx="115" cy="105" r="3" fill="#FF4455" opacity="0.7" />
+          <path d="M50 100 Q70 85 90 100 Q110 115 130 100 Q150 85 160 100" stroke="#FF6677" strokeWidth="2.5" fill="none" opacity="0.8" />
+        </svg>
+      )
+      case 4: return (
+        <svg viewBox="0 0 220 200" className="w-48 h-48 mx-auto">
+          <rect width="220" height="200" fill="#F5F0EA" />
+          <path d="M50 60 Q55 58 170 62 Q180 64 182 100 Q180 136 170 138 Q55 142 50 140 Q38 120 38 100 Q38 80 50 60Z" fill="#D4A987" />
+          <path d="M50 60 Q55 58 170 62 Q176 64 178 80 Q176 70 165 68 Q55 64 48 66Z" fill="#C4957A" opacity="0.5" />
+          <path d="M60 95 Q90 88 130 92 Q155 95 170 100" stroke="#5B7FBB" strokeWidth="5" fill="none" strokeLinecap="round" opacity="0.75" />
+          <path d="M80 100 Q100 106 120 103 Q140 100 155 104" stroke="#6A8FC9" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.5" />
+          <path d="M55 75 Q52 100 55 125" stroke="#B8896A" strokeWidth="2" fill="none" opacity="0.4" />
+          <text x="110" y="170" textAnchor="middle" fontSize="10" fill="#888" fontFamily="sans-serif">veine antécubitale</text>
+        </svg>
+      )
+      case 5: return (
+        <svg viewBox="0 0 220 200" className="w-48 h-48 mx-auto">
+          <rect width="220" height="200" fill="#F5F0EA" />
+          <rect x="15" y="30" width="190" height="145" rx="6" fill="#E8E4DC" stroke="#D0C8BB" strokeWidth="1.5" />
+          <rect x="30" y="50" width="22" height="80" rx="10" fill="#CC1111" opacity="0.9" />
+          <rect x="30" y="50" width="22" height="12" rx="5" fill="#880000" />
+          <rect x="33" y="56" width="6" height="60" rx="3" fill="#FF4444" opacity="0.3" />
+          <rect x="62" y="55" width="22" height="75" rx="10" fill="#7B3F9E" opacity="0.85" />
+          <rect x="62" y="55" width="22" height="12" rx="5" fill="#4A1A6E" />
+          <rect x="65" y="61" width="6" height="55" rx="3" fill="#BB88DD" opacity="0.3" />
+          <rect x="32" y="82" width="18" height="20" rx="2" fill="white" opacity="0.85" />
+          <line x1="34" y1="87" x2="48" y2="87" stroke="#ccc" strokeWidth="1" />
+          <line x1="34" y1="91" x2="48" y2="91" stroke="#ccc" strokeWidth="1" />
+          <line x1="34" y1="95" x2="44" y2="95" stroke="#ccc" strokeWidth="1" />
+          <rect x="100" y="60" width="45" height="35" rx="3" fill="white" stroke="#D0C8BB" strokeWidth="1" />
+          <line x1="108" y1="68" x2="137" y2="68" stroke="#ddd" strokeWidth="0.8" />
+          <line x1="108" y1="73" x2="137" y2="73" stroke="#ddd" strokeWidth="0.8" />
+          <line x1="108" y1="78" x2="130" y2="78" stroke="#ddd" strokeWidth="0.8" />
+          <line x1="108" y1="83" x2="133" y2="83" stroke="#ddd" strokeWidth="0.8" />
+          <rect x="105" y="108" width="70" height="8" rx="4" fill="#A0A0A0" />
+          <rect x="105" y="108" width="18" height="8" rx="4" fill="#C8C8C8" />
+          <polygon points="175,108 183,112 175,116" fill="#888" />
+          <text x="110" y="165" textAnchor="middle" fontSize="9.5" fill="#888" fontFamily="sans-serif">matériel de prélèvement</text>
+        </svg>
+      )
+      default: return null
+    }
   }
 
   return (
@@ -777,31 +766,27 @@ function ScenarioExercise({ title, situation, steps, onNext, setFooterAction }: 
   )
 }
 
-// ─── VideoExercise ────────────────────────────────────────────────────────────
-
 // ─── AudioExercise ────────────────────────────────────────────────────────────
 
 function AudioExercise({ title, description, src, minListenSeconds = 0, caption, showTension = true, onNext, setFooterAction }: AudioExerciseData & BaseExerciseProps) {
-  const [elapsed, setElapsed]   = useState(0)
-  const [playing, setPlaying]   = useState(false)
-  const intervalRef             = useRef<ReturnType<typeof setInterval> | null>(null)
-  const audioRef                = useRef<HTMLAudioElement>(null)
-  const isReady                 = elapsed >= minListenSeconds
+  const [elapsed, setElapsed] = useState(0)
+  const [isReady, setIsReady] = useState(minListenSeconds === 0)
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
-    setFooterAction({ label: isReady ? 'Continuer →' : `Écoute encore… (${Math.max(0, minListenSeconds - elapsed)}s)`, disabled: !isReady, onClick: isReady ? onNext : null })
+    setFooterAction({
+      label: isReady ? 'Continuer →' : `Écoute encore… (${Math.max(0, minListenSeconds - elapsed)}s)`,
+      disabled: !isReady,
+      onClick: isReady ? onNext : null,
+    })
   }, [isReady, elapsed, minListenSeconds, onNext, setFooterAction])
 
-  function handlePlay() {
-    setPlaying(true)
-    if (intervalRef.current) return
-    intervalRef.current = setInterval(() => setElapsed(e => e + 1), 1000)
+  function handleTimeUpdate() {
+    if (isReady) return
+    const t = audioRef.current?.currentTime ?? 0
+    setElapsed(Math.floor(t))
+    if (t >= minListenSeconds) setIsReady(true)
   }
-  function handlePause() {
-    setPlaying(false)
-    if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null }
-  }
-  useEffect(() => () => { if (intervalRef.current) clearInterval(intervalRef.current) }, [])
 
   return (
     <div className="flex flex-col gap-5">
@@ -816,16 +801,7 @@ function AudioExercise({ title, description, src, minListenSeconds = 0, caption,
         </div>
       )}
       <div style={{display:'flex', flexDirection:'column', gap:'12px', padding:'24px', background:'#FBF5EA', border:'1px solid #ddd'}}>
-        <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
-          <div style={{width:44, height:44, borderRadius:'50%', background: playing ? '#EE3D2E' : '#333', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, cursor:'pointer'}}
-            onClick={() => { if (audioRef.current) { playing ? audioRef.current.pause() : audioRef.current.play() } }}>
-            <span style={{color:'white', fontSize:'1.1rem'}}>{playing ? '⏸' : '▶'}</span>
-          </div>
-          <div style={{flex:1}}>
-            <audio ref={audioRef} src={src} onPlay={handlePlay} onPause={handlePause} onEnded={handlePause}
-              style={{width:'100%', height:36}} controls />
-          </div>
-        </div>
+        <audio ref={audioRef} src={src} onTimeUpdate={handleTimeUpdate} style={{width:'100%'}} controls />
         {caption && <p style={{fontSize:'0.78rem', color:'#A0907A', fontStyle:'italic'}}>{caption}</p>}
         {minListenSeconds > 0 && !isReady && (
           <p style={{fontSize:'0.8rem', color:'#888', textAlign:'center'}}>Écoute au moins {minListenSeconds}s pour continuer</p>
