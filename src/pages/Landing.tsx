@@ -138,7 +138,7 @@ const FAQ = [
   },
   {
     q: "Comment ça se passe, concrètement, la première séance ?",
-    a: "Tu t'inscris, c'est gratuit. La première séance dure environ 20 minutes. Tu lis, tu comprends, tu n'es exposé·e à rien que des mots. Le module 1 commence par la science : pourquoi ton corps réagit comme il le fait, ce que l'hémophobie est réellement, et pourquoi l'évitement aggrave les choses. Il y a un quiz court à la fin, et un espace pour noter ce que tu ressens. Pas d'image, pas de vidéo, pas de confrontation. Juste une porte ouverte. Si tu décides de continuer, tu accèdes aux 6 modules suivants pour 295€ une seule fois, sans abonnement. Beaucoup de gens font le premier module et se disent qu'ils auraient pu commencer bien plus tôt.",
+    a: "Tu t'inscris, c'est gratuit. La première séance dure environ 20 minutes. Tu lis, tu comprends, tu n'es exposé·e à rien que des mots. Le module 1 commence par la science : pourquoi ton corps réagit comme il le fait, ce que l'hémophobie est réellement, et pourquoi l'évitement aggrave les choses. Il y a un quiz court à la fin, et un espace pour noter ce que tu ressens. Pas d'image, pas de vidéo, pas de confrontation. Juste une porte ouverte. Si tu décides de continuer, tu accèdes aux 8 modules suivants pour 295€ une seule fois, sans abonnement. Beaucoup de gens font le premier module et se disent qu'ils auraient pu commencer bien plus tôt.",
   },
 ]
 
