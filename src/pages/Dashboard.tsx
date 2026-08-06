@@ -245,6 +245,8 @@ export default function Dashboard() {
 
             {!currentMod && completedCount === MODULES.length && (
               <div style={{display:'flex', flexDirection:'column', gap:'16px', marginBottom:'8px'}}>
+
+                {/* Étape 1 : première prise de sang */}
                 <div style={{padding:'28px', background:'#FFF5F0', border:'1.5px solid #EE3D2E', boxShadow:'4px 4px 0 #E7DCC9'}}>
                   <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#EE3D2E', marginBottom:'10px'}}>Prochaine étape</p>
                   <h2 style={{fontSize:'1.3rem', fontWeight:800, letterSpacing:'-0.03em', color:'#1C1714', marginBottom:'8px', lineHeight:1.25}}>Ta première vraie prise de sang</h2>
@@ -253,11 +255,11 @@ export default function Dashboard() {
                   </p>
                   <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     {[
-                      ['🏥', 'Choisir un petit laboratoire privé de ville', 'Plus calme qu\'un hôpital, personnel habitué aux patients anxieux.'],
-                      ['📞', 'Appeler à l\'avance', 'Dire : «J\'ai une phobie du sang, est-ce que je peux m\'allonger ?» Cette demande est connue et accueillie.'],
-                      ['💪', 'Commencer la tension musculaire avant d\'entrer dans la salle', 'Pas au moment de l\'aiguille - dès la salle d\'attente.'],
-                      ['🎧', 'Mettre des écouteurs en attendant', 'Écoute quelque chose de calme ou de familier pour rester ancré·e.'],
-                      ['🔁', 'Si malaise : ce n\'est pas un échec', 'Recommence dans une semaine. La courbe n\'est pas une ligne droite.'],
+                      ['🏥', 'Choisir un petit laboratoire privé de ville', 'Plus calme qu\'un hôpital, le personnel est habitué aux patients anxieux.'],
+                      ['📞', 'Appeler à l\'avance', '«J\'ai une phobie du sang, est-ce que je peux m\'allonger ?» Cette demande est connue et accueillie.'],
+                      ['💪', 'Commencer la tension musculaire dès la salle d\'attente', 'Pas au moment de l\'aiguille - bien avant, pour maintenir ta pression artérielle stable.'],
+                      ['🎧', 'Mettre des écouteurs en attendant', 'Quelque chose de calme ou de familier pour rester ancré·e dans le moment présent.'],
+                      ['🔁', 'Si malaise : ce n\'est pas un échec', 'Recommence dans une semaine. La courbe d\'apprentissage n\'est pas une ligne droite.'],
                     ].map(([icon, title, sub]) => (
                       <div key={title} style={{display:'flex', gap:'12px', alignItems:'flex-start', padding:'12px 14px', background:'#FFFDF8', border:'1px solid #E7DCC9'}}>
                         <span style={{fontSize:'1.1rem', flexShrink:0, marginTop:'1px'}}>{icon}</span>
@@ -270,12 +272,49 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div style={{padding:'20px 24px', background:'#FBF5EA', border:'1px solid #E7DCC9'}}>
-                  <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#888', marginBottom:'8px'}}>Maintien</p>
-                  <p style={{fontSize:'0.88rem', color:'#555', lineHeight:1.65}}>
-                    Une exposition légère par mois suffit à maintenir les acquis : regarder une vidéo du module 8, relire un scénario, refaire un exercice de tension. Les gains se préservent si on les entretient, même modestement.
-                  </p>
+                {/* Rester actif */}
+                <div style={{padding:'24px 28px', background:'#FBF5EA', border:'1.5px solid #1C1714', boxShadow:'4px 4px 0 #E7DCC9'}}>
+                  <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#888', marginBottom:'10px'}}>Rester actif</p>
+                  <h3 style={{fontSize:'1.1rem', fontWeight:800, letterSpacing:'-0.02em', color:'#1C1714', marginBottom:'16px'}}>Quatre façons de maintenir les acquis</h3>
+                  <div style={{display:'flex', flexDirection:'column', gap:'14px'}}>
+                    {[
+                      {
+                        icon: '🩸',
+                        title: 'Donner son sang régulièrement',
+                        body: 'Le don du sang est l\'exposition d\'entretien la plus complète qui existe : encadrée, planifiée, et au service d\'une valeur (aider les autres). Les études montrent que l\'action engagée en direction d\'une valeur renforce la tolérance à l\'inconfort bien plus qu\'une exposition purement technique. EFS (Établissement Français du Sang) accepte les donneurs tous les 8 semaines (hommes) et 12 semaines (femmes).',
+                        tag: 'Öst & Sterner, 1991 - Hayes, ACT',
+                      },
+                      {
+                        icon: '🚑',
+                        title: 'Passer le PSC1 (Premiers Secours Civiques)',
+                        body: 'Une formation de 7 heures qui inclut des scénarios réels d\'hémorragie avec simulation. Craske et al. (2008) sur l\'apprentissage inhibiteur : les expositions dans des contextes variés généralisent mieux la désensibilisation qu\'un seul type d\'exposition répété. Le PSC1 couvre exactement ce contexte différent - et il te rend utile en situation réelle.',
+                        tag: 'Craske et al., 2008',
+                      },
+                      {
+                        icon: '👥',
+                        title: 'Accompagner un proche à ses prises de sang',
+                        body: 'Rachman (1989) a documenté la vicarious extinction : observer quelqu\'un traverser sereinement une situation anxiogène renforce l\'extinction chez le spectateur. Être la personne qui accompagne, au lieu d\'être accompagnée, inverse le rôle et consolide les acquis.',
+                        tag: 'Rachman, 1989',
+                      },
+                      {
+                        icon: '📅',
+                        title: 'Une exposition d\'entretien par mois',
+                        body: 'Craske, Treanor et al. (2014) : une exposition espacée toutes les 3 à 4 semaines prévient le retour de la peur, documenté chez 20 à 30 % des personnes traitées pour phobie spécifique. Une vidéo du module 8, un scénario relu, un exercice de tension - quelques minutes suffisent.',
+                        tag: 'Craske et al., 2014',
+                      },
+                    ].map(item => (
+                      <div key={item.title} style={{display:'flex', gap:'14px', alignItems:'flex-start', padding:'16px', background:'#FFFDF8', border:'1px solid #E7DCC9'}}>
+                        <span style={{fontSize:'1.3rem', flexShrink:0, marginTop:'2px'}}>{item.icon}</span>
+                        <div style={{flex:1}}>
+                          <p style={{fontSize:'0.88rem', fontWeight:700, color:'#1C1714', marginBottom:'4px'}}>{item.title}</p>
+                          <p style={{fontSize:'0.78rem', color:'#555', lineHeight:1.6, marginBottom:'6px'}}>{item.body}</p>
+                          <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.06em', textTransform:'uppercase', color:'#A0907A'}}>{item.tag}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
               </div>
             )}
 
