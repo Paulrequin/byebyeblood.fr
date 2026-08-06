@@ -243,6 +243,42 @@ export default function Dashboard() {
               </div>
             )}
 
+            {!currentMod && completedCount === MODULES.length && (
+              <div style={{display:'flex', flexDirection:'column', gap:'16px', marginBottom:'8px'}}>
+                <div style={{padding:'28px', background:'#FFF5F0', border:'1.5px solid #EE3D2E', boxShadow:'4px 4px 0 #E7DCC9'}}>
+                  <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#EE3D2E', marginBottom:'10px'}}>Prochaine étape</p>
+                  <h2 style={{fontSize:'1.3rem', fontWeight:800, letterSpacing:'-0.03em', color:'#1C1714', marginBottom:'8px', lineHeight:1.25}}>Ta première vraie prise de sang</h2>
+                  <p style={{fontSize:'0.88rem', color:'#555', lineHeight:1.65, marginBottom:'20px'}}>
+                    Le programme est terminé. Les outils sont en toi. Il reste une étape : les utiliser en vrai, dans un vrai laboratoire, avec une vraie aiguille.
+                  </p>
+                  <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+                    {[
+                      ['🏥', 'Choisir un petit laboratoire privé de ville', 'Plus calme qu\'un hôpital, personnel habitué aux patients anxieux.'],
+                      ['📞', 'Appeler à l\'avance', 'Dire : «J\'ai une phobie du sang, est-ce que je peux m\'allonger ?» Cette demande est connue et accueillie.'],
+                      ['💪', 'Commencer la tension musculaire avant d\'entrer dans la salle', 'Pas au moment de l\'aiguille - dès la salle d\'attente.'],
+                      ['🎧', 'Mettre des écouteurs en attendant', 'Écoute quelque chose de calme ou de familier pour rester ancré·e.'],
+                      ['🔁', 'Si malaise : ce n\'est pas un échec', 'Recommence dans une semaine. La courbe n\'est pas une ligne droite.'],
+                    ].map(([icon, title, sub]) => (
+                      <div key={title} style={{display:'flex', gap:'12px', alignItems:'flex-start', padding:'12px 14px', background:'#FFFDF8', border:'1px solid #E7DCC9'}}>
+                        <span style={{fontSize:'1.1rem', flexShrink:0, marginTop:'1px'}}>{icon}</span>
+                        <div>
+                          <p style={{fontSize:'0.85rem', fontWeight:700, color:'#1C1714', marginBottom:'2px'}}>{title}</p>
+                          <p style={{fontSize:'0.78rem', color:'#888', lineHeight:1.5}}>{sub}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{padding:'20px 24px', background:'#FBF5EA', border:'1px solid #E7DCC9'}}>
+                  <p style={{fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#888', marginBottom:'8px'}}>Maintien</p>
+                  <p style={{fontSize:'0.88rem', color:'#555', lineHeight:1.65}}>
+                    Une exposition légère par mois suffit à maintenir les acquis : regarder une vidéo du module 8, relire un scénario, refaire un exercice de tension. Les gains se préservent si on les entretient, même modestement.
+                  </p>
+                </div>
+              </div>
+            )}
+
             <p className={s.modulesSectionTitle}>Tous les modules</p>
             <div className={s.modulesList}>
               {MODULES.map(mod => {

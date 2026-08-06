@@ -935,7 +935,7 @@ export const MODULES: Module[] = [
       },
       {
         type: 'journal',
-        prompt: "Tu as terminé le programme complet : thérapie d'exposition ET ACT. Réponds à ces trois questions : (1) Qu'est-ce que tu as appris sur ta relation à la peur ? (2) Quelle situation concrète dans ta vie est maintenant différente ou le sera bientôt ? (3) Quelle valeur ce programme t'a aidé à mieux honorer ?",
+        prompt: "Tu as terminé le programme complet : thérapie d'exposition ET ACT. Réponds à ces trois questions : (1) Qu'est-ce que tu as appris sur ta relation à la peur ? (2) Quelle est la prochaine étape concrète que tu vas poser dans les 30 prochains jours (laboratoire, médecin, situation réelle) ? (3) Quelle valeur ce programme t'a aidé à mieux honorer ?",
       },
     ],
   },
