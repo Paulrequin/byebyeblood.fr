@@ -113,7 +113,7 @@ export const MODULES: Module[] = [
       {
         type: 'reading',
         title: 'Pourquoi tenir un journal',
-        content: "La phobie est une dérégulation du système d'alarme. Ton amygdale, la région du cerveau qui détecte le danger, a appris à déclencher une alerte maximale face au sang, même quand aucun danger réel n'existe. Le problème n'est pas que tu aies peur : la peur est utile. Le problème, c'est que ton cerveau ne fait plus la différence entre une menace réelle et une image, un mot, une pensée.\n\nPour désapprendre cette confusion, tu dois d'abord apprendre à l'observer. C'est là qu'intervient le journal.\n\nCe que le journal fait pour toi\n\nÉcrire sur ce que tu ressens n'est pas un exercice de style. C'est un outil neurologique. Quand tu mets des mots sur une émotion, tu actives le cortex préfrontal, la partie rationnelle de ton cerveau, qui modère l'activité de l'amygdale. Des études en neurosciences affectives (notamment les travaux de Matthew Lieberman à l'UCLA) montrent que simplement nommer une émotion réduit mesurably son intensité.\n\nMais le journal sert aussi à quelque chose de plus précis : calibrer ta peur. Apprendre à distinguer ce qui est vrai de ce qui est irrationnel.\n\nLa note de 1 à 10\n\nÀ chaque session, tu vas noter ton état sur une échelle de 1 à 10. Ce chiffre n'est pas une évaluation de ta valeur ni de ton courage. C'est une mesure brute de ce que ton corps ressent à cet instant.\n\n1-3 : calme, présent·e, peu ou pas d'anxiété physique.\n4-6 : inconfort notable, tension, léger vertige possible. L'alarme s'active, mais tu restes fonctionnel·le.\n7-8 : anxiété forte, respiration courte, envie de fuir. Ton corps croit à un danger réel.\n9-10 : réponse vasovagale imminente ou déclenchée, très forte détresse.\n\nEn notant ce chiffre régulièrement, tu vas commencer à voir deux choses. D'abord, que le même stimulus peut déclencher des niveaux très différents selon ton état du jour, ton niveau de fatigue, ou si tu as pratiqué tes outils. Ensuite, que sur la durée du programme, les chiffres descendent. Pas en ligne droite, pas sans rechutes, mais ils descendent. Ce mouvement vers le bas, c'est la preuve que ton cerveau réapprend.\n\nApprendre à voir la peur réelle et la peur apprise\n\nUne peur réelle répond à une menace concrète, présente, dans ton environnement immédiat. Une peur apprise répond à un signal conditionné, une image, une pensée, une couleur, qui a été associée par le passé à une expérience difficile.\n\nLa phobie est presque entièrement de la deuxième catégorie. Aucune photo ne peut te blesser. Aucun mot n'est dangereux. Mais ton cerveau, par association, a appris à traiter ces signaux comme des alertes réelles.\n\nLe journal est l'outil qui te permet de faire cette distinction, progressivement, séance après séance. En écrivant «j'ai ressenti 7, mais je n'étais pas en danger», tu commences à rééduquer l'amygdale. Tu lui montres que l'alarme s'est déclenchée, mais que rien de grave ne s'est passé. C'est exactement le même mécanisme que l'exposition progressive, mais appliqué à ta façon de penser.",
+        content: "La phobie est une dérégulation du système d'alarme. Ton amygdale, la région du cerveau qui détecte le danger, a appris à déclencher une alerte maximale face au sang, même quand aucun danger réel n'existe. Le problème n'est pas que tu aies peur : la peur est utile. Le problème, c'est que ton cerveau ne fait plus la différence entre une menace réelle et une image, un mot, une pensée.\n\nPour désapprendre cette confusion, tu dois d'abord apprendre à l'observer. C'est là qu'intervient le journal.\n\nCe que le journal fait pour toi\n\nÉcrire sur ce que tu ressens n'est pas un exercice de style. C'est un outil neurologique. Quand tu mets des mots sur une émotion, tu actives le cortex préfrontal, la partie rationnelle de ton cerveau, qui modère l'activité de l'amygdale. Des études en neurosciences affectives (notamment les travaux de Matthew Lieberman à l'UCLA) montrent que simplement nommer une émotion réduit de manière mesurable son intensité.\n\nMais le journal sert aussi à quelque chose de plus précis : calibrer ta peur. Apprendre à distinguer ce qui est vrai de ce qui est irrationnel.\n\nLa note de 1 à 10\n\nÀ chaque session, tu vas noter ton état sur une échelle de 1 à 10. Ce chiffre n'est pas une évaluation de ta valeur ni de ton courage. C'est une mesure brute de ce que ton corps ressent à cet instant.\n\n1-3 : calme, présent·e, peu ou pas d'anxiété physique.\n4-6 : inconfort notable, tension, léger vertige possible. L'alarme s'active, mais tu restes fonctionnel·le.\n7-8 : anxiété forte, respiration courte, envie de fuir. Ton corps croit à un danger réel.\n9-10 : réponse vasovagale imminente ou déclenchée, très forte détresse.\n\nEn notant ce chiffre régulièrement, tu vas commencer à voir deux choses. D'abord, que le même stimulus peut déclencher des niveaux très différents selon ton état du jour, ton niveau de fatigue, ou si tu as pratiqué tes outils. Ensuite, que sur la durée du programme, les chiffres descendent. Pas en ligne droite, pas sans rechutes, mais ils descendent. Ce mouvement vers le bas, c'est la preuve que ton cerveau réapprend.\n\nApprendre à voir la peur réelle et la peur apprise\n\nUne peur réelle répond à une menace concrète, présente, dans ton environnement immédiat. Une peur apprise répond à un signal conditionné, une image, une pensée, une couleur, qui a été associée par le passé à une expérience difficile.\n\nLa phobie est presque entièrement de la deuxième catégorie. Aucune photo ne peut te blesser. Aucun mot n'est dangereux. Mais ton cerveau, par association, a appris à traiter ces signaux comme des alertes réelles.\n\nLe journal est l'outil qui te permet de faire cette distinction, progressivement, séance après séance. En écrivant «j'ai ressenti 7, mais je n'étais pas en danger», tu commences à rééduquer l'amygdale. Tu lui montres que l'alarme s'est déclenchée, mais que rien de grave ne s'est passé. C'est exactement le même mécanisme que l'exposition progressive, mais appliqué à ta façon de penser.",
         keyPoints: [
           "La phobie est une dérégulation du système d'alarme, pas un signe de faiblesse",
           "Nommer une émotion active le cortex préfrontal et réduit l'activité de l'amygdale",
@@ -125,7 +125,7 @@ export const MODULES: Module[] = [
           {
             authors: "Lieberman, M. D., Eisenberger, N. I., Crockett, M. J., Tom, S. M., Pfeifer, J. H. & Way, B. M.",
             year: 2007,
-            finding: "Mettre des mots sur une émotion, même sans chercher à la changer, réduit mesurably l'activité de l'amygdale et diminue l'intensité émotionnelle perçue. L'IRMf montre une activation simultanée du cortex préfrontal droit, la région de la régulation émotionnelle.",
+            finding: "Mettre des mots sur une émotion, même sans chercher à la changer, réduit de manière mesurable l'activité de l'amygdale et diminue l'intensité émotionnelle perçue. L'IRMf montre une activation simultanée du cortex préfrontal droit, la région de la régulation émotionnelle.",
             source: "Psychological Science, UCLA",
           },
           {
@@ -491,10 +491,10 @@ export const MODULES: Module[] = [
             source: "The Psychological Record",
           },
           {
-            authors: "Öhman, A., Flykt, A. & Esteves, F.",
-            year: 2001,
-            finding: "Le cerveau détecte des stimuli potentiellement menaçants en 50 à 100 millisecondes, avant même la conscience visuelle. L'amygdale s'active face à des formes abstraites évoquant une menace avant que le cortex n'ait identifié l'objet. La position d'observateur neutralise cette réponse en activant le cortex préfrontal.",
-            source: "Journal of Experimental Psychology: General, Université de Stockholm",
+            authors: "Luciano, C. et al.",
+            year: 2010,
+            finding: "L'entraînement au soi observateur réduit la fusion cognitive et augmente la flexibilité psychologique de façon distincte des effets obtenus par la défusion seule. Se percevoir comme «contexte stable» plutôt que comme «contenu changeant» modifie durablement la relation aux pensées anxieuses.",
+            source: "Behavior Modification",
           },
         ],
       },
@@ -534,7 +534,7 @@ export const MODULES: Module[] = [
     id: 6,
     title: 'Exposition par les images',
     subtitle: 'Du plus abstrait au plus concret',
-    description: "Trois niveaux d'images progressives, et la clarification de ce qui compte vraiment pour toi.",
+    description: "Cinq niveaux d'images progressives, et la clarification de ce qui compte vraiment pour toi.",
     duration: '30 min',
     xpBonus: 100,
     badge: { id: 'module_6', label: 'Regard posé', icon: '👁️' },
@@ -744,9 +744,9 @@ export const MODULES: Module[] = [
       {
         type: 'reading',
         title: "ACT : Cinq outils, une seule vidéo",
-        content: "Tu as maintenant cinq outils ACT dans ta boîte : reconnaître le piège du contrôle, ancrer dans le moment présent, défusionner de tes pensées, accepter l'inconfort, habiter le soi observateur, et clarifier tes valeurs. Dans le module précédent, tu as pratiqué la défusion avec les mots. Ici, tu vas l'appliquer au mouvement.\n\nFace à une vidéo difficile, ton esprit va générer des pensées. «Je ne vais pas tenir.» «C'est trop.» «Je vais faire un malaise.» Tu sais maintenant quoi faire avec ça : nommer la pensée («mon cerveau me dit que je ne peux pas tenir»), revenir à ce qui est réel maintenant (tu es assis·e, en sécurité, devant un écran), et continuer à regarder.\n\nLa tension musculaire maintient ta pression artérielle. L'ACT maintient ta présence. Les deux ensemble, c'est ce qui rend l'exposition vidéo supportable, puis banale.\n\nUn sixième outil t'attend dans le module final. Mais pour l'instant, tu as tout ce qu'il faut.",
+        content: "Tu as maintenant cinq outils ACT dans ta boîte : ancrer dans le moment présent, défusionner de tes pensées, accepter l'inconfort, habiter le soi observateur, et clarifier tes valeurs. Dans le module précédent, tu as pratiqué la défusion avec les mots. Ici, tu vas l'appliquer au mouvement.\n\nFace à une vidéo difficile, ton esprit va générer des pensées. «Je ne vais pas tenir.» «C'est trop.» «Je vais faire un malaise.» Tu sais maintenant quoi faire avec ça : nommer la pensée («mon cerveau me dit que je ne peux pas tenir»), revenir à ce qui est réel maintenant (tu es assis·e, en sécurité, devant un écran), et continuer à regarder.\n\nLa tension musculaire maintient ta pression artérielle. L'ACT maintient ta présence. Les deux ensemble, c'est ce qui rend l'exposition vidéo supportable, puis banale.\n\nUn sixième outil t'attend dans le module final. Mais pour l'instant, tu as tout ce qu'il faut.",
         keyPoints: [
-          "5 outils ACT déjà acquis, tous activables pendant la vision",
+          "5 outils ACT acquis : présent, défusion, acceptation, soi observateur, valeurs",
           "Nommer la pensée réduit son emprise : 'mon cerveau me dit que...'",
           "L'écran n'est pas la situation réelle : tu es en sécurité, maintenant",
           "Tension musculaire + présence ACT = exposition vidéo possible",
@@ -786,7 +786,7 @@ export const MODULES: Module[] = [
       },
       {
         type: 'journal',
-        prompt: "Tu viens de regarder des vidéos de prises de sang réelles. Décris ce qui s'est passé en toi pendant la vision : au niveau physique (tension, rythme cardiaque, nausée), au niveau des pensées (qu'est-ce que ton cerveau te disait ?), et au niveau du comportement (as-tu continué à regarder, as-tu eu envie d'arrêter, as-tu utilisé la tension musculaire ?). Qu'est-ce qui était différent par rapport aux images statiques du module précédent ?",
+        prompt: "Tu viens de regarder des vidéos de prises de sang réelles. Décris ce qui s'est passé en toi pendant la vision : au niveau physique (tension, rythme cardiaque, nausée), au niveau des pensées (qu'est-ce que ton cerveau te disait ?), et au niveau du comportement (as-tu continué à regarder, as-tu eu envie d'arrêter, as-tu utilisé la tension musculaire ?). Qu'est-ce qui était différent par rapport aux extraits audio du module 7 et aux images statiques du module 6 ?",
       },
     ],
   },
@@ -830,7 +830,7 @@ export const MODULES: Module[] = [
         title: 'ACT : L\'action engagée, la synthèse',
         content: "Tu es arrivé·e au sixième et dernier processus de l'ACT de Steven Hayes : l'action engagée. C'est le moment où tout se rassemble.\n\nAu fil de ce programme, tu as exploré les six piliers du modèle ACT, ce que Hayes appelle l'hexaflex de la flexibilité psychologique. Tu as appris à reconnaître le piège du contrôle (module 1). Tu as pratiqué le moment présent comme ancre (module 2). Tu as découvert la défusion cognitive, voir tes pensées comme des pensées, pas comme des faits (module 3). Tu as choisi l'acceptation active face à l'inconfort (module 4). Tu as habité le soi observateur, ce ciel stable en toi (module 5). Tu as clarifié tes valeurs, ta boussole intérieure (module 6).\n\nL'action engagée, c'est la mise en mouvement de tout cela. Hayes la définit ainsi : prendre des pas concrets, délibérés et répétés en direction de ses valeurs, même quand l'esprit dit «attends d'être prêt·e». Parce que l'esprit dira toujours «pas encore». La vraie liberté ne vient pas de l'absence de peur. Elle vient de la capacité à avancer malgré elle, avec elle, en la tenant sans en être tenu·e.\n\nDans quelques instants, tu vas traverser des scénarios réels. Ce ne sont pas des tests. Ce sont des pratiques d'action engagée. Chaque pas que tu feras, tu le feras parce qu'il t'amène vers la vie que tu veux vraiment mener.",
         keyPoints: [
-          "L'hexaflex ACT complet : contrôle, présent, défusion, acceptation, soi observateur, valeurs",
+          "L'hexaflex ACT complet : présent, défusion, acceptation, soi observateur, valeurs, action engagée",
           "L'action engagée = avancer vers ses valeurs même sans se sentir prêt·e",
           "L'esprit dira toujours «pas encore» : agir malgré lui, c'est la liberté",
           "Tu tiens ta peur sans en être tenu·e, c'est la flexibilité psychologique",
