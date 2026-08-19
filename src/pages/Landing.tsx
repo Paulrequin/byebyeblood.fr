@@ -70,6 +70,24 @@ const NIVEAUX: NiveauData[] = [
     ],
   },
   {
+    name: 'Exposition par le son', sub: 'Entendre avant de voir', pct: 0, locked: true,
+    steps: [
+      ["Le son sans l'image", 'todo'],
+      ["ACT : être présent avec les mots", 'todo'],
+      ["Trois extraits audio progressifs", 'todo'],
+      ["Ancrage par l'écoute", 'todo'],
+    ],
+  },
+  {
+    name: 'Exposition par les vidéos', sub: 'Du mouvement et du son, en douceur', pct: 0, locked: true,
+    steps: [
+      ["Pourquoi la vidéo est différente", 'todo'],
+      ["ACT : cinq outils, une seule vidéo", 'todo'],
+      ["Vidéos progressives réelles", 'todo'],
+      ["Intégration complète", 'todo'],
+    ],
+  },
+  {
     name: 'Maîtrise totale', sub: 'Prêt·e pour la vraie vie', pct: 0, locked: true,
     steps: [
       ["Scénarios réels", 'todo'],
@@ -105,8 +123,16 @@ const PARCOURS = [
     num: '06', name: 'Exposition par les images',
     story: "Des représentations de plus en plus concrètes, accompagnées de tous les outils. Tu sais pourquoi tu es là. Tu restes.",
     tag: 'L\'image' },
-  { bg: '#E4A088', border: '#CF8A6E', numColor: '#7E180F', tagColor: '#844038',
-    num: '07', name: 'Maîtrise totale',
+  { bg: '#E7A586', border: '#D58763', numColor: '#7E180F', tagColor: '#844038',
+    num: '07', name: 'Exposition par le son',
+    story: "Trois extraits audio, sans image. Les mots seuls peuvent déjà déclencher quelque chose. Tu apprends à les entendre sans qu'ils t'emportent.",
+    tag: "L'écoute" },
+  { bg: '#DE8661', border: '#CC683E', numColor: '#6B1209', tagColor: '#6E362E',
+    num: '08', name: 'Exposition par les vidéos',
+    story: "Du mouvement, du son, des prises de sang réelles. La tension appliquée reste ton ancrage du début à la fin.",
+    tag: 'Le mouvement' },
+  { bg: '#D57748', border: '#C05A2E', numColor: '#5A0F08', tagColor: '#5C2E27',
+    num: '09', name: 'Maîtrise totale',
     story: "Des scénarios réels. La synthèse complète. Et enfin, un vrai rendez-vous médical que tu traverses debout, sans fuir.",
     tag: 'Le réel' },
 ]
@@ -366,7 +392,7 @@ export default function Landing() {
       <section id="parcours" className={s.section}>
         <div className={s.wrap}>
           <div className={s.col} style={{ maxWidth: '40rem', marginBottom: '2.6rem' }}>
-            <div className={s.eyebrow}>Le parcours · sept modules</div>
+            <div className={s.eyebrow}>Le parcours · neuf modules</div>
             <h2 className={s.h2}>Du mot <span className={s.accent}>au réel.</span></h2>
           </div>
           <div className={s.levels}>
@@ -374,7 +400,7 @@ export default function Landing() {
               <div
                 key={lv.num}
                 className={s.level}
-                style={{ background: lv.bg, border: `1.5px solid ${lv.border}` }}
+                style={{ background: lv.bg, border: `2.5px solid ${lv.border}` }}
               >
                 <div className={s.levelNum} style={{ color: lv.numColor }}>{lv.num}</div>
                 <div>
@@ -448,7 +474,7 @@ export default function Landing() {
                 <span className={s.accent}>Garde-le à vie.</span>
               </h2>
               <p className={s.bodyText} style={{ maxWidth: '28rem' }}>
-                La première séance est offerte. Si l'histoire te porte, tu débloques les sept modules une bonne fois pour toutes : pas d'abonnement, pas de rappel, pas de date limite.
+                La première séance est offerte. Si l'histoire te porte, tu débloques les huit modules suivants une bonne fois pour toutes : pas d'abonnement, pas de rappel, pas de date limite.
               </p>
             </div>
             <div className={s.priceCard}>

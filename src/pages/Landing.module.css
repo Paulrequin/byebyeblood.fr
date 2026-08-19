@@ -29,10 +29,8 @@
   justify-content:  space-between;
   height:           64px;
   padding:          0 clamp(1.2rem, 4vw, 2.5rem);
-  background:       rgba(251, 245, 234, .86);
-  backdrop-filter:  blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom:    1px solid var(--line);
+  background:       var(--bg);
+  border-bottom:    2.5px solid var(--ink);
 }
 
 .logo {
@@ -67,15 +65,18 @@
   font-weight:   700;
   color:         var(--ink);
   background:    transparent;
-  border:        1.5px solid var(--ink);
+  border:        2.5px solid var(--ink);
   border-radius: 999px;
   padding:       .5rem 1.1rem;
   cursor:        pointer;
-  transition:    background .2s, color .2s;
+  box-shadow:    3px 3px 0 var(--ink);
+  transition:    background .15s, color .15s, transform .15s, box-shadow .15s;
 }
 .navLoginBtn:hover {
   background: var(--ink);
   color:      var(--bg);
+  transform:  translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
 }
 
 /* ── HERO ──────────────────────────────────────────────────────────────────── */
@@ -83,7 +84,7 @@
   display:               grid;
   grid-template-columns: 1.04fr .96fr;
   align-items:           stretch;
-  border-bottom:         1px solid var(--line);
+  border-bottom:         2.5px solid var(--ink);
   position:              relative;
 }
 
@@ -122,6 +123,12 @@
   letter-spacing: .12em;
   text-transform: uppercase;
   color:          var(--red-deep);
+  background:     var(--card-bg);
+  border:         2px solid var(--ink);
+  border-radius:  999px;
+  padding:        .4rem .9rem;
+  transform:      rotate(-1.5deg);
+  width:          fit-content;
 }
 .kickerDot {
   width:         8px;
@@ -176,15 +183,17 @@
   align-items:    center;
   gap:            5px;
   line-height:    1;
-  transition:     all .2s ease;
+  transition:     all .15s ease;
   background:     transparent;
   color:          var(--ink);
-  border:         1.5px solid var(--ink);
+  border:         2.5px solid var(--ink);
 }
+.chip:hover { transform: translateY(-2px); }
 .chipActive {
   background:   var(--red);
   color:        #fff;
-  border-color: var(--red);
+  border-color: var(--ink);
+  box-shadow:   3px 3px 0 var(--ink);
 }
 .chipDone {
   background:   var(--ink);
@@ -208,39 +217,42 @@
   font-family:     'Bricolage Grotesque', sans-serif;
   font-weight:     700;
   font-size:       15px;
-  border-radius:   12px;
+  border-radius:   10px;
   padding:         .95rem 1.6rem;
   cursor:          pointer;
   color:           #fff;
   background:      var(--red);
-  box-shadow:      0 6px 0 var(--red-deep);
-  border:          none;
+  box-shadow:      4px 4px 0 var(--ink);
+  border:          2.5px solid var(--ink);
   display:         inline-block;
   text-decoration: none;
   transition:      transform .15s ease, box-shadow .15s ease;
 }
 .btnPrimary:hover {
-  transform:  translateY(2px);
-  box-shadow: 0 4px 0 var(--red-deep);
+  transform:  translate(4px, 4px);
+  box-shadow: 0 0 0 var(--ink);
 }
 
 .btnOutline {
   font-family:     'Bricolage Grotesque', sans-serif;
   font-weight:     700;
   font-size:       15px;
-  border-radius:   12px;
+  border-radius:   10px;
   padding:         .95rem 1.5rem;
   cursor:          pointer;
   color:           var(--ink);
-  background:      transparent;
-  border:          1.5px solid var(--ink);
+  background:      var(--bg);
+  border:          2.5px solid var(--ink);
+  box-shadow:      4px 4px 0 var(--ink);
   display:         inline-block;
   text-decoration: none;
-  transition:      background .2s, color .2s;
+  transition:      background .15s, color .15s, transform .15s, box-shadow .15s;
 }
 .btnOutline:hover {
   background: var(--ink);
   color:      var(--bg);
+  transform:  translate(4px, 4px);
+  box-shadow: 0 0 0 var(--ink);
 }
 
 .btnLg {
@@ -263,7 +275,7 @@
 /* Hero right panel */
 .heroRight {
   background:      var(--panel);
-  border-left:     1px solid var(--line);
+  border-left:     2.5px solid var(--ink);
   padding:         clamp(2rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem);
   display:         flex;
   flex-direction:  column;
@@ -274,10 +286,16 @@
 /* Progression card */
 .card {
   background:    var(--card-bg);
-  border:        1.5px solid var(--ink);
-  border-radius: 16px;
-  box-shadow:    10px 10px 0 var(--ink);
+  border:        2.5px solid var(--ink);
+  border-radius: 14px;
+  box-shadow:    14px 14px 0 var(--red);
   padding:       1.8rem 1.7rem;
+  transform:     rotate(-1deg);
+  transition:    transform .25s ease, box-shadow .25s ease;
+}
+.card:hover {
+  transform:  rotate(0deg);
+  box-shadow: 18px 18px 0 var(--red);
 }
 .cardHead {
   display:         flex;
@@ -363,7 +381,7 @@
 }
 
 /* ── Generic sections ──────────────────────────────────────────────────────── */
-.section     { border-bottom: 1px solid var(--line); }
+.section     { border-bottom: 2.5px solid var(--ink); }
 .sectionCard { background: var(--card-bg); }
 
 .wrap {
@@ -391,11 +409,18 @@
 }
 
 .eyebrow {
-  font-size:      12.5px;
+  display:        inline-block;
+  font-size:      12px;
   font-weight:    700;
-  letter-spacing: .12em;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color:          var(--red-deep);
+  background:     var(--bg);
+  border:         2px solid var(--ink);
+  border-radius:  999px;
+  padding:        .35rem .8rem;
+  transform:      rotate(-1.2deg);
+  width:          fit-content;
 }
 
 .h2 {
@@ -437,17 +462,18 @@
 }
 .stepCard {
   background:     var(--bg);
-  border:         1.5px solid var(--line);
-  border-radius:  16px;
+  border:         2.5px solid var(--ink);
+  border-radius:  14px;
   padding:        1.8rem 1.6rem;
   display:        flex;
   flex-direction: column;
   gap:            .7rem;
-  transition:     transform .2s ease, box-shadow .2s ease;
+  box-shadow:     6px 6px 0 var(--ink);
+  transition:     transform .18s ease, box-shadow .18s ease;
 }
 .stepCard:hover {
-  transform:  translateY(-4px);
-  box-shadow: 0 10px 24px rgba(40, 26, 18, .10);
+  transform:  translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--ink);
 }
 .stepCardN {
   font-family: 'Bricolage Grotesque', sans-serif;
@@ -475,12 +501,18 @@
   gap:            .9rem;
 }
 .level {
-  border-radius:         16px;
+  border-radius:         14px;
   padding:               1.5rem 1.7rem;
   display:               grid;
   grid-template-columns: 64px 1fr auto;
   gap:                   1.4rem;
   align-items:           center;
+  box-shadow:            5px 5px 0 rgba(28, 23, 20, .14);
+  transition:            transform .18s ease, box-shadow .18s ease;
+}
+.level:hover {
+  transform:  translate(-3px, -3px);
+  box-shadow: 8px 8px 0 rgba(28, 23, 20, .18);
 }
 .levelNum {
   font-family: 'Bricolage Grotesque', sans-serif;
@@ -511,13 +543,17 @@
 .priceCard {
   background:     var(--ink);
   color:          var(--bg);
-  border-radius:  20px;
+  border:         2.5px solid var(--ink);
+  border-radius:  16px;
   padding:        2.2rem 2rem;
   display:        flex;
   flex-direction: column;
   gap:            1.3rem;
-  box-shadow:     12px 12px 0 var(--red);
+  box-shadow:     16px 16px 0 var(--red);
+  transform:      rotate(1deg);
+  transition:     transform .25s ease;
 }
+.priceCard:hover { transform: rotate(0deg); }
 .priceLabel {
   font-size:      12px;
   font-weight:    700;
@@ -572,13 +608,14 @@
   color:         var(--ink);
   background:    var(--amber);
   padding:       .95rem 1.5rem;
-  border-radius: 12px;
-  border:        none;
+  border-radius: 10px;
+  border:        2.5px solid var(--bg);
+  box-shadow:    4px 4px 0 var(--bg);
   cursor:        pointer;
-  transition:    transform .15s ease;
+  transition:    transform .15s ease, box-shadow .15s ease;
   display:       block;
 }
-.btnAmber:hover    { transform: translateY(-2px); }
+.btnAmber:hover    { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--bg); }
 .btnAmber:disabled { opacity: .55; cursor: default; }
 
 /* CTA final */
@@ -611,7 +648,7 @@
 
 /* Footer */
 .footer {
-  border-top: 1px solid var(--line);
+  border-top: 2.5px solid var(--ink);
   background: var(--card-bg);
 }
 .footerInner {
@@ -671,8 +708,8 @@
 .faqIcon {
   width:       28px;
   height:      28px;
-  border-radius: 50%;
-  border:      1.5px solid currentColor;
+  border-radius: 7px;
+  border:      2.5px solid currentColor;
   display:     flex;
   align-items: center;
   justify-content: center;
@@ -700,17 +737,19 @@
   flex-direction:  column;
   gap:             .9rem;
   background:      var(--card-bg);
-  border:          1px solid var(--line);
-  border-radius:   20px;
+  border:          2.5px solid var(--ink);
+  border-radius:   16px;
   padding:         2rem 2rem 1.6rem;
   text-decoration: none;
   color:           inherit;
-  transition:      border-color .2s, transform .2s;
+  box-shadow:      0 0 0 var(--ink);
+  transition:      border-color .18s, transform .18s, box-shadow .18s;
   max-width:       520px;
 }
 .articleCard:hover {
   border-color: var(--red);
-  transform:    translateY(-3px);
+  transform:    translate(-4px, -4px);
+  box-shadow:   6px 6px 0 var(--red);
 }
 .articleTag {
   font-size:      11px;
@@ -745,7 +784,7 @@
 /* ── Responsive ────────────────────────────────────────────────────────────── */
 @media (max-width: 880px) {
   .hero           { grid-template-columns: 1fr; }
-  .heroRight      { border-left: none; border-top: 1px solid var(--line); }
+  .heroRight      { border-left: none; border-top: 2.5px solid var(--ink); }
   .two, .twoPrice { grid-template-columns: 1fr; }
   .steps3         { grid-template-columns: 1fr; }
   .level          { grid-template-columns: 48px 1fr; }

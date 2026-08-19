@@ -16,8 +16,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Initialise depuis la session existante
-    supabase.auth.getSession()
+    // Initialise depuis la session existante. Si le token stocké est invalide/expiré,
+    // supabase-js retente le refresh en interne pendant ~20s avant de résoudre — on
+    // borne cette attente pour ne pas figer l'UI sur un spinner (cf. incident 503 refresh).
+    const timeout = new Promise<{ data: { session: null } }>((resolve) => {
+      setTimeout(() => resolve({ data: { session: null } }), 4000)
+    })
+
+    Promise.race([supabase.auth.getSession(), timeout])
       .then(({ data: { session } }) => {
         setSession(session)
         setUser(session?.user ?? null)
