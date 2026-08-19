@@ -10,6 +10,7 @@ import Success from './pages/Success'
 import DiagnosticSUD from './pages/DiagnosticSUD'
 import SourcesScientifiques from './pages/SourcesScientifiques'
 import Legal from './pages/Legal'
+import Practice from './pages/Practice'
 import BlogIndex from './pages/blog/BlogIndex'
 import PeurPriseDeSang from './pages/blog/PeurPriseDeSang'
 import EnfantPeurPriseDeSang from './pages/blog/EnfantPeurPriseDeSang'
@@ -40,6 +41,9 @@ export default function App() {
       {/* Sources scientifiques - page publique */}
       <Route path="/sources" element={<SourcesScientifiques />} />
       <Route path="/legal" element={<Legal />} />
+
+      {/* Page de pratique post-programme - accès invité par code, sans compte */}
+      <Route path="/pratique" element={<Practice />} />
 
       {/* Blog */}
       <Route path="/blog" element={<BlogIndex />} />

@@ -313,6 +313,12 @@ export default function Dashboard() {
                       </div>
                     ))}
                   </div>
+                  <a
+                    href="/pratique"
+                    style={{display:'block', textAlign:'center', marginTop:'18px', padding:'12px', background:'#FBF5EA', border:'1.5px solid #1C1714', borderRadius:8, fontSize:'0.8rem', fontWeight:700, color:'#1C1714', textDecoration:'none'}}
+                  >
+                    Faire une fiche d'entretien →
+                  </a>
                 </div>
 
               </div>
