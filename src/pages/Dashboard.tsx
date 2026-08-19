@@ -105,6 +105,7 @@ export default function Dashboard() {
           Bye Bye <span className={s.navLogoRed}>Blood</span>
         </span>
         <div className={s.navRight}>
+          <a href="/pratique" style={{fontSize:'0.75rem', fontWeight:700, color:'#EE3D2E', textDecoration:'none', marginRight:'14px'}} title="Fiches de pratique post-programme">L'After Show</a>
           <a href="/sources" style={{fontSize:'0.75rem', color:'#A0907A', textDecoration:'none', marginRight:'8px'}} title="Fondements scientifiques">Sciences</a>
           <div className={s.avatar}>{userInitial}</div>
           <button className={s.signOutBtn} onClick={handleSignOut}>Déconnexion</button>

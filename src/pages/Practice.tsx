@@ -107,6 +107,7 @@ function CodeGate({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form className={s.gateCard} onSubmit={handleSubmit}>
+      <p className={s.gateKicker}>L'After Show</p>
       <h1 className={s.gateTitle}>Fiche de pratique</h1>
       <p className={s.gateSub}>
         Entre le code qui t'a été transmis pour accéder à un exercice d'entretien : une fiche, quelques minutes, à ton rythme.
