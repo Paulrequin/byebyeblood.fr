@@ -39,6 +39,8 @@ export const FICHES: Fiche[] = [
   { id: 'video-1', visual: { kind: 'video', src: 'https://www.youtube.com/watch?v=VYZXHU21TqQ' }, text: "Trouver les veines : une infirmière explique comment repérer et préparer une veine. Aucun sang visible." },
   { id: 'video-2', visual: { kind: 'video', src: 'https://www.youtube.com/watch?v=ep8QGJ144V8' }, text: "Prélèvement sanguin veineux : le protocole complet, de la préparation à la compresse finale." },
   { id: 'video-3', visual: { kind: 'video', src: 'https://www.youtube.com/watch?v=8Nx9l6rXx3Q' }, text: "Hémocultures : plusieurs tubes, plus de sang visible. L'exposition la plus intense de ce module." },
+  { id: 'video-4', visual: { kind: 'video', src: 'https://www.youtube.com/watch?v=EQjzupxthak' }, text: "Pose d'un cathéter veineux périphérique : le geste expliqué étape par étape par une infirmière formatrice." },
+  { id: 'video-5', visual: { kind: 'video', src: 'https://www.youtube.com/watch?v=ysHhEcwrgLw' }, text: "Repérer une veine difficile : une phlébotomiste montre comment palper et localiser une veine peu visible." },
 ]
 
 export function randomFiche(excludeId?: string): Fiche {
